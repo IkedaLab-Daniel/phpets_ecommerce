@@ -181,3 +181,30 @@ form .white-btn:active{
     cursor: pointer;
     transform: scale(98%) translateY(0px);
 }
+
+form .signup-btn{
+    padding: 12px;
+    width: 100%;
+    background-color: #8892BF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: .4s;
+    margin: 15px 0;
+}
+
+form .signup-btn:hover{
+    cursor: pointer;
+    transform: scale(102%) translateY(-2px);
+}
+
+form .signup-btn:active{
+    cursor: pointer;
+    transform: scale(98%) translateY(0px);
+}
+
+.show{
+    display: block;
+}

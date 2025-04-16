@@ -1,5 +1,5 @@
 <?php
-include './includes/db_connect.php'; // database connection
+include './includes/db_connect.php'; 
 
 // Fetch products
 $query = "SELECT products.*, categories.name AS category, CONCAT(users.first_name, ' ', users.last_name) AS seller
@@ -14,10 +14,12 @@ $result = mysqli_query($conn, $query);
 <html>
 <head>
     <title>Pet Product Shop</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/svg" href="./assets/images/paw.svg" />
+    <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
     <h1>Welcome to PHPets!</h1>
+    <a href="./logout.php">Logout</a>
     <div class="product-grid">
         <?php while ($row = mysqli_fetch_assoc($result)) : ?>
             <div class="product-card">

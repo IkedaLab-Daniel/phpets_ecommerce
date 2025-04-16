@@ -10,12 +10,14 @@ function updatePage() {
         part1.classList.remove('hidden');
         part2.classList.add('hidden');
         btn.innerHTML = 'Next';
-        signup.classList.add('hidden'); // Hide the signup button on page 1
+        signup.classList.remove('active'); 
+        signup.classList.add('hidden'); 
     } else if (page === 2) {
         part1.classList.add('hidden');
         part2.classList.remove('hidden');
         btn.innerHTML = 'Back';
-        signup.classList.remove('hidden'); // Show the signup button on page 2
+        signup.classList.add('active');
+        signup.classList.remove('hidden'); 
     }
 }
 

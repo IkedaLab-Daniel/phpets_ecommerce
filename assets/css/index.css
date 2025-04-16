@@ -13,6 +13,10 @@ body{
     background-color: rgb(28, 28, 28);
     background-image: radial-gradient(rgba(255, 255, 255, 0.177) 2px, transparent 2px);
     background-size: 20px 20px; 
+    /* background-image: url('../images/bg.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; */
 }
 
 .logo{

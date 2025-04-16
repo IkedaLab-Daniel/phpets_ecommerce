@@ -6,7 +6,7 @@
 .login-main{
     width: 60vw;
     height: auto;
-    background-color: rgb(64, 64, 64);
+    background-color: rgba(64, 64, 64);
     position: fixed;
     top: 50%;
     left: 50%;

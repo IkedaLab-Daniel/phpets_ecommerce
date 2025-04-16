@@ -1,3 +1,49 @@
+<?php
+session_start();
+include 'includes/db_connect.php';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM users WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // If user exists
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+
+        if (password_verify($password, $user['password'])) {
+            // Store user info in session
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['first_name'] = $user['first_name'];
+
+            // Redirect based on role
+            if ($user['role'] === 'admin') {
+                header("Location: index.php");
+            } elseif ($user['role'] === 'seller') {
+                header("Location: index.php");
+            } else {
+                header("Location: index.php");
+            }
+            exit;
+        } else {
+            echo "<script>alert('Incorrect password.');</script>";
+        }
+    } else {
+        echo "<script>alert('No account found with that email.');</script>";
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +51,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/index.css" />
     <link rel="stylesheet" href="./assets/css/login.css" />
+    <link rel="icon" type="image/svg" href="./assets/images/paw.svg" />
     <title>Log In to PHPets!</title>
 </head>
 <body>
@@ -30,7 +77,7 @@
                 
             </div>
             <div class="right">
-                <form class="login" action="">
+                <form class="login" action="login.php" method="POST">
                     <h1>Log In</h1>
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" placeholder="Enter your email" required />
