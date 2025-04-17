@@ -111,7 +111,7 @@ form h1{
 
 form label{
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-size: 1.2rem
 }
 
@@ -207,4 +207,65 @@ form .signup-btn:active{
 
 .show{
     display: block;
+}
+
+.radio-group{
+    display: flex;
+    gap: 20px;
+}
+
+.choice{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;   
+    padding: 5px 25px;
+    border-radius: 8px;
+    border: 2px white dashed;
+}
+
+.choice span{
+    font-size: 1.3rem;
+}
+
+.choice input{
+    width: 2rem;
+    margin: 0;
+}
+
+.selected{
+    background-color: #8892BF;
+    border: 0px white solid;
+}
+
+.page-indicator{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-indicator img{
+    width: 70px;
+}
+
+.disable-btn{
+    opacity: .4;
+    cursor: not-allowed;
+    padding: 12px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: .4s;
+    display: block;
+    margin: 15px 0;
+}
+
+.disable-btn:hover{
+    opacity: .4;
+    cursor: not-allowed;
 }

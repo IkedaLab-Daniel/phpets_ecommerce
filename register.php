@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include 'includes/db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -11,28 +15,45 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $address = $_POST['address'];
     $role = $_POST['account_type'];
 
+    // Check if passwords match
     if ($password !== $confirm) {
         echo "<script>alert('Passwords do not match.');</script>";
     } else {
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        // Check if email already exists
+        $check_sql = "SELECT user_id FROM users WHERE email = ?";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->bind_param("s", $email);
+        $check_stmt->execute();
+        $check_stmt->store_result();
 
-        $sql = "INSERT INTO users (first_name, middle_name, last_name, email, password, address, role) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssssss", $first_name, $middle_name, $last_name, $email, $hashed_password, $address, $role);
-
-        if ($stmt->execute()) {
-            echo "<script>alert('Registration successful! You can now log in.'); window.location.href='login.php';</script>";
+        if ($check_stmt->num_rows > 0) {
+            echo "<script>alert('Email already exists. Please use a different one.');</script>";
         } else {
-            echo "<script>alert('Error: " . $stmt->error . "');</script>";
+            // Email is unique, proceed with registration
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+            $sql = "INSERT INTO users (first_name, middle_name, last_name, email, password, address, role) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sssssss", $first_name, $middle_name, $last_name, $email, $hashed_password, $address, $role);
+
+            if ($stmt->execute()) {
+                echo "<script>alert('Registration successful! You can now log in.'); window.location.href='login.php';</script>";
+            } else {
+                error_log("SQL Error: " . $stmt->error);
+                echo "<script>alert('Error: " . $stmt->error . "');</script>";
+            }
+
+            $stmt->close();
         }
 
-        $stmt->close();
+        $check_stmt->close();
         $conn->close();
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -70,15 +91,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="right">
                 <form class="signup" action="register.php" method="POST">
                     <h1>Sign Up</h1>
+                    <div class="page-indicator">
+                        <img src="./assets/images/one-closed.svg" class="one">
+                        <img src="./assets/images/check-circle-svgrepo-com.svg" class="checkmark hidden" alt="">
+                        <span>---------</span>
+                        <img src="./assets/images/two.svg" alt="">
+                    </div>
                     <div class="signin-part-1">
                         <label for="first_name">First Name:</label>
                         <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required />
 
                         <label for="middle_name">Middle Name:</label>
-                        <input type="text" id="middle_name" name="middle_name" placeholder="Enter your middle name" />
+                        <input type="text" id="middle_name" name="middle_name" placeholder="Enter your middle name (optional)" />
 
                         <label for="last_name">Last Name:</label>
-                        <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required />
+                        <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" />
 
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" placeholder="Enter your email" required />
@@ -94,19 +121,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <input type="tex" name="address" placeholder="Street, Barangay, Municipal, Province">
 
                         <div class="radio-group">
-                            <label>
-                                <input type="radio" name="account_type" value="buyer" required />
-                                Buyer
-                            </label>
-                            <label>
+                            <div class="choice selected">
+                                <input type="radio" name="account_type" value="buyer" checked required />
+                                <span> Buyer</span>
+                                <span></span>
+                            </div>
+                            <div class="choice ">
                                 <input type="radio" name="account_type" value="seller" required />
-                                Seller
-                            </label>
+                                <span> Seller</span>
+                                <span></span>
+                            </div>
                         </div>
                     </div>
 
                     <button type="submit" class="signup-btn hidden">Sign Up</button>
-                    <button class="black-btn next-back">Next</button>
+                    <button class="next-back">Next</button>
                     <a class="white-btn" href="login.php" style="width: 100%;">
                         Already Have an Account? Log In
                     </a>

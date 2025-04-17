@@ -8,6 +8,7 @@ $query = "SELECT products.*, categories.name AS category, CONCAT(users.first_nam
           JOIN users ON products.seller_id = users.user_id";
 
 $result = mysqli_query($conn, $query);
+session_start()
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +20,11 @@ $result = mysqli_query($conn, $query);
 </head>
 <body>
     <h1>Welcome to PHPets!</h1>
-    <a href="./logout.php">Logout</a>
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <a href="logout.php">Logout</a>
+    <?php else: ?>
+        <a href="login.php">Log In</a>
+    <?php endif; ?>
     <div class="product-grid">
         <?php while ($row = mysqli_fetch_assoc($result)) : ?>
             <div class="product-card">
