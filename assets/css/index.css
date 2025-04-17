@@ -2,7 +2,6 @@
 
 *{
     margin: 0;
-    padding: 0;
     box-sizing: border-box;
     text-decoration: none;
     color: white;
@@ -15,6 +14,7 @@ body{
     background-size: 20px 20px; 
     /* background-image: url('../images/bg.gif');
     background-repeat: no-repeat;
+    padding: 0;
     background-size: cover;
     background-position: center; */
 }
@@ -26,10 +26,107 @@ body{
     align-items: center;
 }
 
-.logo .violet{
+.violet{
     color: #8892BF;
 }
 
 .hidden{
     display: none;
+}
+
+main{
+    margin-top: 4rem;
+}
+
+.hero {
+    background-image: url(../images/hero.jpg);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100%;
+    height: 60vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 2; 
+}
+
+.hero .text-element{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    gap: 4%;
+}
+
+.hero h1{
+    font-size: 4.5rem;
+    text-align: center;
+    text-shadow: 1px 1px 10px rgba(0,0,0,0.6);
+}
+
+.hero p{
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.hero-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.view-products{
+    background-color: #8892BF;
+    padding: 10px 30px;
+    border-radius: 30px;
+    margin-top: 20px;
+    transition: .4s;
+}
+
+.view-products:hover{
+    transform: translateY(-5px) scale(110%);
+    cursor: pointer;
+}
+
+.view-products:active{
+    transform: translateY(0px) scale(95%);
+    opacity: .5;
+    cursor: pointer;
+}
+
+.categories-btn{
+    background-color: #ffffff;
+    padding: 10px 40px;
+    border-radius: 30px;
+    margin-top: 20px;
+    transition: .4s;
+    color: black;
+}
+
+.categories-btn:hover{
+    transform: translateY(-5px) scale(110%);
+    cursor: pointer;
+}
+
+.categories-btn:active{
+    transform: translateY(0px) scale(95%);
+    opacity: .5;
+    cursor: pointer;
 }
