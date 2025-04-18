@@ -13,7 +13,8 @@ html {
 }
 
 body{
-    background-color: rgb(28, 28, 28);
+    background-color: #1E201E;
+    color: #f0f0f0;
     background-image: radial-gradient(rgba(255, 255, 255, 0.177) 2px, transparent 2px);
     background-size: 20px 20px; 
     /* background-image: url('../images/bg.gif');
@@ -80,7 +81,7 @@ main{
     background-position: center; 
     background-repeat: no-repeat; 
     width: 100%;
-    height: 60vh;
+    height: 70vh;
     position: relative;
     display: flex;
     justify-content: center;

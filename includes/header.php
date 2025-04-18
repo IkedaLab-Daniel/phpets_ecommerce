@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session
+    session_start(); 
 ?>
 
 <!DOCTYPE html>
@@ -15,10 +15,14 @@ session_start(); // Start the session
     <body>
         <nav>
             <div class="logo">
-                <img src="./assets/images/paw.svg" />
-                <span class="violet">PHP</span><span class="white">ets</span>
+                <a href="/phpets/index.php">
+                    <img src="./assets/images/paw.svg" />
+                    <span class="violet">PHP</span><span class="white">ets</span>
+                </a>
             </div>
-            <div>soon</div>
+            <div class="nav-middle">
+                <a href="/phpets/about.php">About</a>
+            </div>
             <div class="login-signup-btns">
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <!-- If user is logged in, show Logout button -->
