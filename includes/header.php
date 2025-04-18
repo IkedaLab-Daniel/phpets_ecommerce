@@ -21,7 +21,9 @@
                 </a>
             </div>
             <div class="nav-middle">
-                <a href="/phpets/about.php">About</a>
+                <a class="nav-link" href="/phpets/about.php">About</a>
+                <a class="nav-link" href="/phpets/index.php">Products</a>
+                <a class="nav-link" href="/phpets/about.php">Categories</a>
             </div>
             <div class="login-signup-btns">
                 <?php if (isset($_SESSION['user_id'])): ?>
