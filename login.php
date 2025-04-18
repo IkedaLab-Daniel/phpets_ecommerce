@@ -25,18 +25,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Redirect based on role
             if ($user['role'] === 'admin') {
+                echo "<div id='toast-data' data-message=' Logged In' data-type='success'></div>";
+                echo "<script>console.log('logged in')</script>";
                 header("Location: index.php");
             } elseif ($user['role'] === 'seller') {
                 header("Location: index.php");
+                echo "<div id='toast-data' data-message=' Logged In' data-type='success'></div>";
             } else {
                 header("Location: index.php");
+                echo "<div id='toast-data' data-message=' Logged In' data-type='success'></div>";
             }
             exit;
         } else {
-            echo "<script>alert('Incorrect password.');</script>";
+            echo "<div id='toast-data' data-message=' ❌ Email or Password Incorrect' data-type='error'></div>";
         }
     } else {
-        echo "<script>alert('No account found with that email.');</script>";
+        echo "<div id='toast-data' data-message=' ❌ Email or Password Incorrect' data-type='error'></div>";
     }
 
     $stmt->close();
@@ -93,5 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
         </div>
     </div>
+    <div id="toast-container"></div>
+    <script src="./assets/js/toast.js"></script>
 </body>
 </html>

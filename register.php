@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Check if passwords match
     if ($password !== $confirm) {
-        echo "<script>alert('Passwords do not match.');</script>";
+        echo "<div id='toast-data' data-message=' ❌ Passwords do not match' data-type='error'></div>";
     } else {
         // Check if email already exists
         $check_sql = "SELECT user_id FROM users WHERE email = ?";
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $check_stmt->store_result();
 
         if ($check_stmt->num_rows > 0) {
-            echo "<script>alert('Email already exists. Please use a different one.');</script>";
+            echo "<div id='toast-data' data-message=' ❌ Email Already Exist' data-type='error'></div>";
         } else {
             // Email is unique, proceed with registration
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt->bind_param("sssssss", $first_name, $middle_name, $last_name, $email, $hashed_password, $address, $role);
 
             if ($stmt->execute()) {
-                echo "<script>alert('Registration successful! You can now log in.'); window.location.href='login.php';</script>";
+                echo "<div id='toast-data' data-message='Registration successful! You can now log in.' data-type='success' data-redirect='login.php'></div>";
             } else {
                 error_log("SQL Error: " . $stmt->error);
                 echo "<script>alert('Error: " . $stmt->error . "');</script>";
@@ -143,7 +143,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
         </div>
     </div>
-
+    <div id="toast-container"></div>
+    <script src="./assets/js/toast.js"></script>
     <script src="./assets/js/register.js"></script>
 </body>
 </html>

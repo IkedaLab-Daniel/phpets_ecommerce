@@ -23,7 +23,7 @@ session_start(); // Start the session
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <!-- If user is logged in, show Logout button -->
                      <?php echo "Welcome back, " . $_SESSION['first_name'] . "" ?>
-                    <a href="/phpets/logout.php" class="signup-btn">Log Out</a>
+                    <a href="/phpets/logout.php" class="logout-btn">Log Out</a>
                 <?php else: ?>
                     <!-- If user is not logged in, show Login and Sign Up buttons -->
                     <a href="/phpets/login.php" class="login-btn">Log In</a>

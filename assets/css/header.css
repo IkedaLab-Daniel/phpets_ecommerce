@@ -70,5 +70,29 @@ nav span{
     transform: scale(95%);
     opacity: .5;
 }
+.login-signup-btns .logout-btn{
+    background-color: none;
+    border: 2px solid rgb(255, 53, 53);
+    color: black;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: .4s;
+    color: rgb(255, 53, 53);
+    font-weight: 600;
+}
+
+.login-signup-btns .logout-btn:hover{
+    cursor: pointer;
+    background-color: rgb(255, 53, 53);
+    color: white;
+    transform: scale(105%);
+    border: 2px solid rgb(255, 53, 53);
+}
+
+.login-signup-btns .logout-btn:active{
+    transform: scale(95%);
+    opacity: .5;
+}
+
 
 

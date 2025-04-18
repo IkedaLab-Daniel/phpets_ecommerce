@@ -23,6 +23,38 @@ body{
     background-position: center; */
 }
 
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+  
+.toast {
+    color: white;
+    padding: 15px 30px;
+    font-weight: 400;
+    margin-top: 10px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    font-family: sans-serif;
+    box-shadow: 0px 2px 30px 6px rgba(0,0,0,0.75);
+}
+
+.toast.success {
+    background-color: #e6f9ec; 
+    color: #2e7d32;            
+    border: 1.5px solid #81c784; 
+}
+
+.toast.error {
+    background-color: #fdecea;      
+    color: #c62828;                
+    border: 1.5px solid #ef9a9a;     
+}
+
+
 .logo{
     font-weight: 800;
     display: flex;
@@ -231,4 +263,14 @@ main{
 .product-card-footer a:active{
     transform: scale(95%) translateY(0px);
     opacity: .5;
+}
+
+@keyframes fadein {
+    from { opacity: 0; right: 0; }
+    to { opacity: 1; right: 20px; }
+}
+  
+@keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
 }

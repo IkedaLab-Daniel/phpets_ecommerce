@@ -1,22 +1,22 @@
 <?php
-include './includes/header.php';
-include './includes/db_connect.php'; 
+    include './includes/header.php';
+    include './includes/db_connect.php'; 
 
-// Fetch products
-$query = "SELECT products.*, categories.name AS category, CONCAT(users.first_name, ' ', users.last_name) AS seller
-          FROM products 
-          JOIN categories ON products.category_id = categories.category_id
-          JOIN users ON products.seller_id = users.user_id
-          WHERE products.status = 'approved'";
+    // Fetch products
+    $query = "SELECT products.*, categories.name AS category, CONCAT(users.first_name, ' ', users.last_name) AS seller
+            FROM products 
+            JOIN categories ON products.category_id = categories.category_id
+            JOIN users ON products.seller_id = users.user_id
+            WHERE products.status = 'approved'";
 
-$result = mysqli_query($conn, $query);
-session_start()
+    $result = mysqli_query($conn, $query);
+    session_start();
 ?>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pet Product Shop</title>
+        <title>PHPets</title>
         <link rel="icon" type="image/svg" href="./assets/images/paw.svg" />
         <link rel="stylesheet" href="assets/css/index.css">
         <link rel="icon" type="image/svg" href="./assets/images/paw.svg" />
