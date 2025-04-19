@@ -134,61 +134,55 @@
 
                 <div id="transactions-detail" style="margin-top: 40px;">
                     <div class="heading">
-                        <img src="/phpets/assets/images/purchase.svg" alt="">
+                        <img src="/phpets/assets/images/transaction.svg" alt="">
                         <h2>Transactions</h2>
                     </div>
+                    <div class="purchased-table-head">
+                        <span>Order</span>
+                        <span>Total</span>
+                        <span>Status</span>
+                    </div>
+                    <div class="transactions-table-row">
+                        <?php while ($order = mysqli_fetch_assoc($all_orders_result)): ?>
+                            <li>
+                                <span><?php echo $order['order_id']; ?></span>
+                                <span>₱ <?php echo $order['total_price']; ?></span>
+                                <div class="order-status-wrapper">
+                                    <p class="<?php echo $order['status']; ?>"><?php echo $order['status']; ?></p>
+                                </div>
+                            </li>
+                        <?php endwhile; ?>
+                    </div>
+                </div>
+
+                <div id="edit-profile" style="margin-top: 40px">
+                    <div class="heading mb-20">
+                        <img src="/phpets/assets/images/transaction.svg" alt="">
+                        <h2>Edit Profile</h2>
+                    </div>
+                    <form action="" method="POST">
+                        <label for="first_name">First Name:</label>
+                        <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" value="<?php echo htmlspecialchars($first_name); ?>" required />
+
+                        <label for="middle_name">Middle Name:</label>
+                        <input type="text" id="middle_name" name="middle_name" placeholder="Enter your middle name (optional)" value="<?php echo htmlspecialchars($middle_name); ?>" />
+
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" value="<?php echo htmlspecialchars($last_name); ?>" required />
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" value="<?php echo htmlspecialchars($email); ?>" required />
+
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" placeholder="Street, Barangay, Municipal, Province" value="<?php echo htmlspecialchars($address); ?>" required />
+                        
+                        <div class="save-btn-container">
+                            <button type="submit" class="save-btn cool-btn">Save Changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        
-        <img src="../uploads/<?php echo htmlspecialchars($profile_photo); ?>" alt="Profile Picture" width="100">
-
-        <p><strong>Full Name:</strong> <?php echo $first_name . ' ' . $middle_name . ' ' . $last_name; ?></p>
-        <p><strong>Address:</strong> <?php echo $address; ?></p>
-        <p><strong>Role:</strong> <?php echo ucfirst($_SESSION['role']); ?></p>
-
-        <h2>🛒 Cart Items</h2>
-        <ul>
-        <?php while ($item = mysqli_fetch_assoc($cart_result)): ?>
-            <li>
-                <?php echo $item['name']; ?> —
-                Qty: <?php echo $item['quantity']; ?> —
-                ₱<?php echo $item['price']; ?> each
-            </li>
-        <?php endwhile; ?>
-        </ul>
-
-        <hr>
-
-        <h2>✅ Purchased Orders (Delivered)</h2>
-        <ul>
-        <?php while ($order = mysqli_fetch_assoc($purchased_result)): ?>
-            <li>
-                Order #<?php echo $order['order_id']; ?> —
-                ₱<?php echo $order['total_price']; ?> —
-                Status: <?php echo $order['status']; ?>
-            </li>
-        <?php endwhile; ?>
-        </ul>
-
-        <hr>
-
-        <h2>📦 All Transactions</h2>
-        <ul>
-        <?php while ($order = mysqli_fetch_assoc($all_orders_result)): ?>
-            <li>
-                Order #<?php echo $order['order_id']; ?> —
-                ₱<?php echo $order['total_price']; ?> —
-                Status: <?php echo $order['status']; ?>
-            </li>
-        <?php endwhile; ?>
-        </ul>
     </body>
     
 </html>
-
-<?php 
-    echo '<pre>';
-    print_r($_SESSION);
-    echo '</pre>';    
-?>
