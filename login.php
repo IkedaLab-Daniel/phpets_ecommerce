@@ -20,8 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (password_verify($password, $user['password'])) {
             // Store user info in session
             $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['role'] = $user['role'];
             $_SESSION['first_name'] = $user['first_name'];
+            $_SESSION['middle_name'] = $user['middle_name'];
+            $_SESSION['address'] = $user['address'];    
+            $_SESSION['last_name'] = $user['last_name'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['email'] = $user['email']; 
+            $_SESSION['profile_photo'] = $user['profile_photo'];
 
             // Redirect based on role
             if ($user['role'] === 'admin') {
