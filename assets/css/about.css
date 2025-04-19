@@ -136,6 +136,7 @@
     align-items: center;
     gap: 20px;
     width: 40%;
+    min-width: 550px;
     height: auto;
     background-color: #3C3D37;
     border-radius: 8px;
