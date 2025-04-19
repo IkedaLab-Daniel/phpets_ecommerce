@@ -216,8 +216,17 @@
     background-color: #FB8C00;
 }
 
+.facebook{
+    background-color: #175cb7;
+    font-size: .9rem;
+}
+
+.ph{
+    background-color: #ff8c00;
+}
+
 .daniel{
-    border-left: 10px solid rgb(218, 218, 218);
+    border-left: 10px solid rgb(236, 236, 236);
 }
 
 .brix{
@@ -225,5 +234,5 @@
 }
 
 .alvin{
-    border-left: 10px solid rgb(255, 255, 143);
+    border-left: 10px solid #ff8c00;
 }

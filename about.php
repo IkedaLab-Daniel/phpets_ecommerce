@@ -24,7 +24,7 @@
                     
                     <div class="hero-btn-container">
                         <a href="#developers" class="view-products">Developers</a>
-                        <span class="categories-btn">Categories</span>
+                        <a href="./index.php" class="categories-btn">Back to Home</a>
                     </div>
                 </div>
             </div>    
@@ -56,45 +56,42 @@
                         </div>
                     </div>
 
-                    <!-- Daniel -->
+                    <!-- Brix -->
                     <div class="dev-card brix">
                         <div class="dev-img-container">
-                            <img src="./assets/images/ice.jpeg" alt="">
+                            <img src="./assets/images/brix.jpeg" alt="">
                         </div>
                         <div class="dev-details-container">
-                            <p class="quote">"Wala na bang mas mahirap pa dito?"</p>
-                            <p class="name">@dev.IceIce</p>
+                            <p class="quote">"Time is gold"</p>
+                            <p class="name">@brixxxxxxx</p>
                             <p class="role">Role Model</p>
                             <div class="socials-container">
-                                <a href="https://github.com/IkedaLab-Daniel" target="_blank" class="social github">
-                                    <img src="./assets/images/github.svg" >
-                                    <span>GitHub</span>
+                                <a href="https://www.facebook.com/brixandrew.ibuna" target="_blank" class="social facebook">
+                                    <img src="./assets/images/facebook.svg" >
+                                    <span>Facebook</span>
                                 </a>
-                                <a href="https://www.credly.com/users/mark-daniel-callejas" target="_blank" class="social credly">
-                                    <img src="./assets/images/credly-2.png" >
-                                    <span>Credly</span>
-                                </a>
+
                             </div>
                         </div>
                     </div>
 
-                    <!-- Daniel -->
+                    <!-- Alvin -->
                     <div class="dev-card alvin">
                         <div class="dev-img-container">
-                            <img src="./assets/images/ice.jpeg" alt="">
+                            <img src="./assets/images/alvin.jpg" alt="">
                         </div>
                         <div class="dev-details-container">
-                            <p class="quote">"Wala na bang mas mahirap pa dito?"</p>
-                            <p class="name">@dev.IceIce</p>
-                            <p class="role">Software Engineer</p>
+                            <p class="quote">"di man ako nag review (46/50 mamaya)"</p>
+                            <p class="name">@yumi</p>
+                            <p class="role">Pa-humble</p>
                             <div class="socials-container">
-                                <a href="https://github.com/IkedaLab-Daniel" target="_blank" class="social github">
-                                    <img src="./assets/images/github.svg" >
-                                    <span>GitHub</span>
+                                <a href="https://www.facebook.com/tewss15" target="_blank" class="social facebook">
+                                    <img src="./assets/images/facebook.svg" >
+                                    <span>Facebook</span>
                                 </a>
-                                <a href="https://www.credly.com/users/mark-daniel-callejas" target="_blank" class="social credly">
-                                    <img src="./assets/images/credly-2.png" >
-                                    <span>Credly</span>
+                                <a href="" target="_blank" class="social ph">
+                                    <img src="./assets/images/ph.png" >
+                                    <span>PronHub</span>
                                 </a>
                             </div>
                         </div>
