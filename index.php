@@ -34,10 +34,52 @@
                     
                     <div class="hero-btn-container">
                         <a href="#product-section" class="view-products">View Products</a>
-                        <span class="categories-btn">Categories</span>
+                        <a href="#categories-scroll" class="categories-btn">Categories</a>
                     </div>
                 </div>
             </div>
+
+            <div class="section-head" id="categories-scroll">
+                <img src="./assets/images/category.svg" >
+                <h2>Categories</h2>
+            </div>
+            <div id="categories">
+                <div class="category-grid-container">
+                    <div class="div1 category-btn top-left">
+                        <img src="./assets/images/foods.svg" >
+                        <span>Foods</span>
+                    </div>
+                    <div class="div2 category-btn">
+                        <img src="./assets/images/toys.svg" >
+                        <span>Toys</span>
+                    </div>
+                    <div class="div3 category-btn">
+                        <img src="./assets/images/accessories.svg" >
+                        <span>Accessories</span>
+                    </div>
+                    <div class="div4 category-btn top-right">
+                        <img src="./assets/images/health.svg" >
+                        <span>Health</span>
+                    </div>
+                    <div class="div5 category-btn bottom-left">
+                        <img src="./assets/images/grooming.svg" >
+                        <span>Grooming</span>
+                    </div>
+                    <div class="div6 category-btn">
+                        <img src="./assets/images/bed.svg" >
+                        <span>Beds</span>
+                    </div>
+                    <div class="div7 category-btn">
+                        <img src="./assets/images/cloth.svg" >
+                        <span>Clothes</span>
+                    </div>
+                    <div class="div8 category-btn bottom-right">
+                        <img src="./assets/images/others.svg" >
+                        <span>Others</span>
+                    </div>
+                </div>
+            </div>
+
             <div id="product-section">
                 <div class="section-head">
                     <img src="./assets/images/cart-bag.svg" >

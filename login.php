@@ -37,10 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
             exit;
         } else {
-            echo "<div id='toast-data' data-message=' ❌ Email or Password Incorrect' data-type='error'></div>";
+            echo "<div id='toast-data' data-message=' ❌ Hell Nah: Email or Password Incorrect' data-type='error' data-img='/phpets/hell_nah.png'></div>";
         }
     } else {
-        echo "<div id='toast-data' data-message=' ❌ Email or Password Incorrect' data-type='error'></div>";
+        echo "<div id='toast-data' data-message=' ❌ Hell Nah: Email or Password Incorrect' data-type='error' data-img='/phpets/hell_nah.png'></div>";
     }
 
     $stmt->close();

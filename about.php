@@ -64,7 +64,7 @@
                         <div class="dev-details-container">
                             <p class="quote">"Wala na bang mas mahirap pa dito?"</p>
                             <p class="name">@dev.IceIce</p>
-                            <p class="role">Software Engineer</p>
+                            <p class="role">Role Model</p>
                             <div class="socials-container">
                                 <a href="https://github.com/IkedaLab-Daniel" target="_blank" class="social github">
                                     <img src="./assets/images/github.svg" >
