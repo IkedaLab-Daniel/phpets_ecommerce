@@ -17,7 +17,7 @@
 <html>
     <head>
         <title>PHPets</title>
-        <link rel="icon" type="image/svg" href="./assets/images/paw.svg" />
+        <link rel="icon" type="image/svg" href="/phpets/assets/images/paw.svg" />
         <link rel="stylesheet" href="assets/css/index.css">
         <link rel="icon" type="image/svg" href="./assets/images/paw.svg" />
     </head>
@@ -33,8 +33,30 @@
                     </div>
                     
                     <div class="hero-btn-container">
-                        <a href="#product-section" class="view-products">View Products</a>
-                        <a href="#categories-scroll" class="categories-btn">Categories</a>
+                        <a href="#product-section" class="view-products">
+                            <img src="/phpets/assets/images/cart-bag.svg" alt="">
+                            <span>View Products</span>
+                        </a>
+                        <a href="#categories-scroll" class="categories-btn">
+                            <img src="/phpets/assets/images/category-black.svg" alt="">
+                            <span>Categories</span>
+                        </a>
+                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'buyer'): ?>
+                            <a href="/phpets/buyer/buyer.php" class="categories-btn">
+                                <img src="/phpets/assets/images/cart-bag-black.svg" alt="">
+                                <span>My Orders</span>
+                            </a>
+                        <?php endif; ?>
+
+                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'seller'): ?>
+                            <a href="/phpets/seller/seller.php" class="categories-btn">
+                                My Products
+                            </a>
+                        <?php endif; ?>
+
+                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                            <a href="/phpets/admin/admin.php" class="categories-btn">Admin Panel</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

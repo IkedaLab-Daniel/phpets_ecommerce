@@ -145,6 +145,10 @@ main{
     border-radius: 30px;
     margin-top: 20px;
     transition: .4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .view-products:hover{
@@ -158,6 +162,10 @@ main{
     cursor: pointer;
 }
 
+.view-products img{
+    width: 1.5rem;
+}
+
 .categories-btn{
     background-color: #ffffff;
     padding: 10px 40px;
@@ -165,6 +173,10 @@ main{
     margin-top: 20px;
     transition: .4s;
     color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .categories-btn:hover{
@@ -176,6 +188,15 @@ main{
     transform: translateY(0px) scale(95%);
     opacity: .5;
     cursor: pointer;
+}
+
+.categories-btn span{
+    color: black;
+    font-size: 1rem;
+}
+
+.categories-btn img{
+    width: 1.5rem;
 }
 
 .section-head{

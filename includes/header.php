@@ -9,14 +9,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/phpets/assets/css/index.css" />
         <link rel="stylesheet" href="/phpets/assets/css/header.css" />
-        <link rel="icon" type="image/svg" href="./assets/images/paw.svg" />
-        <title>PHPets</title>
+        <link rel="icon" type="image/svg" href="/phpets/assets/images/paw.svg" />
     </head>
     <body>
         <nav>
             <div class="logo">
                 <a href="/phpets/index.php">
-                    <img src="./assets/images/paw.svg" />
+                    <img src="/phpets/assets/images/paw.svg" />
                     <span class="violet">PHP</span><span class="white">ets</span>
                 </a>
             </div>

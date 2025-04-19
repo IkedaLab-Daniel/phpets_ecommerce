@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const message = toastData.getAttribute("data-message");
         const type = toastData.getAttribute("data-type");
         const redirect = toastData.getAttribute("data-redirect");
-        const imgSrc = toastData.getAttribute("data-img"); // Get image source if provided
+        const imgSrc = toastData.getAttribute("data-img");
 
         if (message) {
             showToast(message, type, imgSrc);
