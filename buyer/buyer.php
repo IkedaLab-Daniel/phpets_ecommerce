@@ -46,10 +46,98 @@
     <body>
         <div id="buyer">
             <div class="left">
-                <h1>Left</h1>
+                <div class="user-details">
+                    <img src="../uploads/<?php echo htmlspecialchars($profile_photo); ?>" alt="Profile Picture" width="100">
+                    <span class="fullname"> <?php echo $first_name . ' ' . $middle_name . ' ' . $last_name; ?></span>
+                    <span class="role"><?php echo ucfirst($_SESSION['role']); ?></span>
+                    <span class="address"><?php echo $address; ?></span>
+                </div>
+                
+                <div class="animate-fadein-left">
+                    <a class="link-navs" href="#card-details">
+                        <img src="/phpets/assets/images/cart-bag.svg" >
+                        <span>My Cart</span>
+                    </a>
+                </div>
+                <div class="animate-fadein-left">
+                    <a class="link-navs" href="#card-details">
+                        <img src="/phpets/assets/images/purchase.svg" >
+                        <span>Purchased</span>
+                    </a>
+                </div>
+                <div class="animate-fadein-left">
+                    <a class="link-navs" href="#card-details">
+                        <img src="/phpets/assets/images/transaction.svg" >
+                        <span>Transactions</span>
+                    </a>
+                </div>
+                <div class="animate-fadein-left">
+                    <a class="link-navs" href="#card-details">
+                        <img src="/phpets/assets/images/edit-profile.svg" >
+                        <span>Edit Profile</span>
+                    </a>
+                </div>
+                
             </div>
             <div class="right">
-                <h1>Right</h1>
+                <div id="cart-details">
+                    <div class="heading">
+                        <img src="/phpets/assets/images/cart-bag.svg" alt="">
+                        <h2>My Cart</h2>
+                    </div>
+                    
+                    <div class="cart-table-head">
+                        <span style="width: 140px;">Name</span>
+                        <span>Quantity</span>
+                        <span>Price</span>
+                        <span>Order</span>
+                    </div>
+                    <div class="cart-table-row">
+                        <?php while ($item = mysqli_fetch_assoc($cart_result)): ?>
+                            <li>
+                                <span><?php echo $item['name']; ?></span>
+                                <span><?php echo $item['quantity']; ?></span>
+                                <span>₱<?php echo $item['price']; ?></span>
+                                <input type="checkbox" name="" class="checkbox">
+                            </li>
+                        <?php endwhile; ?>
+                    </div>
+                    <div class="checkout-btn-container">
+                        <span>Total: <b>₱0.00</b></span>
+                        <button class="clear-btn cool-btn">Clear All</button>
+                        <button class="checkout-btn cool-btn">Check Out</button>
+                    </div>
+                </div>
+
+                <div id="purchased-details" style="margin-top: 20px;">
+                    <div class="heading">
+                        <img src="/phpets/assets/images/purchase.svg" alt="">
+                        <h2>Purchased</h2>
+                    </div>
+                    <div class="cart-table-head">
+                        <span>Order</span>
+                        <span>Total</span>
+                        <span>Status</span>
+                        <span>Action</span>
+                    </div>
+                    <div class="purchased-table-row">
+                        <?php while ($order = mysqli_fetch_assoc($purchased_result)): ?>
+                            <li>
+                                <span style="width: 80px;"><?php echo $order['order_id']; ?></span>
+                                <span>₱ <?php echo $order['total_price']; ?></span>
+                                <span><?php echo $order['status']; ?></span>
+                                <button class="order-again ">Order Again</button>
+                            </li>
+                        <?php endwhile; ?>
+                    </div>
+                </div>
+
+                <div id="transactions-detail" style="margin-top: 40px;">
+                    <div class="heading">
+                        <img src="/phpets/assets/images/purchase.svg" alt="">
+                        <h2>Transactions</h2>
+                    </div>
+                </div>
             </div>
         </div>
         

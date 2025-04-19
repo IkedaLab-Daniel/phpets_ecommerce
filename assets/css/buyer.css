@@ -7,19 +7,225 @@
 
 #buyer .left{
     width: 20vw;
-    height: 50vh;
-    background-color: red;
-    color: red;
+    height: auto;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#buyer .left .user-details{
+    width: 100%;
+    height: auto;
     background-color: #454640;
     border-radius: 12px;
-    min-width: 300px;
+    padding: 20px;
+    animation: fadein-left 1s ease forwards;
 }
+
+#buyer .left .animate-fadein-left{
+    animation: fadein-left 1s ease forwards;
+}
+
+#buyer .left .link-navs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #454640;
+    border-radius: 12px;
+    padding: 20px;
+    gap: 10px;
+    transition: .4s;
+}
+
+#buyer .left .link-navs:hover{
+    transform: translateY(-3px) scale(105%);
+    background-color: #31322d;
+}
+
+
+#buyer .left .link-navs img{
+    width: 40px;
+}
+
+#buyer .left .link-navs span{
+    font-size: 1.4rem;
+}
+
 
 #buyer .right{
     width: 80vw;
-    height: 50vh;
+    height: auto;
     background-color: blue;
     background-color: #454640;
     border-radius: 12px;
+    padding: 20px;
+    animation: fadein-top 1s ease forwards;
 }
 
+.user-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-details img{
+    width: 200px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 4px solid rgb(203, 203, 203);
+}
+
+.user-details .fullname{
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.user-details .role{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.user-details .address{
+    font-size: 1rem;
+    text-align: center;
+}
+
+.right .heading{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+}    
+
+.right .heading img{
+    width: 3.5rem;
+}
+
+.right .heading h2{
+    font-size: 2rem;
+}
+
+.right .cart-table-head{
+    width: 100%;
+    background-color: rgb(30, 28, 28);
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.right .cart-table-row{
+    background-color: rgb(30, 28, 28);
+    border-radius: 8px;
+}
+
+.right .cart-table-row li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.checkbox{
+    transform: translateX(-20px) scale(150%);
+    cursor: pointer;
+}
+
+.checkout-btn-container{
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    align-items: center;
+}
+
+.checkout-btn-container span{
+    font-size: 1.4rem;
+}
+
+
+.checkout-btn{
+    background-color: #818ab4;
+    border: 2px solid #818ab4;
+    padding: 10px 30px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-weight: 800;
+    transition: .4s;
+}
+
+.cool-btn{
+    transition: .4s;
+}
+
+.cool-btn:hover{
+    cursor: pointer;
+    transform: translateY(-3px) scale(103%);
+}
+
+.cool-btn:active{
+    opacity: .5;
+    transform: translateY(0px) scale(95%);
+}
+
+.clear-btn{
+    background-color: #454640;
+    border: 2px solid white;
+    padding: 10px 30px;
+    margin: 10px 0;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+}
+
+.right .purchased-table-row{
+    background-color: rgb(30, 28, 28);
+    border-radius: 8px;
+}
+
+.right .purchased-table-row li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.right .purchased-table-row .order-again{
+    background-color: #818ab4;
+    border: 2px solid #818ab4;
+    border-radius: 4px;
+    transition: .4s;
+}
+.right .purchased-table-row .order-again:hover{
+    cursor: pointer;
+    transform: scale(103%);
+}
+
+.right .purchased-table-row .order-again:active{
+    opacity: .5;
+    transform: scale(95%);
+}
+
+@keyframes fadein-left {
+    0%{
+        opacity: 0;
+        transform: translateX(-300px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0px);
+    } 
+}
+
+@keyframes fadein-top {
+    0%{
+        opacity: 0;
+        transform: translateY(-300px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0px);
+    } 
+}
