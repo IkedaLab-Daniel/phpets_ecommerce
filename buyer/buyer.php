@@ -193,7 +193,7 @@
 
                 <div id="edit-profile" style="margin-top: 40px">
                     <div class="heading mb-20">
-                        <img src="/phpets/assets/images/transaction.svg" alt="">
+                        <img src="/phpets/assets/images/edit-profile.svg" alt="">
                         <h2>Edit Profile</h2>
                     </div>
                     <form action="" method="POST">
@@ -214,6 +214,13 @@
                         
                         <div class="save-btn-container">
                             <button type="submit" class="save-btn cool-btn">Save Changes</button>
+                        </div>
+                    </form>
+                    <h2>Upload Image</h2>
+                    <form action="../includes/upload.php" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="uploaded_file" required>
+                        <div class="save-btn-container">
+                            <button type="submit" name="upload" class="save-btn cool-btn">Upload</button>
                         </div>
                     </form>
                 </div>
