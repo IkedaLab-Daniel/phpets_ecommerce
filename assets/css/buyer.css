@@ -97,6 +97,7 @@
     justify-content: left;
     align-items: center;
     gap: 10px;
+    margin: 30px 0 10px 0;
 }    
 
 .right .heading img{
@@ -144,7 +145,6 @@
 .checkout-btn-container span{
     font-size: 1.4rem;
 }
-
 
 .checkout-btn{
     background-color: #818ab4;
@@ -223,26 +223,7 @@
     text-align: center;
 }
 
-
-.right .transactions-table-row{
-    background-color: rgb(30, 28, 28);
-    border-radius: 8px;
-}
-
-.right .transactions-table-row li{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-}
-
-.right .transactions-table-row span{
-    width: 33%;
-    text-align: center;
-}
-
-
-.right .transactions-table-row .pending{
+.right .order-box-head .pending{
     text-transform: uppercase;
     background-color: #FACC15;
     color: #4b2820;
@@ -251,7 +232,7 @@
     font-weight: 600;
 }
 
-.right .transactions-table-row .delivered{
+.right .order-box-head .delivered{
     color: rgb(255, 255, 255);
     text-transform: uppercase;
     background-color: rgb(78, 154, 59);
@@ -260,7 +241,7 @@
     font-weight: 600;
 }
 
-.right .transactions-table-row .shipped{
+.right .order-box-head .shipped{
     color: rgb(255, 255, 255);
     text-transform: uppercase;
     background-color: #3B82F6;
@@ -269,7 +250,7 @@
     font-weight: 600;
 }
 
-.right .transactions-table-row .cancelled{
+.right .order-box-head .cancelled{
     color: rgb(255, 255, 255);
     text-transform: uppercase;
     background-color: rgb(206, 75, 75);
@@ -282,6 +263,66 @@
     width: 33%;
     display: flex;
     justify-content: center;
+}
+
+.order-box{
+    background-color: rgb(30, 28, 28);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.order-box .order-box-head{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.order-box .order-box-products{
+    display: flex;
+    flex-direction: column;
+}
+
+.order-box .order-box-products .order-item{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgb(160, 160, 160);
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin: 5px 0;
+}
+
+.order-box-foot{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.foot-left{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.foot-right a{
+    background-color: rgb(199, 73, 73);
+    color: white;
+    padding: 10px 30px;
+    border-radius: 8px;
+}
+
+.disabled{
+    background-color: rgb(106, 106, 106);
+    color: rgb(207, 207, 207);
+    padding: 10px 30px;
+    border-radius: 8px;
+    cursor: not-allowed;
 }
 
 form label{
@@ -303,8 +344,8 @@ form input{
 }
 
 form input:focus{
-    outline: none; /* Ensures no outline appears when focused */
-    border-color: #8892BF; /* Optional: Add a custom border color for focus */
+    outline: none; 
+    border-color: #8892BF; 
 }
 
 .mb-20{

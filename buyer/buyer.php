@@ -86,7 +86,7 @@
             </div>
             <div class="right">
                 <div id="cart-details">
-                    <div class="heading">
+                    <div class="heading" style="margin-top: 10px;">
                         <img src="/phpets/assets/images/cart-bag.svg" alt="">
                         <h2>My Cart</h2>
                     </div>
@@ -114,7 +114,7 @@
                     </div>
                 </div>
 
-                <div id="purchased-details" style="margin-top: 20px;">
+                <div id="purchased-details">
                     <div class="heading">
                         <img src="/phpets/assets/images/purchase.svg" alt="">
                         <h2>Purchased</h2>
@@ -137,56 +137,56 @@
                     </div>
                 </div>
 
-                <div id="transactions-detail" style="margin-top: 40px;">
+                <div id="all-transactions">
                     <div class="heading">
                         <img src="/phpets/assets/images/transaction.svg" alt="">
                         <h2>Transactions</h2>
                     </div>
-                    <div class="purchased-table-head">
-                        <span>Order</span>
-                        <span>Total</span>
-                        <span>Status</span>
-                    </div>
-                    <div class="transactions-table-row">
-                    <?php foreach ($all_orders as $order): ?>
-                        <li>
-                            <span><?php echo $order['order_id']; ?></span>
-                            <span>₱ <?php echo $order['total_price']; ?></span>
-                            <div class="order-status-wrapper">
-                                <p class="<?php echo $order['status']; ?>"><?php echo $order['status']; ?></p>
-                            </div>
-                        </li>
-                    <?php endforeach; ?>
-                    </div>
-                </div>
-
-                <div id="all-transactions">
-                    <h2>All Transactions</h2>
                     <?php foreach ($all_orders as $order): ?>
                         <div class="order-box">
-                            <p><strong>Order ID:</strong> <?= $order['order_id'] ?></p>
-                            <p><strong>Status:</strong> <?= $order['status'] ?></p>
-                            <p><strong>Date:</strong> <?= $order['order_date'] ?></p>
+                            <div class="order-box-head">
+                                <p><strong>Order ID:</strong> <?= $order['order_id'] ?></p>
+                                <p></p>
+                                <p class="<?php echo $order['status']; ?>"><?php echo $order['status']; ?></p>                            </div>
 
-                            <ul>
-                            <?php
-                                $order_id = $order['order_id'];
-                                $item_sql = "SELECT oi.*, p.name, p.image, p.price 
-                                            FROM order_items oi
-                                            JOIN products p ON oi.product_id = p.product_id
-                                            WHERE oi.order_id = $order_id";
-                                $item_result = mysqli_query($conn, $item_sql);
+                            <div class="order-box-products">
+                                <?php
+                                    $order_id = $order['order_id'];
+                                    $item_sql = "SELECT oi.*, p.name, p.image, p.price 
+                                                FROM order_items oi
+                                                JOIN products p ON oi.product_id = p.product_id
+                                                WHERE oi.order_id = $order_id";
+                                    $item_result = mysqli_query($conn, $item_sql);
 
-                                while($item = mysqli_fetch_assoc($item_result)):
-                            ?>
-                                <li>
-                                    <img src="../uploads/<?= $item['image'] ?>" alt="" width="50">
-                                    <?= $item['name'] ?> - <?= $item['quantity'] ?> pcs - ₱<?= number_format($item['price'], 2) ?>
-                                </li>
-                            <?php endwhile; ?>
-                            </ul>
+                                    while($item = mysqli_fetch_assoc($item_result)):
+                                ?>
+                                    <div class="order-item">
+                                        <img src="../uploads/<?= $item['image'] ?>" width="50">
+                                        <span><?= $item['name'] ?></span>
+                                        <span><?= $item['quantity'] ?>pcs</span>
+                                        <span>₱ <?= number_format($item['price'], 2) ?></span>
+                                        
+                                    </div>
+                                <?php endwhile; ?>
+                            </div>
+                            
+                            <div class="order-box-foot">
+                                <div class="foot-left">
+                                    <!-- <p><strong>Date:</strong> <?= $order['order_date'] ?></p> -->
+                                    <p><strong>Total Price:</strong> ₱<?= number_format($order['total_price'], 2) ?></p>
+                                </div>
 
-                            <hr>
+                                <div class="foot-right">
+                                    <?php 
+                                        if ($order['status'] != 'delivered' and $order['status'] != 'cancelled'){
+                                            echo "<div class='cool-btn'><a class='cancel'>Cancel</a></div>";
+                                        } else{
+                                            echo "<div><span class='disabled'>Cancel</span></div>";
+                                        }
+                                    ?>
+                                </div>
+                                
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
