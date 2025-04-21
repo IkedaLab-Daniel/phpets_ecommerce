@@ -59,29 +59,30 @@
                 </div>
                 
                 <div class="animate-fadein-left">
-                    <a class="link-navs" href="#card-details">
-                        <img src="/phpets/assets/images/cart-bag.svg" >
+                    <a class="link-navs" href="#cart-details">
+                        <img src="/phpets/assets/images/cart-bag.svg">
                         <span>My Cart</span>
                     </a>
                 </div>
                 <div class="animate-fadein-left">
-                    <a class="link-navs" href="#card-details">
-                        <img src="/phpets/assets/images/purchase.svg" >
+                    <a class="link-navs" href="#purchased-details">
+                        <img src="/phpets/assets/images/purchase.svg">
                         <span>Purchased</span>
                     </a>
                 </div>
                 <div class="animate-fadein-left">
-                    <a class="link-navs" href="#card-details">
-                        <img src="/phpets/assets/images/transaction.svg" >
+                    <a class="link-navs" href="#all-transactions">
+                        <img src="/phpets/assets/images/transaction.svg">
                         <span>Transactions</span>
                     </a>
                 </div>
                 <div class="animate-fadein-left">
-                    <a class="link-navs" href="#card-details">
-                        <img src="/phpets/assets/images/edit-profile.svg" >
+                    <a class="link-navs" href="#edit-profile">
+                        <img src="/phpets/assets/images/edit-profile.svg">
                         <span>Edit Profile</span>
                     </a>
                 </div>
+
                 
             </div>
             <div class="right">

@@ -89,10 +89,6 @@
                                     <img src="./assets/images/facebook.svg" >
                                     <span>Facebook</span>
                                 </a>
-                                <a href="" target="_blank" class="social ph">
-                                    <img src="./assets/images/ph.png" >
-                                    <span>PronHub</span>
-                                </a>
                             </div>
                         </div>
                     </div>
