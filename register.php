@@ -1,57 +1,57 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
-include 'includes/db_connect.php';
+    include 'includes/db_connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $first_name = $_POST['first_name'];
-    $middle_name = $_POST['middle_name'] ?? null;
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirm = $_POST['confirm_password'];
-    $address = $_POST['address'];
-    $role = $_POST['account_type'];
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $first_name = $_POST['first_name'];
+        $middle_name = $_POST['middle_name'] ?? null;
+        $last_name = $_POST['last_name'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $confirm = $_POST['confirm_password'];
+        $address = $_POST['address'];
+        $role = $_POST['account_type'];
 
-    // Check if passwords match
-    if ($password !== $confirm) {
-        echo "<div id='toast-data' data-message=' ❌ Passwords do not match' data-type='error'></div>";
-    } else {
-        // Check if email already exists
-        $check_sql = "SELECT user_id FROM users WHERE email = ?";
-        $check_stmt = $conn->prepare($check_sql);
-        $check_stmt->bind_param("s", $email);
-        $check_stmt->execute();
-        $check_stmt->store_result();
-
-        if ($check_stmt->num_rows > 0) {
-            echo "<div id='toast-data' data-message=' ❌ Email Already Exist' data-type='error'></div>";
+        // Check if passwords match
+        if ($password !== $confirm) {
+            echo "<div id='toast-data' data-message=' ❌ Passwords do not match' data-type='error'></div>";
         } else {
-            // Email is unique, proceed with registration
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            // Check if email already exists
+            $check_sql = "SELECT user_id FROM users WHERE email = ?";
+            $check_stmt = $conn->prepare($check_sql);
+            $check_stmt->bind_param("s", $email);
+            $check_stmt->execute();
+            $check_stmt->store_result();
 
-            $sql = "INSERT INTO users (first_name, middle_name, last_name, email, password, address, role) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssssss", $first_name, $middle_name, $last_name, $email, $hashed_password, $address, $role);
-
-            if ($stmt->execute()) {
-                echo "<div id='toast-data' data-message='Registration successful! You can now log in.' data-type='success' data-redirect='login.php'></div>";
+            if ($check_stmt->num_rows > 0) {
+                echo "<div id='toast-data' data-message=' ❌ Email Already Exist' data-type='error'></div>";
             } else {
-                error_log("SQL Error: " . $stmt->error);
-                echo "<script>alert('Error: " . $stmt->error . "');</script>";
+                // Email is unique, proceed with registration
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+                $sql = "INSERT INTO users (first_name, middle_name, last_name, email, password, address, role) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sssssss", $first_name, $middle_name, $last_name, $email, $hashed_password, $address, $role);
+
+                if ($stmt->execute()) {
+                    echo "<div id='toast-data' data-message='Registration successful! You can now log in.' data-type='success' data-redirect='login.php'></div>";
+                } else {
+                    error_log("SQL Error: " . $stmt->error);
+                    echo "<script>alert('Error: " . $stmt->error . "');</script>";
+                }
+
+                $stmt->close();
             }
 
-            $stmt->close();
+            $check_stmt->close();
+            $conn->close();
         }
-
-        $check_stmt->close();
-        $conn->close();
     }
-}
 ?>
 
 

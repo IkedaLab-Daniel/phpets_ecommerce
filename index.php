@@ -119,7 +119,7 @@
                             </div>
                             <div class="product-card-footer">
                                 <p>₱<?php echo number_format($row['price'], 2); ?></p>
-                                <a href="product.php?id=<?php echo $row['product_id']; ?>">View</a>
+                                <a href="view_product.php?id=<?php echo $row['product_id']; ?>">View</a>
                             </div>
                         </div>
                     <?php endwhile; ?>
