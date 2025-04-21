@@ -45,7 +45,7 @@
         <link rel="stylesheet" href="/phpets/assets/css/index.css" />
         <link rel="stylesheet" href="/phpets/assets/css/buyer.css" />
         <link rel="icon" type="image/svg" href="/phpets/assets/images/paw.svg" />
-        <title>PHPets: Buyer Panel </title>
+        <title><?php echo $first_name . ' ' . $last_name; ?> </title>
     </head>
 
     <body>
@@ -99,19 +99,26 @@
                         <span>Order</span>
                     </div>
                     <div class="cart-table-row">
-                        <?php while ($item = mysqli_fetch_assoc($cart_result)): ?>
-                            <li>
-                                <span><?php echo $item['name']; ?></span>
-                                <span><?php echo $item['quantity']; ?></span>
-                                <span>₱<?php echo $item['price']; ?></span>
-                                <input type="checkbox" name="" class="checkbox">
-                            </li>
-                        <?php endwhile; ?>
+                        <?php if (mysqli_num_rows($cart_result) > 0): ?>
+                            <?php while ($item = mysqli_fetch_assoc($cart_result)): ?>
+                                <li>
+                                    <span><?php echo $item['name']; ?></span>
+                                    <span><?php echo $item['quantity']; ?></span>
+                                    <span>₱<?php echo $item['price']; ?></span>
+                                    <input type="checkbox" name="" class="checkbox">
+                                </li>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <p class="empty-cart-message">No item in your cart. <a class="shop-now cool-btn" href="../index.php">Shop Now</a></p>
+                            
+                        <?php endif; ?>
                     </div>
                     <div class="checkout-btn-container">
-                        <span>Total: <b>₱0.00</b></span>
-                        <button class="clear-btn cool-btn">Clear All</button>
-                        <button class="checkout-btn cool-btn">Check Out</button>
+                        <?php if (mysqli_num_rows($cart_result) > 0): ?>
+                            <span>Total: <b>₱0.00</b></span>
+                            <button class="clear-btn cool-btn">Clear All</button>
+                            <button class="checkout-btn cool-btn">Check Out</button>
+                        <?php endif; ?>
                     </div>
                 </div>
 

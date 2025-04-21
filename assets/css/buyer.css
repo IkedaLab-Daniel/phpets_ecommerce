@@ -368,6 +368,20 @@ form input:focus{
     padding: 10px 20px;
 }
 
+.empty-cart-message{
+    text-align: center;
+    padding: 10px;
+    background-color: #454640;
+    font-size: 1.4rem;
+}
+
+.shop-now{
+    font-size: 1rem;
+    padding: 10px 20px;
+    background-color: #818ab4;
+    border-radius: 8px;
+}
+
 @keyframes fadein-left {
     0%{
         opacity: 0;

@@ -25,7 +25,7 @@
         exit();
     }
 
-    $product = $product_result->fetch_assoc();
+    $product = $product_result->fetch_assoc(); // ? Will also be used to get its reviews data
 
     // Fetch reviews
     $review_sql = "SELECT r.*, u.first_name, u.last_name 
@@ -55,30 +55,31 @@
     }
     
     $buyer_id = $_SESSION['user_id'];
-    $product_id = $_GET['id']; // assuming product.php?id=...
+    $product_id = $_GET['id']; 
     
     // Add to cart
     if (isset($_POST['add_to_cart'])) {
         $quantity = intval($_POST['quantity']);
     
-        // Check if already in cart
+        // ? Check if already in cart -> If yes, don't make another item on cart, but increate QTY instead
         $check_sql = "SELECT * FROM cart WHERE buyer_id = $buyer_id AND product_id = $product_id";
         $check_result = mysqli_query($conn, $check_sql);
     
         if (mysqli_num_rows($check_result) > 0) {
-            // Update quantity
+            // * Update quantity here
             $update_sql = "UPDATE cart SET quantity = quantity + $quantity WHERE buyer_id = $buyer_id AND product_id = $product_id";
             mysqli_query($conn, $update_sql);
         } else {
             // Insert new cart entry
             $insert_sql = "INSERT INTO cart (buyer_id, product_id, quantity) VALUES ($buyer_id, $product_id, $quantity)";
             mysqli_query($conn, $insert_sql);
+                // TODO - Error catching
         }
     
-        echo "<p style='color: green;'>Added to cart!</p>";
+        echo "<p style='color: green;'>Added to cart!</p>"; // ! Temporarily - Will be updated soon
     }
     
-    // Checkout (redirect to separate file)
+    // ? Checkout (redirect to separate file)
     if (isset($_POST['checkout_now'])) {
         $quantity = intval($_POST['quantity']);
         $_SESSION['checkout_product_id'] = $product_id;
