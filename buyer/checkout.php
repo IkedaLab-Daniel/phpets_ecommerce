@@ -27,13 +27,13 @@
         $total_price += $row['price'] * $row['quantity'];
     }
     
-    // * tep 3: Create order
+    // * Step 3: Create order
     $order_query = "INSERT INTO orders (buyer_id, total_price, status) 
                     VALUES ($buyer_id, $total_price, 'pending')";
     mysqli_query($conn, $order_query);
     $order_id = mysqli_insert_id($conn); // ? get the inserted order ID
     
-    // ! Step 4: Insert order items and update product stock (Now working)
+    // ! Step 4: Insert order items and update product stock 
     foreach ($cart_items as $item) {
         $product_id = $item['product_id'];
         $quantity = $item['quantity'];
