@@ -1,7 +1,7 @@
 <?php
     session_start();
     include './includes/db_connect.php';
-    include './includes/error_catch.php';
+    include './includes/header.php';
 
     if (!isset($_GET['id'])) {
         echo "No product selected.";
@@ -48,6 +48,44 @@
     $avg_result = $stmt->get_result();
     $avg_row = $avg_result->fetch_assoc();
     $average_rating = $avg_row['average_rating'] ? number_format($avg_row['average_rating'], 1) : "No ratings yet";
+
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'buyer') {
+        header("Location: login.php");
+        exit();
+    }
+    
+    $buyer_id = $_SESSION['user_id'];
+    $product_id = $_GET['id']; // assuming product.php?id=...
+    
+    // Add to cart
+    if (isset($_POST['add_to_cart'])) {
+        $quantity = intval($_POST['quantity']);
+    
+        // Check if already in cart
+        $check_sql = "SELECT * FROM cart WHERE buyer_id = $buyer_id AND product_id = $product_id";
+        $check_result = mysqli_query($conn, $check_sql);
+    
+        if (mysqli_num_rows($check_result) > 0) {
+            // Update quantity
+            $update_sql = "UPDATE cart SET quantity = quantity + $quantity WHERE buyer_id = $buyer_id AND product_id = $product_id";
+            mysqli_query($conn, $update_sql);
+        } else {
+            // Insert new cart entry
+            $insert_sql = "INSERT INTO cart (buyer_id, product_id, quantity) VALUES ($buyer_id, $product_id, $quantity)";
+            mysqli_query($conn, $insert_sql);
+        }
+    
+        echo "<p style='color: green;'>Added to cart!</p>";
+    }
+    
+    // Checkout (redirect to separate file)
+    if (isset($_POST['checkout_now'])) {
+        $quantity = intval($_POST['quantity']);
+        $_SESSION['checkout_product_id'] = $product_id;
+        $_SESSION['checkout_quantity'] = $quantity;
+        header("Location: /phpets/buyer/checkout.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +93,7 @@
     <head>
         <title><?php echo htmlspecialchars($product['name']); ?> | Product Detail</title>
     </head>
-    <body>
+    <body style="margin-top: 5rem;">
         <h2><?php echo htmlspecialchars($product['name']); ?></h2>
         <img src="uploads/<?php echo $product['image']; ?>" alt="Product Image" width="200">
         <p><strong>Description:</strong> <?php echo htmlspecialchars($product['description']); ?></p>
@@ -63,6 +101,16 @@
         <p><strong>Price:</strong> ₱<?php echo number_format($product['price'], 2); ?></p>
         <p><strong>Average Rating:</strong> <?php echo $average_rating; ?> ⭐</p>
 
+        <hr>
+        <form method="POST" action="">
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="quantity" value="1" min="1" required>
+
+            <input type="hidden" name="product_id" value="<?= $product_id ?>">
+
+            <button type="submit" name="add_to_cart">Add to Cart 🛒</button>
+            <button type="submit" name="checkout_now">Check Out 💳</button>
+        </form>
         <hr>
 
         <h3>Customer Reviews</h3>
