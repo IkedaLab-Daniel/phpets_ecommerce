@@ -11,7 +11,7 @@
     $product_id = intval($_GET['id']);
 
     // Fetch product details
-    $product_sql = "SELECT p.*, u.first_name, u.last_name 
+    $product_sql = "SELECT p.*, u.first_name, u.last_name, u.profile_photo 
                     FROM products p
                     JOIN users u ON p.seller_id = u.user_id
                     WHERE p.product_id = ?";
@@ -92,15 +92,41 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/svg" href="./assets/images/paw.svg" />
+        <link rel="stylesheet" href="assets/css/view_product.css">
         <title><?php echo htmlspecialchars($product['name']); ?> | Product Detail</title>
+
     </head>
     <body style="margin-top: 5rem;">
-        <h2><?php echo htmlspecialchars($product['name']); ?></h2>
-        <img src="uploads/<?php echo $product['image']; ?>" alt="Product Image" width="200">
-        <p><strong>Description:</strong> <?php echo htmlspecialchars($product['description']); ?></p>
-        <p><strong>Seller:</strong> <?php echo $product['first_name'] . ' ' . $product['last_name']; ?></p>
+        <div class="single-item-view">
+            <div class="product-details">
+                <div class="left">
+                    <img src="uploads/<?php echo $product['image']; ?>" alt="Product Image" width="200">
+                </div>
+                <div class="right">
+                    <h2 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h2>
+                    <div class="small-rating"> 
+                        <img src="/phpets/assets/images/star.svg" width="25px">
+                        <span><?php echo $average_rating; ?> </span>
+                    </div>
+                    <p class="description"><strong>Description:</strong> <?php echo htmlspecialchars($product['description']); ?></p>
+                    <div class="seller">
+                        <img src="/phpets/uploads/<?php echo htmlspecialchars($product['profile_photo']); ?>" alt="Seller Profile Photo">
+                        <p><?php echo htmlspecialchars($product['first_name'] . ' ' . $product['last_name']); ?></p>
+                    </div>
+                    <p><strong>Stock:</strong> <?php echo $product['stock']; ?> available</p> 
+                </div>
+            </div>
+            
+        </div>
+        
+        
+        
+        
         <p><strong>Price:</strong> ₱<?php echo number_format($product['price'], 2); ?></p>
-        <p><strong>Average Rating:</strong> <?php echo $average_rating; ?> ⭐</p>
+        
 
         <hr>
         <form method="POST" action="">

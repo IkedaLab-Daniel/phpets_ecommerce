@@ -33,16 +33,22 @@
     mysqli_query($conn, $order_query);
     $order_id = mysqli_insert_id($conn); // ? get the inserted order ID
     
-    // ! Step 4: Insert order items
-    // TODO: Update product: Decrease stocks
+    // ! Step 4: Insert order items and update product stock (Now working)
     foreach ($cart_items as $item) {
         $product_id = $item['product_id'];
         $quantity = $item['quantity'];
         $price = $item['price']; 
-    
+
+        // Insert order item
         $item_query = "INSERT INTO order_items (order_id, product_id, quantity, price)  
-                       VALUES ($order_id, $product_id, $quantity, $price)";
+                    VALUES ($order_id, $product_id, $quantity, $price)";
         mysqli_query($conn, $item_query);
+
+        // ? Update product stock 
+        $update_stock_query = "UPDATE products 
+                            SET stock = stock - $quantity 
+                            WHERE product_id = $product_id";
+        mysqli_query($conn, $update_stock_query);
     }
     
     // * Step 5: Clear cart
@@ -59,7 +65,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <link rel="stylesheet" href="assets/css/checkout.css">  <!-- null -->
+        <title>Checkout</title>
     </head>
     <body>
         <h2>This page will get all item in cart, make an order, put all item in cart as order_item in order, then delete cart items</h2>
