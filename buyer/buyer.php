@@ -109,7 +109,7 @@
                                 </li>
                             <?php endwhile; ?>
                         <?php else: ?>
-                            <p class="empty-cart-message">No item in your cart. <a class="shop-now cool-btn" href="../index.php">Shop Now</a></p>
+                            <p class="empty-cart-message">Your Cart is Empty <a class="shop-now cool-btn" href="../index.php">Shop Now</a></p>
                             
                         <?php endif; ?>
                     </div>

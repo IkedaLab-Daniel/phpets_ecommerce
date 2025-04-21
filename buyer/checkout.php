@@ -11,11 +11,12 @@
     $buyer_id = $_SESSION['user_id'];
     
     // * Step 1: Get all cart items for this user
+    // TODO: If no item on Cart, return 
+    // ! Causes empty "order" row if checkout wihout cart
     $cart_query = "SELECT c.*, p.price FROM cart c 
                    JOIN products p ON c.product_id = p.product_id 
                    WHERE c.buyer_id = $buyer_id";       
-    $cart_result = mysqli_query($conn, $cart_query);    // TODO: If no item on Cart, return 
-                                                        // ! Causes empty "order" row if checkout wihout cart item
+    $cart_result = mysqli_query($conn, $cart_query);   
     
     // * Step 2: Calculate total price
     $total_price = 0;   
@@ -33,12 +34,13 @@
     $order_id = mysqli_insert_id($conn); // ? get the inserted order ID
     
     // ! Step 4: Insert order items
+    // TODO: Update product: Decrease stocks
     foreach ($cart_items as $item) {
         $product_id = $item['product_id'];
         $quantity = $item['quantity'];
         $price = $item['price']; 
     
-        $item_query = "INSERT INTO order_items (order_id, product_id, quantity, price)  // TODO: Update product: Decrease stocks
+        $item_query = "INSERT INTO order_items (order_id, product_id, quantity, price)  
                        VALUES ($order_id, $product_id, $quantity, $price)";
         mysqli_query($conn, $item_query);
     }
