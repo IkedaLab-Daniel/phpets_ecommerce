@@ -13,14 +13,16 @@
     border-radius: 12px;
     display: flex;
     gap: 20px;
+    position: relative;
 }
 
 .single-item-view .product-details .left img{
+    width: 250px;
     border-radius: 4px;
 }
 
 .single-item-view .product-details .right .product-name{
-    font-size: 2rem;
+    font-size: 1.7rem;
 }
 
 .single-item-view .product-details .right .small-rating{
@@ -46,4 +48,216 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+}
+
+.single-item-view .product-details .right .category{
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color: black;
+    padding: 5px 20px;
+    border-radius: 4px;
+}
+
+.single-item-view .product-details .right .stock{
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.single-item-view .product-details .right .stock img{
+    width: 2rem;
+}
+
+.single-item-view .product-details .right .price{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #8892BF;
+    text-shadow: 0px 0px 10px rgb(101, 101, 101);
+}
+
+.add-to-cart-checkout-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+
+.add-to-cart-checkout-form form{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 60vw;
+    background: #484848;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.add-to-cart-checkout-form form .div1{
+    width: 33%;
+}
+
+.add-to-cart-checkout-form form .div1 input{
+    background-color: black;
+    color: white;
+    height: 40px;
+    border-radius: 4px;
+    text-align: center;
+    margin-left: 5px;
+}
+
+.add-to-cart-checkout-form form .div2{
+    width: 33%;
+    background-color: rgb(255, 255, 255);
+    margin-left: -20px;
+    border-radius: 4px;
+    animation: prevent-spam 4s forwards ease;
+}
+
+.add-to-cart-checkout-form form .div2 button{
+    background-color: rgba(245, 222, 179, 0);
+    padding: 10px;
+    width: 100%;
+    color: black;
+    border: 0px;
+    border-radius: 6px;
+    outline: 0px;
+    font-size: 1rem;
+    font-weight: 600;
+    animation: prevent-spam 4s forwards ease;
+
+}
+
+
+.add-to-cart-checkout-form form .div3{
+    width: 33%;
+    background-color: #8892BF;
+    border-radius: 4px;
+}
+
+.add-to-cart-checkout-form form .div3 button{
+    background-color: rgba(245, 222, 179, 0);
+    padding: 10px;
+    width: 100%;
+    color: white;
+    border: 0px;
+    border-radius: 6px;
+    outline: 0px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.cool-btn{
+    transition: .4s;
+}
+
+.cool-btn:hover{
+    transform: scale(103%) translateY(-3px);
+    cursor: pointer;
+}
+
+.cool-btn:active{
+    transform: scale(97%) translateY(0px);
+    opacity: .5;
+}
+
+.added-to-cart{
+    position: absolute;
+    top: 6rem;
+    right: 20px;
+    padding: 10px 40px;
+    background-color: #e6f9ec; 
+               
+    border: 2px solid #81c784; 
+    border-radius: 4px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    max-height: 60px;
+    animation: disappear 4s forwards ease;
+    animation-delay: 3s;
+}
+
+.added-to-cart p{
+    color: #2e7d32; 
+}
+
+
+.added-to-cart .cat{
+    width: 50px;
+}
+
+.added-to-cart .check{
+    width: 30px;
+}
+
+.loading{
+    color: black;
+    animation: loading 3.5s forwards ease;
+}
+
+.okay{
+    color: black;
+    animation: okay 4s forwards ease;
+}
+
+@keyframes disappear {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+@keyframes prevent-spam {
+    0%{
+        cursor: not-allowed;
+        opacity: .4;
+        pointer-events: none;
+    }
+    95%{
+        cursor: not-allowed;
+        opacity: .2;
+        pointer-events: none;
+    }
+    100%{
+        cursor: pointer;
+        opacity: 1;
+    }
+}
+
+@keyframes loading {
+    0%{
+        display: block;
+    }
+    99%{
+        display: block;
+    }
+    100%{
+        display: none;
+    }
+}
+
+@keyframes okay {
+    0%{
+        display: none;
+    }
+    99%{
+        display: none;
+    }
+    100%{
+        display: block;
+    }
 }

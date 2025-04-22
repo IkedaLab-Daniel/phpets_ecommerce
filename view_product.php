@@ -11,21 +11,22 @@
     $product_id = intval($_GET['id']);
 
     // Fetch product details
-    $product_sql = "SELECT p.*, u.first_name, u.last_name, u.profile_photo 
+    $product_sql = "SELECT p.*, u.first_name, u.last_name, u.profile_photo, c.name AS category_name 
                     FROM products p
                     JOIN users u ON p.seller_id = u.user_id
+                    JOIN categories c ON p.category_id = c.category_id
                     WHERE p.product_id = ?";
     $stmt = $conn->prepare($product_sql);
     $stmt->bind_param("i", $product_id);
     $stmt->execute();
     $product_result = $stmt->get_result();
-
+    
     if ($product_result->num_rows === 0) {
         echo "Product not found.";
         exit();
     }
-
-    $product = $product_result->fetch_assoc(); // ? Will also be used to get its reviews data
+    
+    $product = $product_result->fetch_assoc(); // Includes category_name
 
     // Fetch reviews
     $review_sql = "SELECT r.*, u.first_name, u.last_name 
@@ -76,7 +77,11 @@
                 // TODO - Error catching
         }
     
-        echo "<p style='color: green;'>Added to cart!</p>"; // ! Temporarily - Will be updated soon
+        echo "<div class = 'added-to-cart'>
+                    <img class = 'check' src='/phpets/assets/images/green-check.svg' width = '30'>
+                    <p>Added to cart!</p>
+                    <img class = 'cat' src='/phpets/assets/images/happy-cat.gif' width = '50'>
+            </div>"; // ! Temporarily - Will be updated soon
     }
     
     // ? Checkout (redirect to separate file)
@@ -101,43 +106,59 @@
     </head>
     <body style="margin-top: 5rem;">
         <div class="single-item-view">
-            <div class="product-details">
-                <div class="left">
-                    <img src="uploads/<?php echo $product['image']; ?>" alt="Product Image" width="200">
-                </div>
-                <div class="right">
-                    <h2 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h2>
-                    <div class="small-rating"> 
-                        <img src="/phpets/assets/images/star.svg" width="25px">
-                        <span><?php echo $average_rating; ?> </span>
-                    </div>
-                    <p class="description"><strong>Description:</strong> <?php echo htmlspecialchars($product['description']); ?></p>
-                    <div class="seller">
-                        <img src="/phpets/uploads/<?php echo htmlspecialchars($product['profile_photo']); ?>" alt="Seller Profile Photo">
-                        <p><?php echo htmlspecialchars($product['first_name'] . ' ' . $product['last_name']); ?></p>
-                    </div>
-                    <p><strong>Stock:</strong> <?php echo $product['stock']; ?> available</p> 
-                </div>
+        <div class="product-details">
+            <div class="left">
+                <img src="uploads/<?php echo $product['image']; ?>" alt="Product Image">
             </div>
-            
+            <div class="right">
+                <h2 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h2>
+                <div class="small-rating"> 
+                    <img src="/phpets/assets/images/star.svg" width="25px">
+                    <span><?php echo $average_rating; ?> </span>
+                </div>
+                <p class="description"><strong>Description:</strong> <?php echo htmlspecialchars($product['description']); ?></p>
+                <p><strong>Category:</strong> <?php echo htmlspecialchars($product['category_name']); ?></p> <!-- Render category -->
+                <div class="seller">
+                    <img src="/phpets/uploads/<?php echo htmlspecialchars($product['profile_photo']); ?>" alt="Seller Profile Photo">
+                    <p><?php echo htmlspecialchars($product['first_name'] . ' ' . $product['last_name']); ?></p>
+                </div>
+                <div class="stock">
+                    <img src="/phpets/assets/images/box.svg" alt="">
+                    <p><strong> <?php echo $product['stock']; ?></strong> remaining</p> 
+                </div>
+                <p class="category"><?php echo htmlspecialchars($product['category_name']); ?></p>
+                <p class="price">₱ <?php echo number_format($product['price'], 2); ?></p>
+            </div>
+        </div>    
+        </div>
+
+        <div class="add-to-cart-checkout-form">
+             <form method="POST" action="">
+                <div class="div1">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" value="1" min="1" required> 
+                    <input type="hidden" name="product_id" value="<?= $product_id ?>">
+                </div>
+                <div class="div2 cool-btn">
+                    <button type="submit" name="add_to_cart">
+                        <span class="loading">Loading</span>
+                        <span class="okay">Add to Cart 🛒</span>
+
+                       
+                    </button>
+                </div>
+                <div class="div3 cool-btn">
+                    <button type="submit" name="checkout_now">Check Out 💳</button>
+                </div>
+                
+
+                
+
+                
+                
+            </form>
         </div>
         
-        
-        
-        
-        <p><strong>Price:</strong> ₱<?php echo number_format($product['price'], 2); ?></p>
-        
-
-        <hr>
-        <form method="POST" action="">
-            <label for="quantity">Quantity:</label>
-            <input type="number" name="quantity" value="1" min="1" required>
-
-            <input type="hidden" name="product_id" value="<?= $product_id ?>">
-
-            <button type="submit" name="add_to_cart">Add to Cart 🛒</button>
-            <button type="submit" name="checkout_now">Check Out 💳</button>
-        </form>
         <hr>
 
         <h3>Customer Reviews</h3>
@@ -159,3 +180,7 @@
         <?php endif; ?>
     </body>
 </html>
+
+<?php 
+    include('./includes/error_catch.php');
+?>
