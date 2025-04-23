@@ -129,3 +129,9 @@
         </main>
     </body>
 </html>
+
+<?php 
+    if ($_SESSION['role'] == 'buyer'){
+        include ("./includes/cart_modal.php");
+    }
+?>

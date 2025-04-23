@@ -183,4 +183,7 @@
 
 <?php 
     include('./includes/error_catch.php');
+    if ($_SESSION['role'] == 'buyer'){
+        include ("./includes/cart_modal.php");
+    }
 ?>
