@@ -5,6 +5,48 @@
     align-items: center;
     gap: 20px;
 }
+
+.single-item-view .mini-nav{
+    background: #484848;
+    width: 60vw;
+    padding: 10px;
+    border-radius: 12px;  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.single-item-view .mini-nav .left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+.single-item-view .mini-nav .right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 1.2rem;
+    margin-right: 10px;
+    transition: .4s;
+}
+
+.single-item-view .mini-nav .right:hover{
+    transform: scale(108%);
+}
+
+.single-item-view .mini-nav h3{
+    font-size: 1.6rem;
+}
+
+.single-item-view .mini-nav img{
+    width: 30px;
+}
+
+
 .single-item-view .product-details{
     width: 60vw;
     height: auto;

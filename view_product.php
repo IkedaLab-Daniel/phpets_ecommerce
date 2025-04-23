@@ -106,30 +106,42 @@
     </head>
     <body style="margin-top: 5rem;">
         <div class="single-item-view">
-        <div class="product-details">
-            <div class="left">
-                <img src="uploads/<?php echo $product['image']; ?>" alt="Product Image">
+            <div class="mini-nav">
+                <div class="left">
+                    <img src="/phpets/assets/images/detail.svg" alt="">
+                     <h3>Product Details</h3>
+                </div>
+                <a href="/phpets/index.php" class="right">
+                    <img src="/phpets/assets/images/back2.svg" alt="">
+                    <span>Back</span>
+                </a>
+                
             </div>
-            <div class="right">
-                <h2 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h2>
-                <div class="small-rating"> 
-                    <img src="/phpets/assets/images/star.svg" width="25px">
-                    <span><?php echo $average_rating; ?> </span>
+            
+            <div class="product-details">
+                <div class="left">
+                    <img src="uploads/<?php echo $product['image']; ?>" alt="Product Image">
                 </div>
-                <p class="description"><strong>Description:</strong> <?php echo htmlspecialchars($product['description']); ?></p>
-                <p><strong>Category:</strong> <?php echo htmlspecialchars($product['category_name']); ?></p> <!-- Render category -->
-                <div class="seller">
-                    <img src="/phpets/uploads/<?php echo htmlspecialchars($product['profile_photo']); ?>" alt="Seller Profile Photo">
-                    <p><?php echo htmlspecialchars($product['first_name'] . ' ' . $product['last_name']); ?></p>
+                <div class="right">
+                    <h2 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h2>
+                    <div class="small-rating"> 
+                        <img src="/phpets/assets/images/star.svg" width="25px">
+                        <span><?php echo $average_rating; ?> </span>
+                    </div>
+                    <p class="description"><strong>Description:</strong> <?php echo htmlspecialchars($product['description']); ?></p>
+                    <p><strong>Category:</strong> <?php echo htmlspecialchars($product['category_name']); ?></p> <!-- Render category -->
+                    <div class="seller">
+                        <img src="/phpets/uploads/<?php echo htmlspecialchars($product['profile_photo']); ?>" alt="Seller Profile Photo">
+                        <p><?php echo htmlspecialchars($product['first_name'] . ' ' . $product['last_name']); ?></p>
+                    </div>
+                    <div class="stock">
+                        <img src="/phpets/assets/images/box.svg" alt="">
+                        <p><strong> <?php echo $product['stock']; ?></strong> remaining</p> 
+                    </div>
+                    <p class="category"><?php echo htmlspecialchars($product['category_name']); ?></p>
+                    <p class="price">₱ <?php echo number_format($product['price'], 2); ?></p>
                 </div>
-                <div class="stock">
-                    <img src="/phpets/assets/images/box.svg" alt="">
-                    <p><strong> <?php echo $product['stock']; ?></strong> remaining</p> 
-                </div>
-                <p class="category"><?php echo htmlspecialchars($product['category_name']); ?></p>
-                <p class="price">₱ <?php echo number_format($product['price'], 2); ?></p>
-            </div>
-        </div>    
+            </div>    
         </div>
 
         <div class="add-to-cart-checkout-form">
