@@ -212,6 +212,107 @@
     animation: okay 4s forwards ease;
 }
 
+#reviews{
+    width: 60vw;
+    height: auto;
+    background: #484848;
+    padding: 25px;
+    border-radius: 12px;
+    display: flex;
+    position: relative;
+    margin: auto;
+    flex-direction: column;
+}
+#reviews .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 5.5px solid rgb(255, 255, 255);
+    padding-bottom: 25px;
+    border-radius: 4px;
+}
+
+#reviews .header .icon-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#reviews .header .icon-text h3{
+    font-size: 1.5rem;
+}
+
+#reviews .header .icon-text img{
+    width: 2.5rem;
+}
+
+#reviews .header .small-rating{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 3px;
+}
+
+#reviews .review{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1.5px solid rgb(197, 197, 197);
+}
+
+#reviews .review .left{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#reviews .review .left img{
+    width: 40%;
+}
+
+#reviews .review .left span{
+    font-size: 2rem;
+    font-weight: bold;
+    color: gold;
+}
+
+#reviews .review .right{
+    width: 80%;
+}
+
+.name-and-profile{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 20px 0  0 10px;
+    gap: 5px;
+}
+
+.name-and-profile .name{
+    font-weight: 600;
+    display: block;
+    font-size: 1.2rem;
+}
+
+.name-and-profile img{
+    width: 35px;
+    border-radius: 50%;
+}
+
+#reviews .review .right .comment{
+    font-size: 1.2rem;
+    font: 500;
+}
+
+#reviews .review .right .date{
+    font-size: 1rem;
+    font-style: italic;
+}
+
 @keyframes disappear {
     0%{
         opacity: 1;

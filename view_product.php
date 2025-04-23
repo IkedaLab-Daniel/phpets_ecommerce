@@ -29,7 +29,7 @@
     $product = $product_result->fetch_assoc(); // Includes category_name
 
     // Fetch reviews
-    $review_sql = "SELECT r.*, u.first_name, u.last_name 
+    $review_sql = "SELECT r.*, u.first_name, u.last_name, u.profile_photo 
                 FROM reviews r
                 JOIN users u ON r.buyer_id = u.user_id
                 WHERE r.product_id = ?
@@ -149,35 +149,52 @@
                 </div>
                 <div class="div3 cool-btn">
                     <button type="submit" name="checkout_now">Check Out 💳</button>
-                </div>
-                
-
-                
-
-                
-                
+                </div>  
             </form>
         </div>
         
-        <hr>
+        <div id="reviews">
+            <div class="header">
+                <div class="icon-text">
+                    <img src="/phpets/assets/images/reviews.svg" alt="">
+                    <h3>Customer Reviews</h3>
+                </div>
+                
+                <div class="small-rating"> 
+                    <img src="/phpets/assets/images/star.svg" width="25px">
+                    <span><?php echo $average_rating; ?> / 5.0</span>
+                </div>
+            </div>  
 
-        <h3>Customer Reviews</h3>
-        <?php if ($review_result->num_rows > 0): ?>
-            <ul>
-                <?php while ($review = $review_result->fetch_assoc()): ?>
-                    <li>
-                        <strong><?php echo $review['first_name'] . ' ' . $review['last_name']; ?></strong> -
-                        <?php echo $review['rating']; ?> ⭐
-                        <br>
-                        <em><?php echo htmlspecialchars($review['comment']); ?></em><br>
-                        <small><?php echo date('F j, Y', strtotime($review['review_date'])); ?></small>
-                    </li>
-                    <hr>
-                <?php endwhile; ?>
-            </ul>
-        <?php else: ?>
-            <p>No reviews yet.</p>
-        <?php endif; ?>
+            <div class="reviews-container">
+                <?php if ($review_result->num_rows > 0): ?>
+                    <div>
+                        <?php while ($review = $review_result->fetch_assoc()): ?>
+                            <div class="name-and-profile">
+                                <img src="/phpets/uploads/<?php echo htmlspecialchars($review['profile_photo']); ?>" alt="User Profile Photo" class="review-profile-photo">
+                                <span class="name"><?php echo $review['first_name'] . ' ' . $review['last_name']; ?></span> 
+                            </div>
+                            <div class="review">
+                                <div class="left">
+                                    <img src="/phpets/assets/images/star.svg">
+                                    <span><?php echo $review['rating']; ?> </span>
+                                </div>
+                                <div class="right">
+                                    <span class="comment"><?php echo htmlspecialchars($review['comment']); ?></span><br>
+                                    <span class="date"><?php echo date('F j, Y', strtotime($review['review_date'])); ?></span>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+                <?php else: ?>
+                    <p>No reviews yet.</p>
+                <?php endif; ?>
+            </div>
+            
+            
+        </div>
+
+        
     </body>
 </html>
 
