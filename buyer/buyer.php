@@ -169,6 +169,45 @@
             echo "Error updating user information: " . $stmt->error;
         }
     }
+
+    // ? Update user photo
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_photo'])) {
+        if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
+            $file_tmp = $_FILES['profile_photo']['tmp_name'];
+            $file_name = $_FILES['profile_photo']['name'];
+            $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
+
+            // Generate a unique file name
+            $unique_file_name = uniqid('profile_', true) . '.' . $file_ext;
+
+            // Define the upload directory
+            $upload_dir = '../uploads/';
+            $upload_path = $upload_dir . $unique_file_name;
+
+            // Move the uploaded file to the uploads directory
+            if (move_uploaded_file($file_tmp, $upload_path)) {
+                // Update the profile_photo field in the database
+                $update_photo_query = "UPDATE users SET profile_photo = ? WHERE user_id = ?";
+                $stmt = $conn->prepare($update_photo_query);
+                $stmt->bind_param("si", $unique_file_name, $buyer_id);
+
+                if ($stmt->execute()) {
+                    // Update the session variable
+                    $_SESSION['profile_photo'] = $unique_file_name;
+
+                    // Redirect to refresh the page
+                    header("Location: buyer.php#edit-profile");
+                    exit();
+                } else {
+                    echo "<script>alert('Failed to update profile photo in the database.');</script>";
+                }
+            } else {
+                echo "<script>alert('Failed to upload the file.');</script>";
+            }
+        } else {
+            echo "<script>alert('No file uploaded or an error occurred.');</script>";
+        }
+}
 ?>
 
 <html>
@@ -376,6 +415,11 @@
                         <div class="save-btn-container">
                             <button type="submit" name="update_user" class="save-btn cool-btn">Save Changes</button>
                         </div>
+                    </form>
+                    <form method="POST" enctype="multipart/form-data">
+                        <h2>Change Profile Photo</h2>
+                        <input type="file" name="profile_photo" required>
+                        <button type="submit" name="update_photo" class="save-btn cool-btn">Update Photo</button>
                     </form>
                 </div>
             </div>
