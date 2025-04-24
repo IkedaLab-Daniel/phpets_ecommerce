@@ -248,10 +248,15 @@
                     <div class="purchased-table-row">
                         <?php while ($order = mysqli_fetch_assoc($purchased_result)): ?>
                             <li>
-                                <span style="width: 80px;"><?php echo $order['order_id']; ?></span>
+                                <span><?php echo $order['order_id']; ?></span>
                                 <span>₱ <?php echo $order['total_price']; ?></span>
-                                <span><?php echo $order['status']; ?></span>
-                                <button class="order-again ">Order Again</button>
+                                <div class="wrapper">
+                                    <span class="delivered"><?php echo $order['status']; ?></span>
+                                </div>
+                                <div class="wrapper">
+                                    <button class="order-again ">Order Again</button>
+                                </div> 
+                                
                             </li>
                         <?php endwhile; ?>
                     </div>
@@ -284,7 +289,7 @@
                                         <img src="../uploads/<?= $item['image'] ?>" width="50">
                                         <span><?= $item['name'] ?></span>
                                         <span><?= $item['quantity'] ?>pcs</span>
-                                        <span>₱ <?= number_format($item['price'], 2) ?></span>
+                                        <span>₱ <?= number_format($item['price'], 2) ?>/pcs</span>
                                         
                                     </div>
                                 <?php endwhile; ?>
