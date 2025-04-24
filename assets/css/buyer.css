@@ -323,7 +323,7 @@
     padding: 10px 0;
 }
 
-.foot-right a{
+.foot-right .cancel{
     background-color: rgb(199, 73, 73);
     color: white;
     padding: 10px 30px;
@@ -390,6 +390,37 @@ form input:focus{
     background-color: #818ab4;
     border-radius: 8px;
 }
+.order-cancelled{
+    position: absolute;
+    top: 6rem;
+    right: 20px;
+    padding: 10px 40px;
+    background-color: #e6f9ec; 
+               
+    border: 2px solid #81c784; 
+    border-radius: 4px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    max-height: 60px;
+    animation: disappear 4s forwards ease;
+    animation-delay: 3s;
+}
+
+.order-cancelled p{
+    color: #2e7d32; 
+}
+
+
+.order-cancelled .cat{
+    width: 50px;
+}
+
+.order-cancelled .check{
+    width: 30px;
+}
 
 @keyframes fadein-left {
     0%{
@@ -411,4 +442,16 @@ form input:focus{
         opacity: 1;
         transform: translateY(0px);
     } 
+}
+
+@keyframes disappear {
+    0%{
+        opacity: 1;
+    }
+    99%{
+        opacity: 0;
+    }
+    100%{
+        display: none;
+    }
 }

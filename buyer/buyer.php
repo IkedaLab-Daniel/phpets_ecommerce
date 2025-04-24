@@ -65,6 +65,52 @@
         header("Location: /phpets/buyer/checkout.php");
         exit();
     }
+
+    // ? CANCEL ORDER FINAL BOSS: Remove Order, add back product's inventory
+    if (isset($_POST['cancel_order'])) {
+        $order_id = intval($_POST['order_id']); // Get the order ID from the form
+
+        // Fetch all items in the order to update inventory
+        $order_items_query = "SELECT product_id, quantity FROM order_items WHERE order_id = ?";
+        $stmt = $conn->prepare($order_items_query);
+        $stmt->bind_param("i", $order_id);
+        $stmt->execute();
+        $order_items_result = $stmt->get_result();
+
+        // Update inventory for each product in the order
+        while ($item = $order_items_result->fetch_assoc()) {
+            $product_id = $item['product_id'];
+            $quantity = $item['quantity'];
+
+            $update_stock_query = "UPDATE products SET stock = stock + ? WHERE product_id = ?";
+            $update_stmt = $conn->prepare($update_stock_query);
+            $update_stmt->bind_param("ii", $quantity, $product_id);
+            $update_stmt->execute();
+        }
+
+        // Delete the order items
+        $delete_order_items_query = "DELETE FROM order_items WHERE order_id = ?";
+        $delete_stmt = $conn->prepare($delete_order_items_query);
+        $delete_stmt->bind_param("i", $order_id);
+        $delete_stmt->execute();
+
+        // Delete the order
+        $delete_order_query = "DELETE FROM orders WHERE order_id = ?";
+        $delete_stmt = $conn->prepare($delete_order_query);
+        $delete_stmt->bind_param("i", $order_id);
+        $delete_stmt->execute();
+        
+        // ! Render a toast success, but order item stills render below, means need reflesh
+        // echo "<div class = 'order-cancelled'>
+        //             <img class = 'check' src='/phpets/assets/images/green-check.svg' width = '30'>
+        //             <p>Order Cancelled</p>
+        //             <img class = 'cat' src='/phpets/assets/images/happy-cat.gif' width = '50'>
+        //     </div>";
+
+        // ? Refresh the page
+        header("Location: buyer.php#all-transactions");
+        exit();
+    }
 ?>
 
 
@@ -218,13 +264,14 @@
                                 </div>
 
                                 <div class="foot-right">
-                                    <?php 
-                                        if ($order['status'] != 'delivered' and $order['status'] != 'cancelled'){
-                                            echo "<div class='cool-btn'><a class='cancel'>Cancel</a></div>";
-                                        } else{
-                                            echo "<div><span class='disabled'>Cancel</span></div>";
-                                        }
-                                    ?>
+                                    <?php if ($order['status'] != 'delivered' && $order['status'] != 'cancelled'): ?>
+                                        <form method="POST">
+                                            <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                                            <button class="cancel cool-btn" type="submit" name="cancel_order">Cancel</button>
+                                        </form>
+                                    <?php else: ?>
+                                        <div><span class="disabled">Cancel</span></div>
+                                    <?php endif; ?>
                                 </div>
                                 
                             </div>
