@@ -35,6 +35,18 @@
         $all_orders[] = $row;
     }
 
+    // ? Clear all items in the cart
+    if (isset($_POST['clear_cart'])) {
+        $clear_cart_query = "DELETE FROM cart WHERE buyer_id = ?";
+        $stmt = $conn->prepare($clear_cart_query);
+        $stmt->bind_param("i", $buyer_id);
+        $stmt->execute();
+
+        // ? Refresh the page
+        header("Location: buyer.php");
+        exit();
+    }
+
     // ? Get total price of all items in cart
     $total_price = 0;
     if (mysqli_num_rows($cart_result) > 0) {
@@ -185,7 +197,7 @@
                     </div>
                     
                     <div class="cart-table-head">
-                        <span style="width: 140px;">Name</span>
+                        <span>Name</span>
                         <span>Quantity</span>
                         <span>Price</span>
                         <span>Action</span>
@@ -194,7 +206,7 @@
                         <?php if (mysqli_num_rows($cart_result) > 0): ?>
                             <?php while ($item = mysqli_fetch_assoc($cart_result)): ?>
                                 <li>
-                                    <span><?php echo $item['name']; ?></span>
+                                    <span style="justify-content: left; margin-left: 20px;"><?php echo $item['name']; ?></span>
                                     <span><?php echo $item['quantity']; ?></span>
                                     <span>₱<?php echo number_format($item['price'], 2); ?></span>
                                     <form action="" method="POST">
@@ -204,14 +216,20 @@
                                 </li>
                             <?php endwhile; ?>
                         <?php else: ?>
-                            <p class="empty-cart-message">Your Cart is Empty <a class="shop-now cool-btn" href="../index.php">Shop Now</a></p>
+                            <p class="empty-cart-message">Your cart is empty <a class="shop-now cool-btn" href="/phpets/index.php">Shop Now</a></p>
                         <?php endif; ?>
                     </div>
                     <form method="POST" class="checkout-btn-container">
                         <?php if (mysqli_num_rows($cart_result) > 0): ?>
                             <span>Total: <b>₱<?php echo number_format($total_price, 2); ?></b></span>
-                            <button class="clear-btn cool-btn">Clear All</button>
-                            <button class="checkout-btn cool-btn" type="submit" name="checkout_now">Check Out</button>
+                            <button class="clear-btn cool-btn" type="submit" name="clear_cart">
+                                <img src="/phpets/assets/images/clear.svg" alt="">
+                                <p>Clear All</p>  
+                            </button>
+                            <button class="checkout-btn cool-btn" type="submit" name="checkout_now">
+                                <img src="/phpets/assets/images/credit-card.svg">
+                                <p>Check Out</p>
+                            </button>
                         <?php endif; ?>
                     </form>
                 </div>

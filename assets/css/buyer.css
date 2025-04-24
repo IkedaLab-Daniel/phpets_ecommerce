@@ -116,10 +116,19 @@
     width: 100%;
     background-color: rgb(30, 28, 28);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    justify-content: center;
     padding: 10px 20px;
     border-radius: 8px;
     margin: 10px 0;
+}
+
+.right .cart-table-head span{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 .right .cart-table-row{
@@ -129,9 +138,15 @@
 
 .right .cart-table-row li{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     padding: 10px;
+}
+
+.right .cart-table-row li > * {
+    width: 25%;
+    display: flex;
+    justify-content: center;
 }
 
 /* .checkbox{
@@ -156,17 +171,29 @@
 }
 
 .checkout-btn-container span{
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 
 .checkout-btn{
     background-color: #818ab4;
     border: 2px solid #818ab4;
-    padding: 10px 30px;
+    padding: 10px 30px 10px 50px;
     margin: 10px 0;
     border-radius: 8px;
     font-weight: 800;
     transition: .4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+}
+
+.checkout-btn img{
+    position: absolute;
+    width: 25px;
+    left: 20px;
+    top: 6px;
 }
 
 .cool-btn{
@@ -186,11 +213,20 @@
 .clear-btn{
     background-color: #454640;
     border: 2px solid white;
-    padding: 10px 30px;
+    padding: 10px 30px 10px 50px;
     margin: 10px 0;
     border-radius: 8px;
     color: white;
     font-weight: 600;
+    position: relative;;
+    display: flex;
+    align-items: center;
+}
+
+.clear-btn img{
+    width: 35px;
+    position: absolute;
+    left: 15px;
 }
 
 .right .purchased-table-row{
