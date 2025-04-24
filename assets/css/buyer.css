@@ -328,6 +328,16 @@
     color: white;
     padding: 10px 30px;
     border-radius: 8px;
+    border: 0px solid white;
+}
+
+.foot-right .remove{
+    background-color: rgba(235, 136, 136, 0);
+    color: rgb(231, 116, 116);
+    border: 3px solid rgb(199, 73, 73);
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-weight: 600;
 }
 
 .disabled{
