@@ -31,9 +31,8 @@
             $product = $stock_result->fetch_assoc();
 
             if ($product['stock'] < $quantity) {
-                $message = "Not enough stock available for product: " . htmlspecialchars($item['name']);
-                $status = "failed";
-                include 'checkout_status.php'; // Include the status page
+                // Redirect to checkout_result.php with a failed status
+                header("Location: /phpets/buyer/checkout_result.php?status=failed");
                 exit();
             }
 
@@ -85,34 +84,11 @@
             unset($_SESSION['checkout_product']);
         }
 
-        $message = "Checkout successful!";
-        $status = "success";
-        include 'checkout_status.php'; // Include the status page
+        // Redirect to checkout_result.php with a success status
+        header("Location: /phpets/buyer/checkout_result.php?status=success");
         exit();
     } else {
         header("Location: /phpets/index.php");
         exit();
     }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/phpets/assets/css/checkout.css">
-        <title>Checkout Status</title>
-    </head>
-    <body>
-        <div class="checkout-status <?php echo $status; ?>">
-            <div class="message-box">
-                <h2><?php echo $message; ?></h2>
-                <?php if ($status === "success"): ?>
-                    <a href="/phpets/buyer/buyer.php#all-transactions" class="btn">View Transactions</a>
-                <?php else: ?>
-                    <a href="/phpets/buyer/checkout.php" class="btn">Go Back</a>
-                <?php endif; ?>
-            </div>
-        </div>
-    </body>
-</html>

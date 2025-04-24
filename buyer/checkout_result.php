@@ -1,18 +1,32 @@
 <?php
-$status = $_GET['status'] ?? 0;
+    include ('../includes/header.php');
+    $status = $_GET['status'] ?? 0;
 ?>
 
 <!DOCTYPE html>
 <html>
-<head><title>Checkout Result</title></head>
-<body>
-    <?php if ($status == 'success'): ?>
-        <h2 style="color: green;">Checkout Successful! 🟢</h2>
-        <p>Your order has been placed.</p>
-    <?php else: ?>
-        <h2 style="color: red;">Checkout Failed! 🔴</h2>
-        <p>Something went wrong. Please try again.</p>
-    <?php endif; ?>
-    <a href="buyer.php">Return to Dashboard</a>
-</body>
+    <head>
+        <title>Checkout Result</title>
+        <link rel="stylesheet" href="/phpets/assets/css/checkout.css">
+    </head>
+    <body>
+        <div id="checkout-result">
+            <?php if ($status == 'success'): ?>
+                <div class="container">
+                    <img src="/phpets/assets/images/checkmark-green.svg" alt="">
+                    <h2 class="success-green">Checkout Successful!</h2>
+                    <p>Your order has been placed.</p>
+                </div>
+            <?php else: ?>
+                <div class="container">
+                    <img src="/phpets/assets/images/cross.svg" alt="">
+                    <h2 class="failed-red">Checkout Failed!</h2>
+                    <p>Something went wrong. Please try again.</p>
+                </div>
+            <?php endif; ?>
+            <a class="return cool-btn" href="buyer.php">Go to Dashboard</a>
+            <a class="more cool-btn" href="/phpets/index.php#product-section">Browse More</a>
+        </div>
+        
+    </body>
 </html>
