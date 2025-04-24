@@ -346,29 +346,48 @@
                         <img src="/phpets/assets/images/purchase.svg" alt="">
                         <h2>Purchased</h2>
                     </div>
-                    <div class="cart-table-head">
-                        <span>Order</span>
-                        <span>Total</span>
-                        <span>Status</span>
-                        <span>Action</span>
-                    </div>
-                    <div class="purchased-table-row">
-                        <?php while ($order = mysqli_fetch_assoc($purchased_result)): ?>
-                            <li>
-                                <span><?php echo $order['order_id']; ?></span>
-                                <span>₱ <?php echo $order['total_price']; ?></span>
-                                <div class="wrapper">
-                                    <span class="delivered"><?php echo $order['status']; ?></span>
+                    <?php while ($order = mysqli_fetch_assoc($purchased_result)): ?>
+                        <div class="order-box">
+                            <div class="order-box-head">
+                                <p><strong>Order ID:</strong> <?php echo $order['order_id']; ?></p>
+                                <p><strong>Total:</strong> ₱<?php echo number_format($order['total_price'], 2); ?></p>
+                                <p class="<?php echo $order['status']; ?>"><?php echo ucfirst($order['status']); ?></p>
+                            </div>
+
+                            <!-- Render items for this order -->
+                            <div class="order-box-products">
+                                <?php
+                                    $order_id = $order['order_id'];
+                                    $item_sql = "SELECT oi.*, p.name, p.image, p.price 
+                                                FROM order_items oi
+                                                JOIN products p ON oi.product_id = p.product_id
+                                                WHERE oi.order_id = $order_id";
+                                    $item_result = mysqli_query($conn, $item_sql);
+
+                                    while ($item = mysqli_fetch_assoc($item_result)):
+                                ?>
+                                    <div class="order-item">
+                                        <img src="../uploads/<?php echo htmlspecialchars($item['image']); ?>" width="50">
+                                        <span><?php echo htmlspecialchars($item['name']); ?></span>
+                                        <span><?php echo $item['quantity']; ?> pcs</span>
+                                        <span>₱ <?php echo number_format($item['price'], 2); ?>/pcs</span>
+                                    </div>
+                                <?php endwhile; ?>
+                            </div>
+
+                            <div class="order-box-foot">
+                                <div class="foot-left">
+                                    <p><strong>Date:</strong> <?php echo date('F j, Y', strtotime($order['order_date'])); ?></p>
                                 </div>
-                                <div class="wrapper">
+                                <div class="foot-right">
                                     <form method="POST">
-                                        <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>"> <!-- Pass order_id -->
+                                        <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
                                         <button class="order-again cool-btn" type="submit" name="buy_again">Buy Again</button>
                                     </form>
-                                </div> 
-                            </li>
-                        <?php endwhile; ?>
-                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
                 </div>
 
                 <div id="all-transactions">
