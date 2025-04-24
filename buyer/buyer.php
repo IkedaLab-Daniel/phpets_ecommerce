@@ -138,11 +138,40 @@
         header("Location: buyer.php#all-transactions");
         exit();
     }
+
+    // ? Update User's Info
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user'])) {
+        $updated_first_name = htmlspecialchars(trim($_POST['first_name']));
+        $updated_middle_name = htmlspecialchars(trim($_POST['middle_name']));
+        $updated_last_name = htmlspecialchars(trim($_POST['last_name']));
+        $updated_email = htmlspecialchars(trim($_POST['email']));
+        $updated_address = htmlspecialchars(trim($_POST['address']));
+
+        // Update the user's information in the database
+        $update_user_query = "UPDATE users SET first_name = ?, middle_name = ?, last_name = ?, email = ?, address = ? WHERE user_id = ?";
+        $stmt = $conn->prepare($update_user_query);
+        $stmt->bind_param("sssssi", $updated_first_name, $updated_middle_name, $updated_last_name, $updated_email, $updated_address, $buyer_id);
+
+        if ($stmt->execute()) {
+            // Update session variables
+            $_SESSION['first_name'] = $updated_first_name;
+            $_SESSION['middle_name'] = $updated_middle_name;
+            $_SESSION['last_name'] = $updated_last_name;
+            $_SESSION['email'] = $updated_email;
+            $_SESSION['address'] = $updated_address;
+
+            // Redirect to refresh the page
+            header("Location: buyer.php#edit-profile");
+            echo "<script> User updated success</script>";
+            exit();
+        } else {
+            echo "<script> Update Failed</script>";
+            echo "Error updating user information: " . $stmt->error;
+        }
+    }
 ?>
 
-
-<!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -345,14 +374,7 @@
                         <input type="text" id="address" name="address" placeholder="Street, Barangay, Municipal, Province" value="<?php echo htmlspecialchars($address); ?>" required />
                         
                         <div class="save-btn-container">
-                            <button type="submit" class="save-btn cool-btn">Save Changes</button>
-                        </div>
-                    </form>
-                    <h2>Upload Image</h2>
-                    <form action="../includes/upload.php" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="uploaded_file" required>
-                        <div class="save-btn-container">
-                            <button type="submit" name="upload" class="save-btn cool-btn">Upload</button>
+                            <button type="submit" name="update_user" class="save-btn cool-btn">Save Changes</button>
                         </div>
                     </form>
                 </div>
