@@ -1,0 +1,40 @@
+.checkout-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.checkout-status.success {
+    background-color: #e0ffe0;
+    color: #2d862d;
+}
+
+.checkout-status.failed {
+    background-color: #ffe0e0;
+    color: #862d2d;
+}
+
+.message-box {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.message-box h2 {
+    margin-bottom: 20px;
+}
+
+.message-box .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.message-box .btn:hover {
+    background-color: #0056b3;
+}

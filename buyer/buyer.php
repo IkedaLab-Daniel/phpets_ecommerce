@@ -35,6 +35,31 @@
         $all_orders[] = $row;
     }
 
+    // ? Buy again
+    if (isset($_POST['buy_again'])) {
+        $order_id = intval($_POST['order_id']); // Get the order ID from the form
+
+        // Fetch all items in the order
+        $order_items_query = "SELECT oi.product_id, oi.quantity, p.price, p.name, p.image 
+                            FROM order_items oi
+                            JOIN products p ON oi.product_id = p.product_id
+                            WHERE oi.order_id = ?";
+        $stmt = $conn->prepare($order_items_query);
+        $stmt->bind_param("i", $order_id);
+        $stmt->execute();
+        $order_items_result = $stmt->get_result();
+
+        // Store the order items in the session for checkout
+        $_SESSION['checkout_items'] = [];
+        while ($item = $order_items_result->fetch_assoc()) {
+            $_SESSION['checkout_items'][] = $item;
+        }
+
+        // Redirect to the checkout page
+        header("Location: /phpets/buyer/checkout.php");
+        exit();
+    }
+
     // ? Clear all items in the cart
     if (isset($_POST['clear_cart'])) {
         $clear_cart_query = "DELETE FROM cart WHERE buyer_id = ?";
@@ -71,9 +96,23 @@
 
     // ? Checkout (redirect to separate file)
     if (isset($_POST['checkout_now'])) {
-        $quantity = intval($_POST['quantity']);
-        $_SESSION['checkout_product_id'] = $product_id;
-        $_SESSION['checkout_quantity'] = $quantity;
+        // Fetch all items in the cart
+        $cart_items_query = "SELECT c.product_id, c.quantity, p.price, p.name, p.image 
+                            FROM cart c
+                            JOIN products p ON c.product_id = p.product_id
+                            WHERE c.buyer_id = ?";
+        $stmt = $conn->prepare($cart_items_query);
+        $stmt->bind_param("i", $buyer_id);
+        $stmt->execute();
+        $cart_items_result = $stmt->get_result();
+
+        // Store all cart items in the session for checkout
+        $_SESSION['checkout_items'] = [];
+        while ($item = $cart_items_result->fetch_assoc()) {
+            $_SESSION['checkout_items'][] = $item;
+        }
+
+        // Redirect to the checkout page
         header("Location: /phpets/buyer/checkout.php");
         exit();
     }
@@ -322,9 +361,11 @@
                                     <span class="delivered"><?php echo $order['status']; ?></span>
                                 </div>
                                 <div class="wrapper">
-                                    <button class="order-again ">Order Again</button>
+                                    <form method="POST">
+                                        <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>"> <!-- Pass order_id -->
+                                        <button class="order-again cool-btn" type="submit" name="buy_again">Buy Again</button>
+                                    </form>
                                 </div> 
-                                
                             </li>
                         <?php endwhile; ?>
                     </div>

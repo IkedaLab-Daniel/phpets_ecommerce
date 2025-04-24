@@ -162,7 +162,7 @@
                 </div>
                 <div class="div2 cool-btn">
                     <button type="submit" name="add_to_cart">
-                        <span class="loading">Loading</span>
+                        <!-- <span class="loading">Loading</span> -->
                         <span class="okay">Add to Cart 🛒</span>          
                     </button>
                 </div>

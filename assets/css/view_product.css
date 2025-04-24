@@ -162,7 +162,7 @@
     background-color: rgb(255, 255, 255);
     margin-left: -20px;
     border-radius: 4px;
-    animation: prevent-spam 4s forwards ease;
+    /* animation: prevent-spam 4s forwards ease; */
 }
 
 .add-to-cart-checkout-form form .div2 button{
@@ -175,7 +175,7 @@
     outline: 0px;
     font-size: 1rem;
     font-weight: 600;
-    animation: prevent-spam 4s forwards ease;
+    /* animation: prevent-spam 4s forwards ease; */
 
 }
 
@@ -244,14 +244,15 @@
     width: 30px;
 }
 
-.loading{
+/* .loading{
     color: black;
     animation: loading 3.5s forwards ease;
-}
+} */
 
 .okay{
     color: black;
-    animation: okay 4s forwards ease;
+    /* animation: okay 4s forwards ease; */
+    display: inline-block;
 }
 
 #reviews{
