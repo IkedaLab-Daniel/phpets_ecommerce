@@ -262,7 +262,7 @@
     border-radius: 12px;
     display: flex;
     position: relative;
-    margin: auto;
+    margin: 0px auto 30px auto;
     flex-direction: column;
 }
 #reviews .header{

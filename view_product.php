@@ -86,9 +86,6 @@
     
     // ? Checkout (redirect to separate file)
     if (isset($_POST['checkout_now'])) {
-        $quantity = intval($_POST['quantity']);
-        $_SESSION['checkout_product_id'] = $product_id;
-        $_SESSION['checkout_quantity'] = $quantity;
         header("Location: /phpets/buyer/checkout.php");
         exit();
     }
@@ -111,7 +108,7 @@
                     <img src="/phpets/assets/images/detail.svg" alt="">
                      <h3>Product Details</h3>
                 </div>
-                <a href="/phpets/index.php" class="right">
+                <a href="/phpets/index.php#product-section" class="right">
                     <img src="/phpets/assets/images/back2.svg" alt="">
                     <span>Back</span>
                 </a>
@@ -154,9 +151,7 @@
                 <div class="div2 cool-btn">
                     <button type="submit" name="add_to_cart">
                         <span class="loading">Loading</span>
-                        <span class="okay">Add to Cart 🛒</span>
-
-                       
+                        <span class="okay">Add to Cart 🛒</span>          
                     </button>
                 </div>
                 <div class="div3 cool-btn">

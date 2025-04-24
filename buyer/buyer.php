@@ -34,6 +34,37 @@
     while ($row = mysqli_fetch_assoc($all_orders_result)) {
         $all_orders[] = $row;
     }
+
+    // ? Get total price of all items in cart
+    $total_price = 0;
+    if (mysqli_num_rows($cart_result) > 0) {
+        while ($item = mysqli_fetch_assoc($cart_result)) {
+            $total_price += $item['price'] * $item['quantity'];
+        }
+        // ? Reset the cart result pointer for rendering items
+        mysqli_data_seek($cart_result, 0);
+    }
+
+    // ? Remove an item on cart
+    if (isset($_POST['remove_item'])) {
+        $cart_id = intval($_POST['cart_id']); // ? Get the cart ID from the form
+        $remove_query = "DELETE FROM cart WHERE cart_id = ?";
+        $stmt = $conn->prepare($remove_query);
+        $stmt->bind_param("i", $cart_id);
+        $stmt->execute();
+        // * Refresh
+        header("Location: buyer.php");
+        exit();
+    }
+
+    // ? Checkout (redirect to separate file)
+    if (isset($_POST['checkout_now'])) {
+        $quantity = intval($_POST['quantity']);
+        $_SESSION['checkout_product_id'] = $product_id;
+        $_SESSION['checkout_quantity'] = $quantity;
+        header("Location: /phpets/buyer/checkout.php");
+        exit();
+    }
 ?>
 
 
@@ -96,7 +127,7 @@
                         <span style="width: 140px;">Name</span>
                         <span>Quantity</span>
                         <span>Price</span>
-                        <span>Order</span>
+                        <span>Action</span>
                     </div>
                     <div class="cart-table-row">
                         <?php if (mysqli_num_rows($cart_result) > 0): ?>
@@ -104,22 +135,24 @@
                                 <li>
                                     <span><?php echo $item['name']; ?></span>
                                     <span><?php echo $item['quantity']; ?></span>
-                                    <span>₱<?php echo $item['price']; ?></span>
-                                    <input type="checkbox" name="" class="checkbox">
+                                    <span>₱<?php echo number_format($item['price'], 2); ?></span>
+                                    <form action="" method="POST">
+                                        <input type="hidden" name="cart_id" value="<?php echo $item['cart_id']; ?>"> <!-- Pass cart_id -->
+                                        <button type="submit" name="remove_item" class="remove cool-btn">Remove</button>
+                                    </form>
                                 </li>
                             <?php endwhile; ?>
                         <?php else: ?>
                             <p class="empty-cart-message">Your Cart is Empty <a class="shop-now cool-btn" href="../index.php">Shop Now</a></p>
-                            
                         <?php endif; ?>
                     </div>
-                    <div class="checkout-btn-container">
+                    <form method="POST" class="checkout-btn-container">
                         <?php if (mysqli_num_rows($cart_result) > 0): ?>
-                            <span>Total: <b>₱0.00</b></span>
+                            <span>Total: <b>₱<?php echo number_format($total_price, 2); ?></b></span>
                             <button class="clear-btn cool-btn">Clear All</button>
-                            <button class="checkout-btn cool-btn">Check Out</button>
+                            <button class="checkout-btn cool-btn" type="submit" name="checkout_now">Check Out</button>
                         <?php endif; ?>
-                    </div>
+                    </form>
                 </div>
 
                 <div id="purchased-details">

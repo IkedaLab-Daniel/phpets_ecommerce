@@ -134,9 +134,18 @@
     padding: 10px;
 }
 
-.checkbox{
+/* .checkbox{
     transform: translateX(-20px) scale(150%);
     cursor: pointer;
+} */
+
+.remove{
+    background-color: rgb(228, 70, 70);
+    padding: 5px 10px;
+    border: 0px solid white;
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
 }
 
 .checkout-btn-container{
