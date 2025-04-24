@@ -1,4 +1,5 @@
 <?php
+    include '../includes/header.php';
     session_start();
 
     // ? Check if the session contains checkout data
@@ -12,7 +13,22 @@
         $checkout_items = [$_SESSION['checkout_product']]; // Wrap single product in an array for consistency
     } elseif (isset($_SESSION['checkout_items'])) {
         $checkout_items = $_SESSION['checkout_items']; // Multiple products from "Buy Again"
-}
+    }
+
+    // ? Fetch user information from the session
+    $user_info = [
+        'first_name' => $_SESSION['first_name'],
+        'middle_name' => $_SESSION['middle_name'] ?? '',
+        'last_name' => $_SESSION['last_name'],
+        'email' => $_SESSION['email'],
+        'address' => $_SESSION['address'],
+    ];
+
+    // ? calculate total price
+    $total_price = 0;
+    foreach ($checkout_items as $item) {
+        $total_price += $item['price'] * $item['quantity'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -24,22 +40,59 @@
         <title>Checkout</title>
     </head>
     <body>
-        <div class="checkout-container">
-            <h2>Checkout</h2>
-            <div class="product-list">
-                <?php foreach ($checkout_items as $item): ?>
-                    <div class="product-item">
-                        <img src="/phpets/uploads/<?php echo htmlspecialchars($item['image']); ?>" alt="Product Image">
-                        <p><strong>Product:</strong> <?php echo htmlspecialchars($item['name']); ?></p>
-                        <p><strong>Quantity:</strong> <?php echo $item['quantity']; ?></p>
-                        <p><strong>Price:</strong> ₱<?php echo number_format($item['price'], 2); ?></p>
-                        <p><strong>Total:</strong> ₱<?php echo number_format($item['price'] * $item['quantity'], 2); ?></p>
+        <div id="checkout-page">
+            <div class="checkout-container">
+                <div class="heading">
+                    <img src="/phpets/assets/images/credit-card.svg" >
+                    <h2>Checkout</h2>
+                </div>
+                
+                <div class="product-table-head">
+                    <span>Item</span>
+                    <span>Quantity</span>
+                    <span>Price</span>
+                    <span>Subtotal</span>
+                </div>
+                <div class="product-list">
+                    <?php foreach ($checkout_items as $item): ?>
+                        <div class="product-item">
+                            <div class="img-name" style="display: flex; align-items: center; gap: 10px;">
+                                <img src="/phpets/uploads/<?php echo htmlspecialchars($item['image']); ?>" alt="Product Image">
+                                <span><?php echo htmlspecialchars($item['name']); ?></span>
+                            </div>
+                            <p><?php echo $item['quantity']; ?></p>
+                            <p>₱<?php echo number_format($item['price'], 2); ?></p>
+                            <p>₱<?php echo number_format($item['price'] * $item['quantity'], 2); ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                    <div class="total-container">
+                        <span>Total:</span>
+                        <span class="total">₱<?php echo number_format($total_price, 2) ?></span>
                     </div>
-                <?php endforeach; ?>
-            </div>
-            <form method="POST" action="process_checkout.php">
-                <button type="submit" name="confirm_checkout" class="checkout-btn">Confirm Checkout</button>
-            </form>
+                </div>
+
+                <div class="user-info">
+                    <div class="user-wrapper">
+                        <img src="/phpets/assets/images/user.svg" alt="">
+                        <h3>Shipping Information</h3>
+                    </div>
+                    
+                    <p><strong>Buyer:</strong> <?php echo htmlspecialchars($user_info['first_name'] . ' ' . $user_info['middle_name'] . ' ' . $user_info['last_name']); ?></p>
+                    <p><strong>Email:</strong> <?php echo htmlspecialchars($user_info['email']); ?></p>
+                    <p><strong>Address:</strong> <?php echo htmlspecialchars($user_info['address']); ?></p>
+                    <p class="cod">Cash on Delivery</p>
+                    <a href="/phpets/buyer/buyer.php#edit-profile" class="edit-info">Edit Info</a>
+                </div>
+                
+                <div class="btn-container">
+                    <a href="/phpets/buyer/buyer.php#edit-profile" class="edit-btn cool-btn">Edit Info</a>
+                    <form method="POST" action="process_checkout.php">
+                        <button class="confirm-btn cool-btn" type="submit" name="confirm_checkout" class="checkout-btn">Confirm Checkout</button>
+                    </form>
+                </div>
+        </div>
+        
+            
         </div>
     </body>
 </html>
