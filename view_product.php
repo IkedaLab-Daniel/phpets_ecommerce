@@ -86,6 +86,18 @@
     
     // ? Checkout (redirect to separate file)
     if (isset($_POST['checkout_now'])) {
+        $quantity = intval($_POST['quantity']);
+
+        // Insert the specific product into a temporary checkout table or session
+        $_SESSION['checkout_product'] = [
+            'product_id' => $product_id,
+            'quantity' => $quantity,
+            'price' => $product['price'],
+            'name' => $product['name'],
+            'image' => $product['image']
+        ];
+
+        // Redirect to the checkout page
         header("Location: /phpets/buyer/checkout.php");
         exit();
     }
