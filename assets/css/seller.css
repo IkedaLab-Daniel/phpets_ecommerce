@@ -135,6 +135,10 @@
     background-color: rgb(30, 28, 28);
     padding: 20px;
     border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
 
 .right .cart-table-row{
@@ -532,6 +536,51 @@ form input:focus{
 .order-cancelled .check{
     width: 30px;
 }
+
+
+.product-card-detail .status{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.product-card-detail .approved{
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    background-color: rgb(78, 154, 59);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    width: auto;
+    text-align: center;
+    display: inline-block;
+}
+
+.product-card-detail .pending{
+    color: #4b2820;
+    text-transform: uppercase;
+    background-color: #FACC15;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    width: auto;
+    text-align: center;
+    display: inline-block;
+}
+
+.product-card-footer .delete{
+    color: white;
+    border: 0px solid white;
+    padding: 10px;
+    width: 100%;
+    background-color: rgb(247, 52, 52);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
 
 @keyframes fadein-left {
     0%{

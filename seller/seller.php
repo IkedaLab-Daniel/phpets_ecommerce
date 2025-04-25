@@ -76,28 +76,22 @@
                         <img src="/phpets/assets/images/cart-bag.svg" alt="">
                         <h2>My Listings</h2>
                     </div>
-                    
-                    <div class="listing-table-head">
-                        <span>Product</span>
-                        <span>Price</span>
-                        <span>Stock</span>
-                        <span>Action</span>
-                    </div>
-
                     <div class="list-table-content">
                         <?php if ($products_result->num_rows > 0): ?>
                             <?php while ($product = $products_result->fetch_assoc()): ?>
-                                <div class="product-item">
+                                <div class="product-card">
                                     <img src="../uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="Product Image" width="100">
-                                    <div class="product-details">
+                                    <span class="category-tag"> <?php echo $product['category_id']; ?></span>
+                                    <div class="product-card-detail">
                                         <h3><?php echo htmlspecialchars($product['name']); ?></h3>
-                                        <p><strong>Description:</strong> <?php echo htmlspecialchars($product['description']); ?></p>
-                                        <p><strong>Price:</strong> ₱<?php echo number_format($product['price'], 2); ?></p>
-                                        <p><strong>Stock:</strong> <?php echo $product['stock']; ?> pcs</p>
-                                        <p><strong>Status:</strong> <?php echo ucfirst($product['status']); ?></p>
-                                        <p><strong>Category ID:</strong> <?php echo $product['category_id']; ?></p>
-                                        <p><strong>Created At:</strong> <?php echo date('F j, Y', strtotime($product['created_at'])); ?></p>
-                                    </div>
+                                        <p> <?php echo htmlspecialchars($product['description']); ?></p>
+                                        <p>Stock: <?php echo $product['stock']; ?> pcs</p>
+                                        <p>₱<?php echo number_format($product['price'], 2); ?></p>
+                                        <p class="<?php echo ($product['status']); ?> status"> <?php echo ucfirst($product['status']); ?></p>
+                                    </div>      
+                                    <div class="product-card-footer">
+                                        <button class="delete cool-btn">Unlist</button>
+                                    </div>                              
                                 </div>
                             <?php endwhile; ?>
                         <?php else: ?>
@@ -106,17 +100,6 @@
                     </div>
                     
 
-                </div>
-            </div>
-            
-
-            <div id="seller-products">
-                <div class="heading">
-                    <img src="/phpets/assets/images/products.svg" alt="">
-                    <h2>My Products</h2>
-                </div>
-                <div class="product-list">
-    
                 </div>
             </div>
         </div>
