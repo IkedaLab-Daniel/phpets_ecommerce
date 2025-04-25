@@ -50,7 +50,8 @@
 
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'seller'): ?>
                             <a href="/phpets/seller/seller.php" class="categories-btn">
-                                My Products
+                                <img src="/phpets/assets/images/bone.svg" alt="">
+                                <span>My Products</span>
                             </a>
                         <?php endif; ?>
 

@@ -367,8 +367,11 @@
                                     while ($item = mysqli_fetch_assoc($item_result)):
                                 ?>
                                     <div class="order-item">
-                                        <img src="../uploads/<?php echo htmlspecialchars($item['image']); ?>" width="50">
-                                        <span><?php echo htmlspecialchars($item['name']); ?></span>
+                                        <div class="brix">
+                                            <img src="../uploads/<?php echo htmlspecialchars($item['image']); ?>" width="50">
+                                            <span><?php echo htmlspecialchars($item['name']); ?></span>
+                                        </div>
+                                       
                                         <span><?php echo $item['quantity']; ?> pcs</span>
                                         <span>₱ <?php echo number_format($item['price'], 2); ?>/pcs</span>
                                     </div>
