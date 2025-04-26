@@ -101,6 +101,60 @@
         header("Location: /phpets/buyer/checkout.php");
         exit();
     }
+
+    // ?------------------------ Review Logics Here -------------------------------
+
+    // ? Check if the user has purchased the product
+    $purchased_sql = "
+        SELECT oi.order_id 
+        FROM order_items oi
+        JOIN orders o ON oi.order_id = o.order_id
+        WHERE o.buyer_id = ? AND oi.product_id = ?";
+    $stmt = $conn->prepare($purchased_sql);
+    $stmt->bind_param("ii", $buyer_id, $product_id);
+    $stmt->execute();
+    $purchased_result = $stmt->get_result();
+    $has_purchased = $purchased_result->num_rows > 0;
+
+    // Check if the user has already reviewed the product
+    $review_check_sql = "SELECT * FROM reviews WHERE buyer_id = ? AND product_id = ?";
+    $stmt = $conn->prepare($review_check_sql);
+    $stmt->bind_param("ii", $buyer_id, $product_id);
+    $stmt->execute();
+    $review_check_result = $stmt->get_result();
+    $existing_review = $review_check_result->fetch_assoc();
+
+    // ? Handle adding a new review
+    if (isset($_POST['add_review'])) {
+        $rating = intval($_POST['rating']);
+        $comment = htmlspecialchars(trim($_POST['comment']));
+
+        $add_review_sql = "INSERT INTO reviews (buyer_id, product_id, rating, comment, review_date) VALUES (?, ?, ?, ?, NOW())";
+        $stmt = $conn->prepare($add_review_sql);
+        $stmt->bind_param("iiis", $buyer_id, $product_id, $rating, $comment);
+
+        if ($stmt->execute()) {
+            echo "<p>Review added successfully!</p>";
+        } else {
+            echo "<p>Failed to add review. Please try again.</p>";
+        }
+    }
+
+    // ? Handle editing an existing review
+    if (isset($_POST['edit_review'])) {
+        $rating = intval($_POST['rating']);
+        $comment = htmlspecialchars(trim($_POST['comment']));
+
+        $edit_review_sql = "UPDATE reviews SET rating = ?, comment = ?, review_date = NOW() WHERE buyer_id = ? AND product_id = ?";
+        $stmt = $conn->prepare($edit_review_sql);
+        $stmt->bind_param("isii", $rating, $comment, $buyer_id, $product_id);
+
+        if ($stmt->execute()) {
+            echo "<p>Review updated successfully!</p>";
+        } else {
+            echo "<p>Failed to update review. Please try again.</p>";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -208,9 +262,32 @@
                 <?php else: ?>
                     <p>No reviews yet.</p>
                 <?php endif; ?>
-            </div>
-            
-            
+            </div>   
+        </div>
+
+        <div id="add-edit-review">
+            <?php if ($has_purchased): ?>
+                <h3><?php echo $existing_review ? "Edit Your Review" : "Add a Review"; ?></h3>
+                <form method="POST" action="">
+                    <label for="rating">Rating:</label>
+                    <select name="rating" id="rating" required>
+                        <option value="1" <?php echo $existing_review && $existing_review['rating'] == 1 ? "selected" : ""; ?>>1</option>
+                        <option value="2" <?php echo $existing_review && $existing_review['rating'] == 2 ? "selected" : ""; ?>>2</option>
+                        <option value="3" <?php echo $existing_review && $existing_review['rating'] == 3 ? "selected" : ""; ?>>3</option>
+                        <option value="4" <?php echo $existing_review && $existing_review['rating'] == 4 ? "selected" : ""; ?>>4</option>
+                        <option value="5" <?php echo $existing_review && $existing_review['rating'] == 5 ? "selected" : ""; ?>>5</option>
+                    </select>
+
+                    <label for="comment">Comment:</label>
+                    <textarea name="comment" id="comment" rows="4" required><?php echo $existing_review ? htmlspecialchars($existing_review['comment']) : ""; ?></textarea>
+
+                    <button type="submit" name="<?php echo $existing_review ? "edit_review" : "add_review"; ?>">
+                        <?php echo $existing_review ? "Update Review" : "Submit Review"; ?>
+                    </button>
+                </form>
+            <?php else: ?>
+                <p>You must purchase this product to leave a review.</p>
+            <?php endif; ?>
         </div>
 
         
