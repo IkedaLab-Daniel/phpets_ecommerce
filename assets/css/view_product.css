@@ -400,18 +400,29 @@
 #add-edit-review .btn-container{
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 10px 0;
+    gap: 10px;
 }
 
 
-#add-edit-review .btn-container button{
+#add-edit-review .btn-container .submit-review{
     background-color: #8892BF;
     padding: 10px 15px;
     color: white;
     border: 0px solid red;
     border-radius: 8px;
     align-self: center;
-    margin: 0 auto;
+    margin: 0;
+}
+
+#add-edit-review .btn-container .delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 

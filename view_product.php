@@ -104,25 +104,41 @@
 
     // ?------------------------ Review Logics Here -------------------------------
 
-    // ? Check if the user has purchased the product
-    $purchased_sql = "
-        SELECT oi.order_id 
-        FROM order_items oi
-        JOIN orders o ON oi.order_id = o.order_id
-        WHERE o.buyer_id = ? AND oi.product_id = ?";
-    $stmt = $conn->prepare($purchased_sql);
-    $stmt->bind_param("ii", $buyer_id, $product_id);
-    $stmt->execute();
-    $purchased_result = $stmt->get_result();
-    $has_purchased = $purchased_result->num_rows > 0;
-
-    // ? Check if the user has already reviewed the product
+    // ! Check if the user has already reviewed the product
     $review_check_sql = "SELECT * FROM reviews WHERE buyer_id = ? AND product_id = ?";
     $stmt = $conn->prepare($review_check_sql);
     $stmt->bind_param("ii", $buyer_id, $product_id);
     $stmt->execute();
     $review_check_result = $stmt->get_result();
     $existing_review = $review_check_result->fetch_assoc();
+
+    // ! client-side-unvalidated-url-redirection Allowing unvalidated redirection based on user-specified URLs
+    // ? Handle deleting an existing review
+    if (isset($_POST['delete_review'])) {
+        $delete_review_sql = "DELETE FROM reviews WHERE buyer_id = ? AND product_id = ?";
+        $stmt = $conn->prepare($delete_review_sql);
+        $stmt->bind_param("ii", $buyer_id, $product_id);
+
+        if ($stmt->execute()) {
+            echo "<p>Review deleted successfully!</p>";
+            // Optionally, refresh the page to reflect the changes
+            echo "<script>window.location.href = window.location.href;</script>";
+        } else {
+            echo "<p>Failed to delete review. Please try again.</p>";
+        }
+    }
+
+    // ? Check if the user has purchased the product and the order is delivered
+    $purchased_sql = "
+        SELECT oi.order_id 
+        FROM order_items oi
+        JOIN orders o ON oi.order_id = o.order_id
+        WHERE o.buyer_id = ? AND oi.product_id = ? AND o.status = 'delivered'";
+    $stmt = $conn->prepare($purchased_sql);
+    $stmt->bind_param("ii", $buyer_id, $product_id);
+    $stmt->execute();
+    $purchased_result = $stmt->get_result();
+    $has_purchased = $purchased_result->num_rows > 0;
 
     // ? Handle adding a new review
     if (isset($_POST['add_review'])) {
@@ -267,14 +283,17 @@
                         <textarea name="comment" id="comment" required><?php echo $existing_review ? htmlspecialchars($existing_review['comment']) : ""; ?></textarea>
                     </div>
                     <div class="btn-container">
-                        <button class="cool-btn" type="submit" name="<?php echo $existing_review ? "edit_review" : "add_review"; ?>">
+                        <?php if ($existing_review): ?>
+                            <button class="delete-btn cool-btn" type="submit" name="delete_review">Delete Review</button>
+                        <?php endif; ?>
+                        <button class="submit-review cool-btn" type="submit" name="<?php echo $existing_review ? "edit_review" : "add_review"; ?>">
                             <?php echo $existing_review ? "Update Review" : "Submit Review"; ?>
                         </button>
                     </div>
-                    
                 </form>
             <?php else: ?>
-                <p>You must purchase this product to leave a review.</p>
+                <p>You can only leave a review if your order has been delivered.</p>
+                <?php include('./includes/error_catch.php'); ?>
             <?php endif; ?>
         </div>
         
