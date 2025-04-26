@@ -28,7 +28,7 @@
     
     $product = $product_result->fetch_assoc(); // Includes category_name
 
-    // Fetch reviews
+    // ? Fetch reviews
     $review_sql = "SELECT r.*, u.first_name, u.last_name, u.profile_photo 
                 FROM reviews r
                 JOIN users u ON r.buyer_id = u.user_id
@@ -39,7 +39,7 @@
     $stmt->execute();
     $review_result = $stmt->get_result();
 
-    // Average rating
+    // ? Average rating
     $avg_sql = "SELECT AVG(rating) AS average_rating 
                 FROM reviews 
                 WHERE product_id = ?";
@@ -58,7 +58,7 @@
     $buyer_id = $_SESSION['user_id'];
     $product_id = $_GET['id']; 
     
-    // Add to cart
+    // ? Add to cart
     if (isset($_POST['add_to_cart'])) {
         $quantity = intval($_POST['quantity']);
     
@@ -116,7 +116,7 @@
     $purchased_result = $stmt->get_result();
     $has_purchased = $purchased_result->num_rows > 0;
 
-    // Check if the user has already reviewed the product
+    // ? Check if the user has already reviewed the product
     $review_check_sql = "SELECT * FROM reviews WHERE buyer_id = ? AND product_id = ?";
     $stmt = $conn->prepare($review_check_sql);
     $stmt->bind_param("ii", $buyer_id, $product_id);
@@ -225,6 +225,58 @@
                 </div>  
             </form>
         </div>
+
+        <div id="add-edit-review">
+            <?php if ($has_purchased): ?>
+                <div class="icon-text" style="justify-content: left;">
+                    <img src="/phpets/assets/images/write.svg" >
+                    <h3><?php echo $existing_review ? "Edit Your Review" : "Add a Review"; ?></h3>
+                </div>
+                <form method="POST" action="">
+                    <div class="rating-container">
+                        <label for="rating">Rating:</label>
+                        <div class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5" <?php echo $existing_review && $existing_review['rating'] == 5 ? "checked" : ""; ?> />
+                            <label for="star5">
+                                <img src="/phpets/assets/images/star-grey.svg" alt="5 stars" data-value="5">
+                            </label>
+
+                            <input type="radio" id="star4" name="rating" value="4" <?php echo $existing_review && $existing_review['rating'] == 4 ? "checked" : ""; ?> />
+                            <label for="star4">
+                                <img src="/phpets/assets/images/star-grey.svg" alt="4 stars" data-value="4">
+                            </label>
+
+                            <input type="radio" id="star3" name="rating" value="3" <?php echo $existing_review && $existing_review['rating'] == 3 ? "checked" : ""; ?> />
+                            <label for="star3">
+                                <img src="/phpets/assets/images/star-grey.svg" alt="3 stars" data-value="3">
+                            </label>
+
+                            <input type="radio" id="star2" name="rating" value="2" <?php echo $existing_review && $existing_review['rating'] == 2 ? "checked" : ""; ?> />
+                            <label for="star2">
+                                <img src="/phpets/assets/images/star-grey.svg" alt="2 stars" data-value="2">
+                            </label>
+
+                            <input type="radio" id="star1" name="rating" value="1" <?php echo $existing_review && $existing_review['rating'] == 1 ? "checked" : ""; ?> />
+                            <label for="star1">
+                                <img src="/phpets/assets/images/star-grey.svg" alt="1 star" data-value="1">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="comment-container">
+                        <label for="comment">Comment:</label>
+                        <textarea name="comment" id="comment" required><?php echo $existing_review ? htmlspecialchars($existing_review['comment']) : ""; ?></textarea>
+                    </div>
+                    <div class="btn-container">
+                        <button class="cool-btn" type="submit" name="<?php echo $existing_review ? "edit_review" : "add_review"; ?>">
+                            <?php echo $existing_review ? "Update Review" : "Submit Review"; ?>
+                        </button>
+                    </div>
+                    
+                </form>
+            <?php else: ?>
+                <p>You must purchase this product to leave a review.</p>
+            <?php endif; ?>
+        </div>
         
         <div id="reviews">
             <div class="header">
@@ -260,37 +312,10 @@
                         <?php endwhile; ?>
                     </div>
                 <?php else: ?>
-                    <p>No reviews yet.</p>
+                    <p style="margin-top: 10px;">No reviews yet.</p>
                 <?php endif; ?>
             </div>   
         </div>
-
-        <div id="add-edit-review">
-            <?php if ($has_purchased): ?>
-                <h3><?php echo $existing_review ? "Edit Your Review" : "Add a Review"; ?></h3>
-                <form method="POST" action="">
-                    <label for="rating">Rating:</label>
-                    <select name="rating" id="rating" required>
-                        <option value="1" <?php echo $existing_review && $existing_review['rating'] == 1 ? "selected" : ""; ?>>1</option>
-                        <option value="2" <?php echo $existing_review && $existing_review['rating'] == 2 ? "selected" : ""; ?>>2</option>
-                        <option value="3" <?php echo $existing_review && $existing_review['rating'] == 3 ? "selected" : ""; ?>>3</option>
-                        <option value="4" <?php echo $existing_review && $existing_review['rating'] == 4 ? "selected" : ""; ?>>4</option>
-                        <option value="5" <?php echo $existing_review && $existing_review['rating'] == 5 ? "selected" : ""; ?>>5</option>
-                    </select>
-
-                    <label for="comment">Comment:</label>
-                    <textarea name="comment" id="comment" rows="4" required><?php echo $existing_review ? htmlspecialchars($existing_review['comment']) : ""; ?></textarea>
-
-                    <button type="submit" name="<?php echo $existing_review ? "edit_review" : "add_review"; ?>">
-                        <?php echo $existing_review ? "Update Review" : "Submit Review"; ?>
-                    </button>
-                </form>
-            <?php else: ?>
-                <p>You must purchase this product to leave a review.</p>
-            <?php endif; ?>
-        </div>
-
-        
     </body>
 </html>
 
@@ -300,3 +325,49 @@
         include ("./includes/cart_modal.php");
     }
 ?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const stars = document.querySelectorAll('.star-rating label img');
+    const starInputs = document.querySelectorAll('.star-rating input');
+
+    // Function to update the stars based on the selected rating
+    function updateStars(selectedValue) {
+        stars.forEach(star => {
+            const starValue = parseInt(star.getAttribute('data-value'));
+            if (starValue <= selectedValue) {
+                star.classList.add('active');
+            } else {
+                star.classList.remove('active');
+            }
+        });
+    }
+
+    // Initialize stars based on the existing review
+    const existingRating = <?php echo $existing_review ? $existing_review['rating'] : 0; ?>;
+    updateStars(existingRating);
+
+    // Add event listeners to the stars
+    stars.forEach(star => {
+        star.addEventListener('click', function () {
+            const selectedValue = parseInt(this.getAttribute('data-value'));
+            updateStars(selectedValue);
+
+            // Update the corresponding radio button
+            starInputs.forEach(input => {
+                input.checked = parseInt(input.value) === selectedValue;
+            });
+        });
+
+        star.addEventListener('mouseover', function () {
+            const hoverValue = parseInt(this.getAttribute('data-value'));
+            updateStars(hoverValue);
+        });
+
+        star.addEventListener('mouseout', function () {
+            const selectedValue = Array.from(starInputs).find(input => input.checked)?.value || 0;
+            updateStars(selectedValue);
+        });
+    });
+});
+</script>
