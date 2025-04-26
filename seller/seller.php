@@ -21,6 +21,24 @@
     $stmt->bind_param("i", $seller_id);
     $stmt->execute();
     $products_result = $stmt->get_result();
+
+    // ? Fetch all orders related to the seller, prioritize pending orders
+    $orders_query = "
+        SELECT DISTINCT o.order_id, o.buyer_id, o.total_price, o.order_date, o.status
+        FROM orders o
+        JOIN order_items oi ON o.order_id = oi.order_id
+        JOIN products p ON oi.product_id = p.product_id
+        WHERE p.seller_id = ?
+        ORDER BY 
+            CASE 
+                WHEN o.status = 'pending' THEN 1
+                ELSE 2
+            END, 
+            o.order_date DESC";
+    $stmt = $conn->prepare($orders_query);
+    $stmt->bind_param("i", $seller_id);
+    $stmt->execute();
+    $orders_result = $stmt->get_result();
 ?>
 
 <html>
@@ -52,7 +70,7 @@
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="#purchased-details">
                         <img src="/phpets/assets/images/purchase.svg">
-                        <span>Pending Orders</span>
+                        <span>Orders</span>
                     </a>
                 </div>
                 <div class="animate-fadein-left">
@@ -80,7 +98,7 @@
                         <?php if ($products_result->num_rows > 0): ?>
                             <?php while ($product = $products_result->fetch_assoc()): ?>
                                 <div class="product-card">
-                                    <img src="../uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="Product Image" width="100">
+                                    <img src="../uploads/<?php echo htmlspecialchars($product['image']); ?>" style="margin-right: 10px;" alt="Product Image" width="100">
                                     <span class="category-tag"> <?php echo $product['category_id']; ?></span>
                                     <div class="product-card-detail">
                                         <h3><?php echo htmlspecialchars($product['name']); ?></h3>
@@ -98,8 +116,52 @@
                             <p>No products listed yet. <a href="/phpets/seller/add_product.php" class="add-product-link">Add a Product</a></p>
                         <?php endif; ?>
                     </div>
-                    
+                </div>
+                
+                <div id="purchased-details">
+                    <div class="heading">
+                        <img src="/phpets/assets/images/purchase.svg" alt="">
+                        <h2>Pending Orders</h2>
+                    </div>
+                    <?php if ($orders_result->num_rows > 0): ?>
+                        <?php while ($order = $orders_result->fetch_assoc()): ?>
+                            <div class="order-box">
+                                <div class="order-box-head">
+                                    <p><strong>Order ID:</strong> <?php echo $order['order_id']; ?></p>
+                                    <p><strong>Buyer ID:</strong> <?php echo $order['buyer_id']; ?></p>
+                                    <p><strong>Total:</strong> ₱<?php echo number_format($order['total_price'], 2); ?></p>
+                                    <p><strong>Date:</strong> <?php echo date('F j, Y', strtotime($order['order_date'])); ?></p>
+                                    <p class="<?php echo $order['status']; ?>"><?php echo ucfirst($order['status']); ?></p>
+                                </div>
 
+                                <div class="order-box-products">
+                                    <?php
+                                        $order_id = $order['order_id'];
+                                        $items_query = "
+                                            SELECT oi.quantity, p.name, p.image, p.price
+                                            FROM order_items oi
+                                            JOIN products p ON oi.product_id = p.product_id
+                                            WHERE oi.order_id = ?";
+                                        $items_stmt = $conn->prepare($items_query);
+                                        $items_stmt->bind_param("i", $order_id);
+                                        $items_stmt->execute();
+                                        $items_result = $items_stmt->get_result();
+
+                                        while ($item = $items_result->fetch_assoc()):
+                                    ?>
+                                        <div class="order-item">
+                                            <img src="../uploads/<?php echo htmlspecialchars($item['image']); ?>" width="50">
+                                            <span><?php echo htmlspecialchars($item['name']); ?></span>
+                                            <span><?php echo $item['quantity']; ?> pcs</span>
+                                            <span>₱ <?php echo number_format($item['price'], 2); ?>/pcs</span>
+                                        </div>
+                                    <?php endwhile; ?>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <p>No orders found.</p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
