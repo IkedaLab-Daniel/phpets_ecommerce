@@ -6,9 +6,8 @@
 }
 
 #buyer .left{
-    width: 20vw;
+    width: 20%;
     height: auto;
-    min-width: 300px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -57,14 +56,14 @@
 
 
 #buyer .right{
-    width: 75vw;
+    width: 80%;
     height: auto;
     background-color: blue;
     background-color: #454640;
     border-radius: 12px;
     padding: 20px;
     animation: fadein-top 1s ease forwards;
-    margin-left: 390px;
+    margin-left: 21%;
 }
 
 .user-details{
@@ -391,6 +390,23 @@
     padding: 10px 15px;
     margin: 5px 0;
 }
+
+.order-item img{
+    border-radius: 4px;
+}
+
+
+.brix{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.brix img{
+    border-radius: 4px;
+}
+
 
 .order-box-foot{
     display: flex;
