@@ -455,18 +455,18 @@
 }
 
 .action-container {
-    width: 25%;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: end;
     align-content: center;
     gap: 5px;
+    margin: 10px 0;
 }
 
 /* Mark as Shipped Button */
 .action-container .mark-shipped {
     background-color: #007bff; /* Bright blue */
-    padding: 10px;
+    padding: 10px 20px;
     width: 100%;
     color: white;
     border: none;
@@ -482,7 +482,7 @@
 /* Mark as Cancelled Button */
 .action-container .mark-cancelled {
     background-color: #dc3545; /* Bright red */
-    padding: 10px;
+    padding: 10px 20px;
     width: 100%;
     color: white;
     border: none;
@@ -498,7 +498,7 @@
 /* Mark as Delivered Button */
 .action-container .mark-delivered {
     background-color: #28a745; /* Bright green */
-    padding: 10px;
+    padding: 10px 20px;
     width: 100%;
     color: white;
     border: none;
@@ -514,7 +514,7 @@
 /* Delete Order Button */
 .action-container .delete-order {
     background-color: transparent;
-    padding: 10px;
+    padding: 10px 25px;
     width: 100%;
     color: #dc3545; /* Bright red */
     border: 2px solid #dc3545;

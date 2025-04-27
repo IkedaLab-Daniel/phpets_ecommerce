@@ -1,11 +1,7 @@
-<?php 
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-?>
 <?php
     session_start();
     include '../includes/db_connect.php';
+    include '../includes/header.php';
     if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'seller') {
         header("Location: ../login.php");
         exit();
@@ -166,19 +162,39 @@
                                             </div>
                                             <p class="center-33"><?php echo $item['quantity']; ?> pcs</p>
                                             <p class="center-33">₱ <?php echo number_format($item['price'], 2); ?>/pcs</p>
-                                            <div class="action-container">
-                                                <?php if ($order['status'] === 'pending'): ?>
-                                                    <button class="mark-shipped cool-btn">Mark as Shipped</button>
-                                                    <button class="mark-cancelled cool-btn">Mark as Cancelled</button>
-                                                <?php elseif ($order['status'] === 'shipped'): ?>
-                                                    <button class="mark-delivered cool-btn">Mark as Delivered</button>
-                                                    <button class="mark-cancelled cool-btn">Mark as Cancelled</button>
-                                                <?php elseif ($order['status'] === 'cancelled' || $order['status'] === 'delivered'): ?>
-                                                    <button class="delete-order cool-btn">Delete</button>
-                                                <?php endif; ?>
-                                            </div>
                                         </div>
                                     <?php endwhile; ?>
+                                    <div class="action-container">
+                                        <?php if ($order['status'] === 'pending'): ?>
+                                            <form method="POST" action="actions.php">
+                                                <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                                                <input type="hidden" name="action" value="shipped">
+                                                <button class="mark-shipped cool-btn" type="submit">Mark as Shipped</button>
+                                            </form>
+                                            <form method="POST" action="actions.php">
+                                                <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                                                <input type="hidden" name="action" value="cancelled">
+                                                <button class="mark-cancelled cool-btn" type="submit">Mark as Cancelled</button>
+                                            </form>
+                                            <?php elseif ($order['status'] === 'shipped'): ?>
+                                                <form method="POST" action="actions.php">
+                                                    <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                                                    <input type="hidden" name="action" value="delivered">
+                                                    <button class="mark-delivered cool-btn" type="submit">Mark as Delivered</button>
+                                                </form>
+                                                <form method="POST" action="actions.php">
+                                                    <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                                                    <input type="hidden" name="action" value="cancelled">
+                                                    <button class="mark-cancelled cool-btn" type="submit">Mark as Cancelled</button>
+                                                </form>
+                                            <?php elseif ($order['status'] === 'cancelled' || $order['status'] === 'delivered'): ?>
+                                                <form method="POST" action="actions.php">
+                                                    <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                                                    <input type="hidden" name="action" value="delete">
+                                                    <button class="delete-order cool-btn" type="submit">Delete</button>
+                                                </form>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
                             </div>
                         <?php endwhile; ?>
