@@ -358,7 +358,7 @@
                             <div class="order-box-products">
                                 <?php
                                     $order_id = $order['order_id'];
-                                    $item_sql = "SELECT oi.*, p.name, p.image, p.price 
+                                    $item_sql = "SELECT oi.*, p.name, p.image, p.price, p.product_id 
                                                 FROM order_items oi
                                                 JOIN products p ON oi.product_id = p.product_id
                                                 WHERE oi.order_id = $order_id";
@@ -371,9 +371,9 @@
                                             <img src="../uploads/<?php echo htmlspecialchars($item['image']); ?>" width="50">
                                             <span><?php echo htmlspecialchars($item['name']); ?></span>
                                         </div>
-                                       
                                         <span><?php echo $item['quantity']; ?> pcs</span>
                                         <span>₱ <?php echo number_format($item['price'], 2); ?>/pcs</span>
+                                        <a href="/phpets/view_product.php?id=<?php echo $item['product_id']; ?>#add-edit-review" class="rate-btn cool-btn">Rate</a>
                                     </div>
                                 <?php endwhile; ?>
                             </div>
@@ -383,7 +383,7 @@
                                     <p><strong>Date:</strong> <?php echo date('F j, Y', strtotime($order['order_date'])); ?></p>
                                 </div>
                                 <div class="foot-right">
-                                    <form method="POST">
+                                    <form method="POST" style="display: inline;">
                                         <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
                                         <button class="order-again cool-btn" type="submit" name="buy_again">Buy Again</button>
                                     </form>
