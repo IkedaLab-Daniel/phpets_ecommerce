@@ -66,7 +66,13 @@
                     <span class="role"><?php echo ucfirst($_SESSION['role']); ?></span>
                     <span class="address"><?php echo $address; ?></span>
                 </div>
-                
+
+                <div class="animate-fadein-left">
+                    <a class="link-navs" href="add-order.php">
+                        <img src="/phpets/assets/images/add.svg">
+                        <span>Add Product</span>
+                    </a>
+                </div>
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="#cart-details">
                         <img src="/phpets/assets/images/cart-bag.svg">
@@ -79,12 +85,7 @@
                         <span>Orders</span>
                     </a>
                 </div>
-                <div class="animate-fadein-left">
-                    <a class="link-navs" href="#all-transactions">
-                        <img src="/phpets/assets/images/transaction.svg">
-                        <span>All Transactions</span>
-                    </a>
-                </div>
+
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="#edit-profile">
                         <img src="/phpets/assets/images/edit-profile.svg">
@@ -127,7 +128,7 @@
                 <div id="purchased-details">
                     <div class="heading">
                         <img src="/phpets/assets/images/purchase.svg" alt="">
-                        <h2>Pending Orders</h2>
+                        <h2>Orders</h2>
                     </div>
                     <?php if ($orders_result->num_rows > 0): ?>
                         <?php while ($order = $orders_result->fetch_assoc()): ?>
