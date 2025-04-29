@@ -91,6 +91,30 @@
     $total_orders_result = $stmt->get_result();
     $total_orders_row = $total_orders_result->fetch_assoc();
     $total_orders = $total_orders_row['total_orders'] ?? 0; 
+
+    // ? Calculate total pending products for the seller
+    $total_pending_products_query = "
+        SELECT COUNT(*) AS total_pending
+        FROM products
+        WHERE seller_id = ? AND status = 'pending'";
+    $stmt = $conn->prepare($total_pending_products_query);
+    $stmt->bind_param("i", $seller_id);
+    $stmt->execute();
+    $total_pending_result = $stmt->get_result();
+    $total_pending_row = $total_pending_result->fetch_assoc();
+    $total_pending = $total_pending_row['total_pending'] ?? 0; // Default to 0 if no pending products
+
+    // ? Calculate total approved products for the seller
+    $total_approved_products_query = "
+        SELECT COUNT(*) AS total_approved
+        FROM products
+        WHERE seller_id = ? AND status = 'approved'";
+    $stmt = $conn->prepare($total_approved_products_query);
+    $stmt->bind_param("i", $seller_id);
+    $stmt->execute();
+    $total_approved_result = $stmt->get_result();
+    $total_approved_row = $total_approved_result->fetch_assoc();
+    $total_approved = $total_approved_row['total_approved'] ?? 0; // Default to 0 if no approved products
 ?>
 
 <html>
@@ -148,14 +172,25 @@
                             <img src="/phpets/assets/images/earning.svg" alt="">
                             <h2>Total Sales</h2>
                         </div>
-                        <p><strong>₱<?php echo number_format($total_earnings, 2); ?></strong></p>
+                        <p class="strong">₱<?php echo number_format($total_earnings, 2); ?></p>
                     </div>
                     <div id="total-orders" class="data-card">
                         <div class="heading-2">
                             <img src="/phpets/assets/images/transaction.svg" alt="">
                             <h2>Total Orders</h2>
                         </div>
-                        <p><strong><?php echo $total_orders; ?></strong></p>
+                        <p class="strong"><?php echo $total_orders; ?></p>
+                    </div>
+                    <div id="total-products" class="data-card">
+                        <div class="heading-2">
+                            <img src="/phpets/assets/images/cart-bag.svg" alt="">
+                            <h2>Total Products</h2>
+                        </div>
+                        <div class="wrapper">
+                            <p class="strong"><?php echo $total_pending; ?> </p><span class="pending">Pending</span>
+                            <p class="strong"><?php echo $total_approved; ?></p><span class="approved">Approved</span>
+                        </div>
+                        
                     </div>
                 </div>
                 

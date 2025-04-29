@@ -739,11 +739,12 @@ form input:focus{
 .dashboard{
     display: flex;
     gap: 10px;
+    justify-content: center;
 }
 
 .heading-2{
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
     gap: 10px;
 }    
@@ -764,9 +765,40 @@ form input:focus{
 }
 
 .data-card p{
-    font-size: 2rem;
     text-align: center;
     margin: 20px 0;
+}
+
+#total-products{
+    width: 400px;
+}
+
+#total-products span{
+    font-size: 1rem;
+}
+
+#total-products span.pending{
+    color: yellow;
+}
+
+#total-products span.approved{
+    color: rgb(57, 251, 57);
+}
+
+#total-products .wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+#total-products .wrapper p{
+    margin-left: 10px;
+}
+
+
+.strong{
+    font-size: 2.5rem;
+    font-weight: 600;
 }
 
 
