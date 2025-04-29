@@ -736,6 +736,38 @@ form input:focus{
     gap: 5px;
 }
 
+.dashboard{
+    display: flex;
+}
+
+.heading-2{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+}    
+
+.heading-2 img{
+    width: 2rem;
+}
+
+.heading-2 h2{
+    font-size: 1.2rem;
+}
+
+#total-sales{
+    background-color: #282828;
+    width: auto;
+    padding: 20px 50px;
+    border-radius: 12px;
+}
+
+#total-sales p{
+    font-size: 2rem;
+    text-align: center;
+    margin: 20px 0;
+}
+
 
 @keyframes fadein-left {
     0%{

@@ -45,6 +45,37 @@
     $stmt->bind_param("i", $seller_id);
     $stmt->execute();
     $orders_result = $stmt->get_result();
+
+
+    // Calculate total earnings from delivered orders
+    $total_earnings_query = "
+        SELECT SUM(o.total_price) AS total_earnings
+        FROM orders o
+        WHERE o.order_id IN (
+            SELECT DISTINCT o.order_id
+            FROM orders o
+            JOIN order_items oi ON o.order_id = oi.order_id
+            JOIN products p ON oi.product_id = p.product_id
+            WHERE p.seller_id = ? AND o.status = 'delivered'
+        )";
+    $stmt = $conn->prepare($total_earnings_query);
+    $stmt->bind_param("i", $seller_id);
+    $stmt->execute();
+    $total_earnings_result = $stmt->get_result();
+    $total_earnings_row = $total_earnings_result->fetch_assoc();
+    $total_earnings = $total_earnings_row['total_earnings'] ?? 0; 
+    
+    // ! Fetch all delivered orders for debugging only
+    $debug_orders_query = "
+        SELECT DISTINCT o.order_id, o.total_price
+        FROM orders o
+        JOIN order_items oi ON o.order_id = oi.order_id
+        JOIN products p ON oi.product_id = p.product_id
+        WHERE p.seller_id = ? AND o.status = 'delivered'";
+    $stmt = $conn->prepare($debug_orders_query);
+    $stmt->bind_param("i", $seller_id);
+    $stmt->execute();
+    $debug_orders_result = $stmt->get_result();
 ?>
 
 <html>
@@ -96,6 +127,23 @@
                 
             </div>
             <div class="right">
+                <div class="dashboard">
+                    <div id="total-sales">
+                        <div class="heading-2">
+                            <img src="/phpets/assets/images/earning.svg" alt="">
+                            <h2>Total Sales</h2>
+                        </div>
+                        <p><strong>₱<?php echo number_format($total_earnings, 2); ?></strong></p>
+                    </div>
+                    <div id="total-orders">
+                        <div class="heading-2">
+                            <img src="/phpets/assets/images/transaction.svg" alt="">
+                            <h2>Total Orders</h2>
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+                
                 <div id="cart-details">
                     <div class="heading" style="margin-top: 10px;">
                         <img src="/phpets/assets/images/cart-bag.svg" alt="">
