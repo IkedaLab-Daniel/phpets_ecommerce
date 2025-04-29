@@ -76,6 +76,21 @@
     $stmt->bind_param("i", $seller_id);
     $stmt->execute();
     $debug_orders_result = $stmt->get_result();
+
+
+    // ? Calculate total orders for the seller
+    $total_orders_query = "
+        SELECT COUNT(DISTINCT o.order_id) AS total_orders
+        FROM orders o
+        JOIN order_items oi ON o.order_id = oi.order_id
+        JOIN products p ON oi.product_id = p.product_id
+        WHERE p.seller_id = ?";
+    $stmt = $conn->prepare($total_orders_query);
+    $stmt->bind_param("i", $seller_id);
+    $stmt->execute();
+    $total_orders_result = $stmt->get_result();
+    $total_orders_row = $total_orders_result->fetch_assoc();
+    $total_orders = $total_orders_row['total_orders'] ?? 0; 
 ?>
 
 <html>
@@ -128,19 +143,19 @@
             </div>
             <div class="right">
                 <div class="dashboard">
-                    <div id="total-sales">
+                    <div id="total-sales" class="data-card">
                         <div class="heading-2">
                             <img src="/phpets/assets/images/earning.svg" alt="">
                             <h2>Total Sales</h2>
                         </div>
                         <p><strong>₱<?php echo number_format($total_earnings, 2); ?></strong></p>
                     </div>
-                    <div id="total-orders">
+                    <div id="total-orders" class="data-card">
                         <div class="heading-2">
                             <img src="/phpets/assets/images/transaction.svg" alt="">
                             <h2>Total Orders</h2>
                         </div>
-                        <p></p>
+                        <p><strong><?php echo $total_orders; ?></strong></p>
                     </div>
                 </div>
                 

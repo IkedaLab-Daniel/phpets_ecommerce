@@ -738,6 +738,7 @@ form input:focus{
 
 .dashboard{
     display: flex;
+    gap: 10px;
 }
 
 .heading-2{
@@ -755,14 +756,14 @@ form input:focus{
     font-size: 1.2rem;
 }
 
-#total-sales{
+.data-card{
     background-color: #282828;
     width: auto;
     padding: 20px 50px;
     border-radius: 12px;
 }
 
-#total-sales p{
+.data-card p{
     font-size: 2rem;
     text-align: center;
     margin: 20px 0;
