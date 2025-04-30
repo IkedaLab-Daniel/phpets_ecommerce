@@ -213,8 +213,11 @@
                                         <p class="<?php echo ($product['status']); ?> status"> <?php echo ucfirst($product['status']); ?></p>
                                     </div>      
                                     <div class="product-card-footer">
-                                        <button class="delete cool-btn">Unlist</button>
-                                    </div>                              
+                                        <form method="POST" action="unlist_product.php">
+                                            <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                                            <button type="submit" class="delete cool-btn">Unlist</button>
+                                        </form>
+                                    </div>                           
                                 </div>
                             <?php endwhile; ?>
                         <?php else: ?>

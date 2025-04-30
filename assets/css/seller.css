@@ -714,6 +714,19 @@ form input:focus{
     display: inline-block;
 }
 
+.product-card-detail .unlisted{
+    color: white;
+    text-transform: uppercase;
+    background-color: rgb(204, 50, 50);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    width: auto;
+    text-align: center;
+    display: inline-block;
+}
+
 .product-card-footer .delete{
     color: white;
     border: 0px solid white;
@@ -779,10 +792,12 @@ form input:focus{
 
 #total-products span.pending{
     color: yellow;
+    font-weight: 600;
 }
 
 #total-products span.approved{
     color: rgb(57, 251, 57);
+    font-weight: 600;
 }
 
 #total-products .wrapper{
