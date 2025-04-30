@@ -15,12 +15,12 @@
     $email = $_SESSION['email'];
     $profile_photo = $_SESSION['profile_photo']; 
 
-    // ? Fetch all products listed by the seller, including category name
+    // ? Fetch all products listed by the seller, excluding 'unlisted' products
     $products_query = "
         SELECT p.*, c.name AS category_name 
         FROM products p
         JOIN categories c ON p.category_id = c.category_id
-        WHERE p.seller_id = ?
+        WHERE p.seller_id = ? AND p.status != 'unlisted'
         ORDER BY p.created_at DESC";
     $stmt = $conn->prepare($products_query);
     $stmt->bind_param("i", $seller_id);
@@ -212,12 +212,10 @@
                                         <p>₱<?php echo number_format($product['price'], 2); ?></p>
                                         <p class="<?php echo ($product['status']); ?> status"> <?php echo ucfirst($product['status']); ?></p>
                                     </div>      
-                                    <div class="product-card-footer">
-                                        <form method="POST" action="unlist_product.php">
-                                            <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
-                                            <button type="submit" class="delete cool-btn">Unlist</button>
-                                        </form>
-                                    </div>                           
+                                    <form method="POST" action="unlist_product.php" class="product-card-footer">
+                                        <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                                        <button type="submit" class="delete cool-btn">Unlist</button>
+                                    </form>                           
                                 </div>
                             <?php endwhile; ?>
                         <?php else: ?>
