@@ -115,6 +115,76 @@
     $total_approved_result = $stmt->get_result();
     $total_approved_row = $total_approved_result->fetch_assoc();
     $total_approved = $total_approved_row['total_approved'] ?? 0; // Default to 0 if no approved products
+
+    // ? Update User's Info
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user'])) {
+        $updated_first_name = htmlspecialchars(trim($_POST['first_name']));
+        $updated_middle_name = htmlspecialchars(trim($_POST['middle_name']));
+        $updated_last_name = htmlspecialchars(trim($_POST['last_name']));
+        $updated_email = htmlspecialchars(trim($_POST['email']));
+        $updated_address = htmlspecialchars(trim($_POST['address']));
+
+        // Update the user's information in the database
+        $update_user_query = "UPDATE users SET first_name = ?, middle_name = ?, last_name = ?, email = ?, address = ? WHERE user_id = ?";
+        $stmt = $conn->prepare($update_user_query);
+        $stmt->bind_param("sssssi", $updated_first_name, $updated_middle_name, $updated_last_name, $updated_email, $updated_address, $buyer_id);
+
+        if ($stmt->execute()) {
+            // Update session variables
+            $_SESSION['first_name'] = $updated_first_name;
+            $_SESSION['middle_name'] = $updated_middle_name;
+            $_SESSION['last_name'] = $updated_last_name;
+            $_SESSION['email'] = $updated_email;
+            $_SESSION['address'] = $updated_address;
+
+            // Redirect to refresh the page
+            header("Location: seller.php#edit-profile");
+            echo "<script> User updated success</script>";
+            exit();
+        } else {
+            echo "<script> Update Failed</script>";
+            echo "Error updating user information: " . $stmt->error;
+        }
+    }
+
+    // ? Update user photo
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_photo'])) {
+        if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
+            $file_tmp = $_FILES['profile_photo']['tmp_name'];
+            $file_name = $_FILES['profile_photo']['name'];
+            $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
+
+            // Generate a unique file name
+            $unique_file_name = uniqid('profile_', true) . '.' . $file_ext;
+
+            // Define the upload directory
+            $upload_dir = '../uploads/';
+            $upload_path = $upload_dir . $unique_file_name;
+
+            // Move the uploaded file to the uploads directory
+            if (move_uploaded_file($file_tmp, $upload_path)) {
+                // Update the profile_photo field in the database
+                $update_photo_query = "UPDATE users SET profile_photo = ? WHERE user_id = ?";
+                $stmt = $conn->prepare($update_photo_query);
+                $stmt->bind_param("si", $unique_file_name, $buyer_id);
+
+                if ($stmt->execute()) {
+                    // Update the session variable
+                    $_SESSION['profile_photo'] = $unique_file_name;
+
+                    // Redirect to refresh the page
+                    header("Location: seller.php#edit-profile");
+                    exit();
+                } else {
+                    echo "<script>alert('Failed to update profile photo in the database.');</script>";
+                }
+            } else {
+                echo "<script>alert('Failed to upload the file.');</script>";
+            }
+        } else {
+            echo "<script>alert('No file uploaded or an error occurred.');</script>";
+        }
+    }
 ?>
 
 <html>
@@ -301,6 +371,38 @@
                     <?php else: ?>
                         <p>No orders found.</p>
                     <?php endif; ?>
+                </div>
+
+                <div id="edit-profile" style="margin-top: 40px">
+                    <div class="heading mb-20">
+                        <img src="/phpets/assets/images/edit-profile.svg" alt="">
+                        <h2>Edit Profile</h2>
+                    </div>
+                    <form action="" method="POST">
+                        <label for="first_name">First Name:</label>
+                        <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" value="<?php echo htmlspecialchars($first_name); ?>" required />
+
+                        <label for="middle_name">Middle Name:</label>
+                        <input type="text" id="middle_name" name="middle_name" placeholder="Enter your middle name (optional)" value="<?php echo htmlspecialchars($middle_name); ?>" />
+
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" value="<?php echo htmlspecialchars($last_name); ?>" required />
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" value="<?php echo htmlspecialchars($email); ?>" required />
+
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" placeholder="Street, Barangay, Municipal, Province" value="<?php echo htmlspecialchars($address); ?>" required />
+                        
+                        <div class="save-btn-container">
+                            <button type="submit" name="update_user" class="save-btn cool-btn">Save Changes</button>
+                        </div>
+                    </form>
+                    <form method="POST" enctype="multipart/form-data">
+                        <h2>Change Profile Photo</h2>
+                        <input type="file" name="profile_photo" required>
+                        <button type="submit" name="update_photo" class="save-btn cool-btn">Update Photo</button>
+                    </form>
                 </div>
             </div>
         </div>

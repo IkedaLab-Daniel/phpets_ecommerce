@@ -53,14 +53,40 @@ textarea{
 .btn-container{
     display: flex;
     justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-container .back{
+    background-color: #ffffff00;
+    border: 2px solid white;
+    color: white;
+    border-radius: 8px;
+    width: 50%;
+    padding: 10px 0;
+    text-align: center;
 }
 
 button{
-    margin: 20px 0 0 0;
     background-color: #8892BF;
+    border: 2px solid #8892BF;
     border-radius: 8px;
-    width: 100%;
-    padding: 15px 0;
+    width: 50%;
+    padding: 10px 0;
+}
+
+.cool-btn{
+    transition: .4s;
+}
+
+.cool-btn:hover{
+    cursor: pointer;
+    transform: translateY(-3px) scale(103%);
+}
+
+.cool-btn:active{
+    opacity: .5;
+    transform: translateY(0px) scale(95%);
 }
 
 

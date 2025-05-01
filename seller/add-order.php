@@ -58,7 +58,8 @@
                     </div>
 
                     <div class="btn-container">
-                        <button type="submit" class="submit-btn">Add Product</button>
+                        <a class="back cool-btn" href="seller.php">Back</a>
+                        <button type="submit" class="submit-btn cool-btn">Add Product</button>
                     </div>
                 </form>
             </div>
