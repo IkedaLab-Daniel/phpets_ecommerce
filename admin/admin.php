@@ -50,6 +50,18 @@
     $total_orders_row = $total_orders_result->fetch_assoc();
     $total_orders = $total_orders_row['total_orders'] ?? 0; // Default to 0 if no orders
 
+
+    // * Fetch all products, with 'pending' products first
+    $all_products_query = "
+        SELECT product_id, name, description, price, stock, status, created_at 
+        FROM products 
+        ORDER BY 
+            CASE 
+                WHEN status = 'pending' THEN 1
+                ELSE 2
+            END, 
+            created_at DESC";
+    $all_products_result = $conn->query($all_products_query);
 ?>
 
 
@@ -182,7 +194,64 @@
                         <?php endif; ?>
                     </div>
                 </div>
+
+                <div id="products">
+                    <div class="heading" style="margin-top: 10px;">
+                        <img src="/phpets/assets/images/cart-bag.svg" alt="">
+                        <h2>All Products</h2>
+                    </div>
+                    <div class="list-table-content">
+                        <?php if ($all_products_result->num_rows > 0): ?>
+                            <table class="products-table">
+                                <thead>
+                                    <tr>
+                                        <!-- <th>ID</th> -->
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Price</th>
+                                        <th>Stock</th>
+                                        <th>Status</th>
+                                        <th>Created At</th>
+                                        <th class="action">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php while ($product = $all_products_result->fetch_assoc()): ?>
+                                        <tr>
+                                            <!-- <td><?php echo $product['product_id']; ?></td> -->
+                                            <td><?php echo htmlspecialchars($product['name']); ?></td>
+                                            <td><?php echo htmlspecialchars($product['description']); ?></td>
+                                            <td>₱<?php echo number_format($product['price'], 2); ?></td>
+                                            <td><?php echo $product['stock']; ?> pcs</td>
+                                            <td class="<?php echo $product['status']; ?>"><?php echo ucfirst($product['status']); ?></td>
+                                            <td><?php echo date('F j, Y', strtotime($product['created_at'])); ?></td>
+                                            <td>
+                                                <?php if ($product['status'] === 'pending'): ?>
+                                                    <form method="POST" action="approve_product.php">
+                                                        <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                                                        <button type="submit" class="approve-btn cool-btn">Approve</button>
+                                                    </form>
+                                                <?php elseif ($product['status'] === 'unlisted'): ?>
+                                                    <form method="POST" action="unlist_product.php">
+                                                        <button type="submit" class="disabled-btn">Unlist</button>
+                                                    </form>
+                                                <?php else: ?>
+                                                    <form method="POST" action="unlist_product.php">
+                                                        <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                                                        <button type="submit" class="unlist-btn cool-btn">Unlist</button>
+                                                    </form>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                            <p>No products found.</p>
+                        <?php endif; ?>
+                    </div>
                 </div>
+            </div>
         </div>
     </body>
 </html>
