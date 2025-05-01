@@ -30,9 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Redirect based on role
             if ($user['role'] === 'admin') {
+                header("Location: admin/admin.php");
                 echo "<div id='toast-data' data-message=' Logged In' data-type='success'></div>";
                 echo "<script>console.log('logged in')</script>";
-                header("Location: index.php");
             } elseif ($user['role'] === 'seller') {
                 header("Location: index.php");
                 echo "<div id='toast-data' data-message=' Logged In' data-type='success'></div>";
@@ -89,10 +89,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <form class="login" action="login.php" method="POST">
                     <h1>Log In</h1>
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required />
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Enter your email" 
+                        value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" 
+                        required 
+                    />
 
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required />
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Enter your password" 
+                        required 
+                    />
 
                     <button type="submit" class="black-btn">Log In</button>
                     <a class="white-btn" href="register.php" style="width: 100%;">
