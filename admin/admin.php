@@ -34,6 +34,10 @@
     $total_sellers_row = $total_sellers_result->fetch_assoc();
     $total_sellers = $total_sellers_row['total_sellers'] ?? 0; // Default to 0 if no sellers
 
+    // * Fetch all users
+    $all_users_query = "SELECT user_id, first_name, last_name, email, role, created_at, status FROM users ORDER BY created_at DESC";
+    $all_users_result = $conn->query($all_users_query);
+
     // * Fetch total products
     $total_products_query = "SELECT COUNT(*) AS total_products FROM products";
     $total_products_result = $conn->query($total_products_query);
@@ -131,7 +135,53 @@
                 </div>
                 
                 <div id="accounts">
-
+                    <div class="heading">
+                        <img src="/phpets/assets/images/user.svg" alt="">
+                        <h2>All Accounts</h2>
+                    </div>
+                    <div class="list-table-content">
+                        <?php if ($all_users_result->num_rows > 0): ?>
+                            <table class="accounts-table">
+                                <thead>
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Created At</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php while ($user = $all_users_result->fetch_assoc()): ?>
+                                        <tr>
+                                            <td><?php echo $user['user_id']; ?></td>
+                                            <td><?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?></td>
+                                            <td><?php echo htmlspecialchars($user['email']); ?></td>
+                                            <td><?php echo ucfirst($user['role']); ?></td>
+                                            <td><?php echo date('F j, Y', strtotime($user['created_at'])); ?></td>
+                                            <td>
+                                                <?php if ($user['status'] === 'good'): ?>
+                                                    <form method="POST" action="ban_user.php">
+                                                        <input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
+                                                        <button type="submit" class="ban-btn cool-btn">Ban</button>
+                                                    </form>
+                                                <?php elseif ($user['status'] === 'banned'): ?>
+                                                    <form method="POST" action="unban_user.php">
+                                                        <input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
+                                                        <button type="submit" class="unban-btn cool-btn">Unban</button>
+                                                    </form>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                            <p>No accounts found.</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
                 </div>
         </div>
     </body>

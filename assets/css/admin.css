@@ -58,7 +58,6 @@
 #admin .right{
     width: 80vw;
     height: auto;
-    background-color: blue;
     background-color: #454640;
     border-radius: 12px;
     padding: 20px;
@@ -117,12 +116,12 @@
     text-align: center;
 }
 
-.right .heading{
+.heading{
     display: flex;
     justify-content: left;
     align-items: center;
     gap: 10px;
-    margin: 30px 0 10px 0;
+    margin: 30px 0 20px 0;
 }    
 
 .right .heading img{
@@ -131,100 +130,6 @@
 
 .right .heading h2{
     font-size: 2rem;
-}
-
-.right .listing-table-head{
-    width: 100%;
-    background-color: rgb(30, 28, 28);
-    display: flex;
-    justify-content: space-evenly;
-    justify-content: center;
-    padding: 10px 20px;
-    border-radius: 8px;
-    margin: 10px 0;
-}
-
-.right .listing-table-head span{
-    width: 25%;
-    display: flex;
-    justify-content: center;
-    font-size: 1.3rem;
-    font-weight: 600;
-}
-
-.list-table-content{
-    background-color: rgb(30, 28, 28);
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
-.right .cart-table-row{
-    background-color: rgb(30, 28, 28);
-    border-radius: 8px;
-}
-
-.right .cart-table-row li{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 10px;
-}
-
-.right .cart-table-row li > * {
-    width: 25%;
-    display: flex;
-    justify-content: center;
-}
-
-/* .checkbox{
-    transform: translateX(-20px) scale(150%);
-    cursor: pointer;
-} */
-
-.remove{
-    background-color: rgb(228, 70, 70);
-    padding: 5px 10px;
-    border: 0px solid white;
-    border-radius: 4px;
-    color: white;
-    font-weight: 500;
-}
-
-.checkout-btn-container{
-    display: flex;
-    gap: 10px;
-    justify-content: end;
-    align-items: center;
-}
-
-.checkout-btn-container span{
-    font-size: 1.2rem;
-}
-
-.checkout-btn{
-    background-color: #818ab4;
-    border: 2px solid #818ab4;
-    padding: 10px 30px 10px 50px;
-    margin: 10px 0;
-    border-radius: 8px;
-    font-weight: 800;
-    transition: .4s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    position: relative;
-}
-
-.checkout-btn img{
-    position: absolute;
-    width: 25px;
-    left: 20px;
-    top: 6px;
 }
 
 .cool-btn{
@@ -239,536 +144,6 @@
 .cool-btn:active{
     opacity: .5;
     transform: translateY(0px) scale(95%);
-}
-
-.clear-btn{
-    background-color: #454640;
-    border: 2px solid white;
-    padding: 10px 30px 10px 50px;
-    margin: 10px 0;
-    border-radius: 8px;
-    color: white;
-    font-weight: 600;
-    position: relative;;
-    display: flex;
-    align-items: center;
-}
-
-.clear-btn img{
-    width: 35px;
-    position: absolute;
-    left: 15px;
-}
-
-.right .purchased-table-row{
-    background-color: rgb(30, 28, 28);
-    border-radius: 8px;
-}
-
-.right .purchased-table-row li{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.right .purchased-table-row li span{
-    display: flex;
-    justify-content: center;
-    width: 25%;
-}
-
-.right .purchased-table-row li .wrapper{
-    display: flex;
-    justify-content: center;
-    width: 25%;
-}
-
-
-.right .purchased-table-row .delivered{
-    color: rgb(255, 255, 255);
-    text-transform: uppercase;
-    background-color: rgb(78, 154, 59);
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 0.8rem;
-    width: auto;
-}
-
-.right .purchased-table-row li{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-}
-
-.order-again{
-    background-color: #818ab4;
-    border: 2px solid #818ab4;
-    border-radius: 4px;
-    transition: .4s;
-}
-
-.order-again:hover{
-    cursor: pointer;
-    transform: scale(103%);
-}
-
-.order-again:active{
-    opacity: .5;
-    transform: scale(95%);
-}
-
-.right .purchased-table-head{
-    width: 100%;
-    background-color: rgb(30, 28, 28);
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    border-radius: 8px;
-    margin: 10px 0;
-}
-
-.right .purchased-table-head span{
-    width: 33%;
-    text-align: center;
-}
-
-.right .order-box-head .pending{
-    text-transform: uppercase;
-    background-color: #FACC15;
-    color: #4b2820;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-weight: 600;
-}
-
-.right .order-box-head .delivered{
-    color: rgb(255, 255, 255);
-    text-transform: uppercase;
-    background-color: rgb(78, 154, 59);
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-weight: 600;
-}
-
-.right .order-box-head .shipped{
-    color: rgb(255, 255, 255);
-    text-transform: uppercase;
-    background-color: #3B82F6;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-weight: 600;
-}
-
-.right .order-box-head .cancelled{
-    color: rgb(255, 255, 255);
-    text-transform: uppercase;
-    background-color: rgb(206, 75, 75);
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-weight: 600;
-}
-
-.order-status-wrapper{
-    width: 33%;
-    display: flex;
-    justify-content: center;
-}
-
-.order-box{
-    background-color: rgb(30, 28, 28);
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.order-box .order-box-head{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.order-box .order-box-products{
-    display: flex;
-    flex-direction: column;
-}
-
-.order-box .order-box-products .order-item{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid rgb(160, 160, 160);
-    border-radius: 4px;
-    padding: 10px 15px;
-    margin: 5px 0;
-}
-
-.brix{
-    width: 33%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.purchased-table-row .order-box-products{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-
-.purchased-table-row .order-box-products .order-item{
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    border: 1px solid rgb(160, 160, 160);
-    border-radius: 4px;
-    padding: 10px 15px;
-    margin: 5px 0;
-}
-
-.center-33{
-    width: 33%;
-    text-align: center;
-}
-
-
-.order-box-foot{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-.foot-left{
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0;
-}
-
-.foot-right .cancel{
-    background-color: rgb(199, 73, 73);
-    color: white;
-    padding: 10px 30px;
-    border-radius: 8px;
-    border: 0px solid white;
-}
-
-.foot-right .remove{
-    background-color: rgba(235, 136, 136, 0);
-    color: rgb(231, 116, 116);
-    border: 3px solid rgb(199, 73, 73);
-    padding: 10px 30px;
-    border-radius: 8px;
-    font-weight: 600;
-}
-
-.disabled{
-    background-color: rgb(106, 106, 106);
-    color: rgb(207, 207, 207);
-    padding: 10px 30px;
-    border-radius: 8px;
-    cursor: not-allowed;
-}
-
-.action-container {
-    width: 100%;
-    display: flex;
-    justify-content: end;
-    align-content: center;
-    gap: 5px;
-    margin: 10px 0;
-}
-
-/* Mark as Shipped Button */
-.action-container .mark-shipped {
-    background-color: #007bff; /* Bright blue */
-    padding: 10px 20px;
-    width: 100%;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
-
-.action-container .mark-shipped:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-}
-
-/* Mark as Cancelled Button */
-.action-container .mark-cancelled {
-    background-color: #dc3545; /* Bright red */
-    padding: 10px 20px;
-    width: 100%;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
-
-.action-container .mark-cancelled:hover {
-    background-color: #a71d2a; /* Darker red on hover */
-}
-
-/* Mark as Delivered Button */
-.action-container .mark-delivered {
-    background-color: #28a745; /* Bright green */
-    padding: 10px 20px;
-    width: 100%;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
-
-.action-container .mark-delivered:hover {
-    background-color: #1e7e34; /* Darker green on hover */
-}
-
-/* Delete Order Button */
-.action-container .delete-order {
-    background-color: transparent;
-    padding: 10px 25px;
-    width: 100%;
-    color: #dc3545; /* Bright red */
-    border: 2px solid #dc3545;
-    border-radius: 4px;
-    font-weight: 600;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.action-container .delete-order:hover {
-    background-color: #dc3545; /* Bright red background */
-    color: white;
-}
-
-/* Order Box Background 
-.order-box {
-    background-color: #2c2f33; 
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    color: #f8f9fa; 
-}
-*/
-
-/* Order Box Head */
-.order-box .order-box-head {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-/* Order Status Colors */
-.right .order-box-head .pending {
-    text-transform: uppercase;
-    background-color: #ffc107; /* Yellow */
-    color: #212529; /* Dark text */
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-weight: 600;
-}
-
-.right .order-box-head .delivered {
-    text-transform: uppercase;
-    background-color: #28a745; /* Green */
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-weight: 600;
-}
-
-.right .order-box-head .shipped {
-    text-transform: uppercase;
-    background-color: #007bff; /* Blue */
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-weight: 600;
-}
-
-.right .order-box-head .cancelled {
-    text-transform: uppercase;
-    background-color: #dc3545; /* Red */
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-weight: 600;
-}
-
-/* Order Item Styling */
-.order-box .order-box-products .order-item {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #6c757d; /* Light gray border */
-    border-radius: 4px;
-    padding: 10px 15px;
-    margin: 5px 0;
-    background-color: #343a40; /* Slightly lighter gray */
-    color: #f8f9fa; /* Light text */
-}
-
-form label{
-    display: block;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-form input{
-    width: 100%;
-    height: 50px;
-    border-radius: 4px;
-    border: 2px solid rgb(25, 25, 25);
-    padding: 10px;
-    margin-bottom: 20px;
-    color: white;
-    background-color: rgb(39, 39, 39);
-    outline: none;
-}
-
-form input:focus{
-    outline: none; 
-    border-color: #8892BF; 
-}
-
-.mb-20{
-    margin-bottom: 20px;
-}
-
-.save-btn-container{
-    display: flex;
-    justify-content: end;
-}
-
-.save-btn{
-    background-color: #818ab4;
-    border: 2px solid #818ab4;
-    border-radius: 8px;
-    padding: 10px 20px;
-}
-
-.empty-cart-message{
-    text-align: center;
-    padding: 10px;
-    background-color: #454640;
-    font-size: 1.4rem;
-}
-
-.shop-now{
-    font-size: 1rem;
-    padding: 10px 20px;
-    background-color: #818ab4;
-    border-radius: 8px;
-}
-.order-cancelled{
-    position: absolute;
-    top: 6rem;
-    right: 20px;
-    padding: 10px 40px;
-    background-color: #e6f9ec; 
-               
-    border: 2px solid #81c784; 
-    border-radius: 4px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    max-height: 60px;
-    animation: disappear 4s forwards ease;
-    animation-delay: 3s;
-}
-
-.order-cancelled p{
-    color: #2e7d32; 
-}
-
-
-.order-cancelled .cat{
-    width: 50px;
-}
-
-.order-cancelled .check{
-    width: 30px;
-}
-
-
-.product-card-detail .status{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
-.product-card-detail .approved{
-    color: rgb(255, 255, 255);
-    text-transform: uppercase;
-    background-color: rgb(78, 154, 59);
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 1.2rem;
-    width: auto;
-    text-align: center;
-    display: inline-block;
-}
-
-.product-card-detail .pending{
-    color: #4b2820;
-    text-transform: uppercase;
-    background-color: #FACC15;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 1.2rem;
-    width: auto;
-    text-align: center;
-    display: inline-block;
-}
-
-.product-card-detail .unlisted{
-    color: white;
-    text-transform: uppercase;
-    background-color: rgb(204, 50, 50);
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 1.2rem;
-    width: auto;
-    text-align: center;
-    display: inline-block;
-}
-
-.product-card-footer .delete{
-    color: white;
-    border: 0px solid white;
-    padding: 10px;
-    width: 100%;
-    background-color: rgb(247, 52, 52);
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-.category-tag{
-    border-radius: 4px;
-}
-
-.brix{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
 }
 
 .dashboard{
@@ -791,6 +166,11 @@ form input:focus{
     gap: 10px;
 }    
 
+.strong{
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
 .heading-2 img{
     width: 2rem;
 }
@@ -811,40 +191,46 @@ form input:focus{
     margin: 20px 0;
 }
 
-#total-products{
-    width: 400px;
+.list-table-content{
+    background-color: rgb(30, 28, 28);
+    padding: 20px;
+    border-radius: 8px;
 }
 
-#total-products span{
-    font-size: 1rem;
+.list-table-content .accounts-table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse; 
+    border-radius: 8px;
 }
 
-#total-products span.pending{
-    color: yellow;
+.list-table-content .accounts-table th,
+.list-table-content .accounts-table td {
+    padding: 10px; 
+    margin: 0;  
+    text-align: center; 
+    border: 1.5px solid rgb(224, 224, 224); /* Ensure borders are visible */
+}
+
+.list-table-content .accounts-table .ban-btn{
+    background-color: rgb(228, 70, 70);
+    padding: 5px;
+    width: 90%;
+    border: 0px solid white;
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
+}
+
+.list-table-content .accounts-table .unban-btn{
+    background-color: transparent;
+    padding: 10px 25px;
+    width: 100%;
+    color: #f34758;
+    border: 2px solid #dc3545;
+    border-radius: 4px;
     font-weight: 600;
 }
-
-#total-products span.approved{
-    color: rgb(57, 251, 57);
-    font-weight: 600;
-}
-
-#total-products .wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-}
-#total-products .wrapper p{
-    margin-left: 10px;
-}
-
-
-.strong{
-    font-size: 2.5rem;
-    font-weight: 600;
-}
-
 
 @keyframes fadein-left {
     0%{
