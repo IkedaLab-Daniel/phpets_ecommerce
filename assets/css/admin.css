@@ -212,6 +212,23 @@
     border: 1.5px solid rgb(224, 224, 224); /* Ensure borders are visible */
 }
 
+.list-table-content .accounts-table td.admin{
+    background-color: rgb(225, 200, 56);
+    color: black;
+    padding: 10px;
+}
+
+.list-table-content .accounts-table td.seller{
+    background-color: rgb(87, 151, 220);
+    color: black;
+}
+
+.list-table-content .accounts-table td.buyer{
+    background-color: rgb(114, 220, 87);
+    color: black;
+}
+
+
 .list-table-content .accounts-table .ban-btn{
     background-color: rgb(228, 70, 70);
     padding: 5px;

@@ -158,7 +158,7 @@
                                             <td><?php echo $user['user_id']; ?></td>
                                             <td><?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?></td>
                                             <td><?php echo htmlspecialchars($user['email']); ?></td>
-                                            <td><?php echo ucfirst($user['role']); ?></td>
+                                            <td class="<?php echo ($user['role']); ?>"><?php echo ucfirst($user['role']); ?></td>
                                             <td><?php echo date('F j, Y', strtotime($user['created_at'])); ?></td>
                                             <td>
                                                 <?php if ($user['status'] === 'good'): ?>
