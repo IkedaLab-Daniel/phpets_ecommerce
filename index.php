@@ -68,35 +68,35 @@
             </div>
             <div id="categories">
                 <div class="category-grid-container">
-                    <a href="/phpets/category.php?q=foods" class="div1 category-btn top-left">
+                    <a href="/phpets/category.php?q=1" class="div1 category-btn top-left">
                         <img src="./assets/images/foods.svg" alt="Foods">
                         <span>Foods</span>
                     </a>
-                    <a href="/phpets/category.php?q=toys" class="div2 category-btn">
+                    <a href="/phpets/category.php?q=2" class="div2 category-btn">
                         <img src="./assets/images/toys.svg" alt="Toys">
                         <span>Toys</span>
                     </a>
-                    <a href="/phpets/category.php?q=accessories" class="div3 category-btn">
+                    <a href="/phpets/category.php?q=3" class="div3 category-btn">
                         <img src="./assets/images/accessories.svg" alt="Accessories">
                         <span>Accessories</span>
                     </a>
-                    <a href="/phpets/category.php?q=health" class="div4 category-btn top-right">
+                    <a href="/phpets/category.php?q=4" class="div4 category-btn top-right">
                         <img src="./assets/images/health.svg" alt="Health">
                         <span>Health</span>
                     </a>
-                    <a href="/phpets/category.php?q=grooming" class="div5 category-btn bottom-left">
+                    <a href="/phpets/category.php?q=5" class="div5 category-btn bottom-left">
                         <img src="./assets/images/grooming.svg" alt="Grooming">
                         <span>Grooming</span>
                     </a>
-                    <a href="/phpets/category.php?q=beds" class="div6 category-btn">
+                    <a href="/phpets/category.php?q=6" class="div6 category-btn">
                         <img src="./assets/images/bed.svg" alt="Beds">
                         <span>Beds</span>
                     </a>
-                    <a href="/phpets/category.php?q=clothes" class="div7 category-btn">
+                    <a href="/phpets/category.php?q=7" class="div7 category-btn">
                         <img src="./assets/images/cloth.svg" alt="Clothes">
                         <span>Clothes</span>
                     </a>
-                    <a href="/phpets/category.php?q=others" class="div8 category-btn bottom-right">
+                    <a href="/phpets/category.php?q=8" class="div8 category-btn bottom-right">
                         <img src="./assets/images/others.svg" alt="Others">
                         <span>Others</span>
                     </a>

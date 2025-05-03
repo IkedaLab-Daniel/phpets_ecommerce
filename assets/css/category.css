@@ -1,0 +1,36 @@
+.long-btn{
+    padding: 10px 50px;
+}
+
+.cool-btn{
+    transition: .4s;
+}
+
+.cool-btn:hover{
+    cursor: pointer;
+    transform: translateY(-3px) scale(103%);
+}
+
+.cool-btn:active{
+    opacity: .5;
+    transform: translateY(0px) scale(95%);
+}
+
+.hero .text-element-2{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    gap: 10px;
+    width: 100%;
+}
+
+.hero .text-element-2 .left{
+    width: 50%;
+}
+
+.hero .text-element-2 .right{
+    width: 50%;
+}
