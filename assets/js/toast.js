@@ -8,14 +8,21 @@ function showToast(message, type = "", imgSrc = "") {
 
     const toast = document.createElement("div");
     toast.className = "toast " + type;
+
     // Add image if imgSrc is provided
     if (imgSrc) {
         const img = document.createElement("img");
         img.src = imgSrc;
         img.alt = "Toast Icon";
-        img.className = "toast-img"; // Add a class for styling
+        if (type === 'error'){
+            img.className = "toast-img";
+        } else{
+            img.className = "toast-img-2";
+        }
+        
+         
         toast.appendChild(img);
-        console.log('Hell Nah PNG')
+        console.log('Hell Nah PNG');
     }
 
     // Add the message
@@ -25,11 +32,15 @@ function showToast(message, type = "", imgSrc = "") {
 
     toastContainer.appendChild(toast);
 
-    // Play sound if the toast type is "error"
+    // Play sound if the toast type is "error" or "banned"
     if (type === "error") {
         const audio = new Audio("/phpets/assets/js/hellnah.mp3");
         audio.play();
-        console.log('Hell Nah');
+        console.log('Hell Nah!');
+    } else if (type === "banned") {
+        const audio = new Audio("/phpets/assets/js/getout.mp3");
+        audio.play();
+        console.log('GET OUT!');
     }
 
     setTimeout(() => {
