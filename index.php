@@ -1,7 +1,7 @@
 <?php
     include './includes/header.php';
     include './includes/db_connect.php'; 
-
+    include './includes/protect.php';
     // Fetch products
     $query = "SELECT products.*, categories.name AS category, CONCAT(users.first_name, ' ', users.last_name) AS seller
             FROM products 
@@ -68,38 +68,38 @@
             </div>
             <div id="categories">
                 <div class="category-grid-container">
-                    <div class="div1 category-btn top-left">
-                        <img src="./assets/images/foods.svg" >
+                    <a href="/phpets/category.php?q=foods" class="div1 category-btn top-left">
+                        <img src="./assets/images/foods.svg" alt="Foods">
                         <span>Foods</span>
-                    </div>
-                    <div class="div2 category-btn">
-                        <img src="./assets/images/toys.svg" >
+                    </a>
+                    <a href="/phpets/category.php?q=toys" class="div2 category-btn">
+                        <img src="./assets/images/toys.svg" alt="Toys">
                         <span>Toys</span>
-                    </div>
-                    <div class="div3 category-btn">
-                        <img src="./assets/images/accessories.svg" >
+                    </a>
+                    <a href="/phpets/category.php?q=accessories" class="div3 category-btn">
+                        <img src="./assets/images/accessories.svg" alt="Accessories">
                         <span>Accessories</span>
-                    </div>
-                    <div class="div4 category-btn top-right">
-                        <img src="./assets/images/health.svg" >
+                    </a>
+                    <a href="/phpets/category.php?q=health" class="div4 category-btn top-right">
+                        <img src="./assets/images/health.svg" alt="Health">
                         <span>Health</span>
-                    </div>
-                    <div class="div5 category-btn bottom-left">
-                        <img src="./assets/images/grooming.svg" >
+                    </a>
+                    <a href="/phpets/category.php?q=grooming" class="div5 category-btn bottom-left">
+                        <img src="./assets/images/grooming.svg" alt="Grooming">
                         <span>Grooming</span>
-                    </div>
-                    <div class="div6 category-btn">
-                        <img src="./assets/images/bed.svg" >
+                    </a>
+                    <a href="/phpets/category.php?q=beds" class="div6 category-btn">
+                        <img src="./assets/images/bed.svg" alt="Beds">
                         <span>Beds</span>
-                    </div>
-                    <div class="div7 category-btn">
-                        <img src="./assets/images/cloth.svg" >
+                    </a>
+                    <a href="/phpets/category.php?q=clothes" class="div7 category-btn">
+                        <img src="./assets/images/cloth.svg" alt="Clothes">
                         <span>Clothes</span>
-                    </div>
-                    <div class="div8 category-btn bottom-right">
-                        <img src="./assets/images/others.svg" >
+                    </a>
+                    <a href="/phpets/category.php?q=others" class="div8 category-btn bottom-right">
+                        <img src="./assets/images/others.svg" alt="Others">
                         <span>Others</span>
-                    </div>
+                    </a>
                 </div>
             </div>
 

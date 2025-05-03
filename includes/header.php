@@ -20,9 +20,9 @@
                 </a>
             </div>
             <div class="nav-middle">
-                <a class="nav-link" href="/phpets/about.php">About</a>
                 <a class="nav-link" href="/phpets/index.php">Products</a>
-                <a class="nav-link" href="/phpets/about.php">Categories</a>
+                <a class="nav-link" href="/phpets/about.php">About</a>
+                <a class="nav-link" href="/phpets/index.php#categories-scroll">Categories</a>
             </div>
             <div class="login-signup-btns">
                 <?php if (isset($_SESSION['user_id'])): ?>
