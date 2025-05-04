@@ -35,7 +35,7 @@
     $total_sellers = $total_sellers_row['total_sellers'] ?? 0; // Default to 0 if no sellers
 
     // * Fetch all users
-    $all_users_query = "SELECT user_id, first_name, last_name, email, role, created_at, status FROM users ORDER BY created_at DESC";
+    $all_users_query = "SELECT user_id, first_name, last_name, email, role, created_at, status, contact_number FROM users ORDER BY created_at DESC";
     $all_users_result = $conn->query($all_users_query);
 
     // * Fetch total products
@@ -172,12 +172,6 @@
                         <span>Products</span>
                     </a>
                 </div>
-                <div class="animate-fadein-left">
-                    <a class="link-navs" href="#purchased-details">
-                        <img src="/phpets/assets/images/transaction.svg">
-                        <span>Transactions</span>
-                    </a>
-                </div>
 
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="#edit-profile">
@@ -229,6 +223,7 @@
                                         <th>User ID</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Contact Number</th>
                                         <th>Role</th>
                                         <th>Created At</th>
                                         <th>Action</th>
@@ -240,6 +235,7 @@
                                             <td><?php echo $user['user_id']; ?></td>
                                             <td><?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?></td>
                                             <td><?php echo htmlspecialchars($user['email']); ?></td>
+                                            <td><?php echo htmlspecialchars($user['contact_number'] ?? 'No Data'); ?></td>
                                             <td class="<?php echo ($user['role']); ?>"><?php echo ucfirst($user['role']); ?></td>
                                             <td><?php echo date('F j, Y', strtotime($user['created_at'])); ?></td>
                                             <td>

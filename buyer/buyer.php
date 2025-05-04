@@ -14,6 +14,8 @@
     $address = $_SESSION['address'];
     $email = $_SESSION['email'];
     $profile_photo = $_SESSION['profile_photo']; 
+    $contact_number = $_SESSION['contact_number'];
+
 
     // Fetch Cart Items
     $cart_sql = "SELECT c.*, p.name, p.price, p.image 
@@ -185,12 +187,13 @@
         $updated_last_name = htmlspecialchars(trim($_POST['last_name']));
         $updated_email = htmlspecialchars(trim($_POST['email']));
         $updated_address = htmlspecialchars(trim($_POST['address']));
-
+        $updated_contact_number = htmlspecialchars(trim($_POST['contact_number'])); // Correctly handle contact number
+    
         // Update the user's information in the database
-        $update_user_query = "UPDATE users SET first_name = ?, middle_name = ?, last_name = ?, email = ?, address = ? WHERE user_id = ?";
+        $update_user_query = "UPDATE users SET first_name = ?, middle_name = ?, last_name = ?, email = ?, address = ?, contact_number = ? WHERE user_id = ?";
         $stmt = $conn->prepare($update_user_query);
-        $stmt->bind_param("sssssi", $updated_first_name, $updated_middle_name, $updated_last_name, $updated_email, $updated_address, $buyer_id);
-
+        $stmt->bind_param("ssssssi", $updated_first_name, $updated_middle_name, $updated_last_name, $updated_email, $updated_address, $updated_contact_number, $buyer_id);
+    
         if ($stmt->execute()) {
             // Update session variables
             $_SESSION['first_name'] = $updated_first_name;
@@ -198,10 +201,11 @@
             $_SESSION['last_name'] = $updated_last_name;
             $_SESSION['email'] = $updated_email;
             $_SESSION['address'] = $updated_address;
-
+            $_SESSION['contact_number'] = $updated_contact_number;
+    
             // Redirect to refresh the page
             header("Location: buyer.php#edit-profile");
-            echo "<script> User updated success</script>";
+            echo "<script> User updated successfully</script>";
             exit();
         } else {
             echo "<script> Update Failed</script>";
@@ -266,7 +270,7 @@
                     <img src="../uploads/<?php echo htmlspecialchars($profile_photo); ?>" alt="Profile Picture" width="100">
                     <span class="fullname"> <?php echo $first_name . ' ' . $middle_name . ' ' . $last_name; ?></span>
                     <span class="role"><?php echo ucfirst($_SESSION['role']); ?></span>
-                    <span class="address"><?php echo $address; ?></span>
+                    <span class="address"><?php echo $address; ?> - <?php echo $contact_number; ?></span>
                 </div>
                 
                 <div class="animate-fadein-left">
@@ -474,7 +478,10 @@
 
                         <label for="address">Address:</label>
                         <input type="text" id="address" name="address" placeholder="Street, Barangay, Municipal, Province" value="<?php echo htmlspecialchars($address); ?>" required />
-                        
+
+                        <label for="contact_number">Contact Number:</label>
+                        <input type="text" id="contact_number" name="contact_number" placeholder="Enter your contact number" value="<?php echo htmlspecialchars($contact_number); ?>" required />
+
                         <div class="save-btn-container">
                             <button type="submit" name="update_user" class="save-btn cool-btn">Save Changes</button>
                         </div>
@@ -491,7 +498,8 @@
     
 </html>
 
-<?php 
+<?php
+    echo "<div style='margin-top='5rem''>a</div>";
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);

@@ -29,7 +29,7 @@
 
     // ? Fetch all orders related to the seller, including buyer's name
     $orders_query = "
-        SELECT DISTINCT o.order_id, o.buyer_id, o.total_price, o.order_date, o.status, u.first_name, u.last_name
+        SELECT DISTINCT o.order_id, o.buyer_id, o.total_price, o.order_date, o.status, u.first_name, u.last_name, u.contact_number
         FROM orders o
         JOIN order_items oi ON o.order_id = oi.order_id
         JOIN products p ON oi.product_id = p.product_id
@@ -304,7 +304,7 @@
                             <div class="order-box">
                             <div class="order-box-head">
                                 <p><strong>Order ID:</strong> <?php echo $order['order_id']; ?></p>
-                                <p><strong>Buyer:</strong> <?php echo htmlspecialchars($order['first_name'] . ' ' . $order['last_name']); ?></p>
+                                <p><strong>Buyer:</strong> <?php echo htmlspecialchars($order['first_name'] . ' ' . $order['last_name']); ?> (<?php echo htmlspecialchars($order['contact_number']); ?>)</p>
                                 <p><strong>Total:</strong> ₱<?php echo number_format($order['total_price'], 2); ?></p>
                                 <p><strong>Date:</strong> <?php echo date('F j, Y', strtotime($order['order_date'])); ?></p>
                                 <p class="<?php echo $order['status']; ?>"><?php echo ucfirst($order['status']); ?></p>
