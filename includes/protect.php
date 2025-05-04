@@ -1,12 +1,6 @@
 <?php
     session_start();
-    include 'db_connect.php'; // Include database connection
-
-    // Check if the user is logged in
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: ../login.php");
-        exit();
-    }
+    include 'db_connect.php';
 
     $user_id = $_SESSION['user_id'];
     $status_query = "SELECT status FROM users WHERE user_id = ?";

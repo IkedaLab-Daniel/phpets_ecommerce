@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <div class="middle">
                         <p>High-quality supplies tailored for your pet’s health, happiness, and style—delivered to your door.</p>
                         <div class="view-products-wrapper">
-                            <a class="view-products" href="index.php">
+                            <a class="view-products" href="/phpets/index.php">
                                 <span >View Products</span>
                             </a>
                         </div>
