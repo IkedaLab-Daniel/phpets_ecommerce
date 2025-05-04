@@ -26,37 +26,43 @@
             <div class="hero">
                 <div class="text-element">
                     <h1>Welcome to <span class="violet">PHP</span>ets</h1>
-
                     <div>
                         <p><b>Shop the Best for Your Best Friend</b></p>
                         <p>From everyday basics to special treats—find everything your pet needs to live their best life.</p>
                     </div>
+
+                    <form class="search-bar" action="search.php" method="GET">
+                        <input id="search" name="q" type="search" placeholder="Dog Food, pussy..." required />
+                        <button class="cool-btn" type="submit">
+                            <img src="/phpets/assets/images/search-dark.svg" alt="">
+                        </button>    
+                    </form>
                     
                     <div class="hero-btn-container">
-                        <a href="#product-section" class="view-products">
+                        <a href="#product-section" class="view-products cool-btn">
                             <img src="/phpets/assets/images/cart-bag.svg" alt="">
                             <span>View Products</span>
                         </a>
-                        <a href="#categories-scroll" class="categories-btn">
+                        <a href="#categories-scroll" class="categories-btn cool-btn">
                             <img src="/phpets/assets/images/category-black.svg" alt="">
                             <span>Categories</span>
                         </a>
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'buyer'): ?>
-                            <a href="/phpets/buyer/buyer.php" class="categories-btn">
+                            <a href="/phpets/buyer/buyer.php" class="categories-btn cool-btn">
                                 <img src="/phpets/assets/images/cart-bag-black.svg" alt="">
                                 <span>My Orders</span>
                             </a>
                         <?php endif; ?>
 
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'seller'): ?>
-                            <a href="/phpets/seller/seller.php" class="categories-btn">
+                            <a href="/phpets/seller/seller.php" class="categories-btn cool-btn">
                                 <img src="/phpets/assets/images/bone.svg" alt="">
                                 <span>My Products</span>
                             </a>
                         <?php endif; ?>
 
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                            <a href="/phpets/admin/admin.php" class="categories-btn">Admin Panel</a>
+                            <a href="/phpets/admin/admin.php" class="categories-btn cool-btn">Admin Panel</a>
                         <?php endif; ?>
                     </div>
                 </div>

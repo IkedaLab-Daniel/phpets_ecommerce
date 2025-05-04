@@ -155,17 +155,6 @@ main{
     gap: 10px;
 }
 
-.view-products:hover{
-    transform: translateY(-5px) scale(110%);
-    cursor: pointer;
-}
-
-.view-products:active{
-    transform: translateY(0px) scale(95%);
-    opacity: .5;
-    cursor: pointer;
-}
-
 .view-products img{
     width: 1.5rem;
 }
@@ -183,12 +172,16 @@ main{
     gap: 10px;
 }
 
-.categories-btn:hover{
+.cool-btn{
+    transition: .4s;
+}
+
+.cool-btn:hover{
     transform: translateY(-5px) scale(110%);
     cursor: pointer;
 }
 
-.categories-btn:active{
+.cool-btn:active{
     transform: translateY(0px) scale(95%);
     opacity: .5;
     cursor: pointer;
@@ -226,7 +219,7 @@ main{
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 0.2fr)); /* ! No sure here */
     gap: 1.5rem;
     padding: 1rem;
 }
@@ -374,6 +367,41 @@ main{
     border: 1px solid rgb(157, 157, 157);
     border-bottom-right-radius: 8px;
 }
+.search-bar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-bar input{
+    width: 400px;
+    height: 50px;
+    border-radius: 30px;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: rgba(29, 29, 29, 0.718);
+    color: white;
+    padding: 10px 20px;
+}
+
+.search-bar input:focus{
+    outline: 0px;
+}
+
+.search-bar button{
+    border-radius: 25px;
+    width: 50px;
+    height: 50px;
+    padding: 12px;
+    border: 2px solid white;
+}
+
+.search-bar button img{
+    width: 100%;
+}
+
+
+
 
 @keyframes fadein {
     from { opacity: 0; right: 0; }

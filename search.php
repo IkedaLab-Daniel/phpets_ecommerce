@@ -3,36 +3,22 @@
     include ('./includes/db_connect.php');
     session_start();
     
-    $category = $_GET['q'];
+    // Get the search query from the URL
+    $query = isset($_GET['q']) ? trim($_GET['q']) : '';
 
-    // * Map category query to their actual value
-    $fullcategoryname = [
-        "1" => "Pet Foods",
-        "2" => "Pet Toys",
-        "3" => "Pet Accessories",
-        "4" => "Pet Health",
-        "5" => "Pet Grooming",
-        "6" => "Pet Beds",
-        "7" => "Pet Clothes",
-        "8" => "Other Pet Items"
-    ];
-
-    // Get the full category name or default to "Unknown Category"
-    $category_display_name = isset($fullcategoryname[$category]) ? $fullcategoryname[$category] : "Unknown Category";
-
-    // Get the full category name or default to "Unknown Category"
-    $category_display_name = isset($fullcategoryname[$category]) ? $fullcategoryname[$category] : "Unknown Category";
-
-    // Fetch products based on the category
-    $query = "SELECT p.product_id, p.name, p.description, p.price, p.image, c.name AS category, u.first_name AS seller 
-              FROM products p
-              JOIN categories c ON p.category_id = c.category_id
-              JOIN users u ON p.seller_id = u.user_id
-              WHERE c.category_id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $category);
+    // Fetch products matching the search query and with status 'approved'
+    $sql = "SELECT p.product_id, p.name, p.description, p.price, p.image, c.name AS category, u.first_name AS seller 
+    FROM products p
+    JOIN categories c ON p.category_id = c.category_id
+    JOIN users u ON p.seller_id = u.user_id
+    WHERE (p.name LIKE ? OR p.description LIKE ?) AND p.status = 'approved'";
+    $stmt = $conn->prepare($sql);
+    $search_term = '%' . $query . '%';
+    $stmt->bind_param("ss", $search_term, $search_term);
     $stmt->execute();
     $result = $stmt->get_result();
+
+
 
     // Get the total number of products
     $total_products = $result->num_rows;
@@ -43,7 +29,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Category - <?php echo htmlspecialchars($category_display_name); ?></title>
+        <title>Search - <?php echo htmlspecialchars($query); ?></title>
         <link rel="stylesheet" href="/phpets/assets/css/category.css" >
     </head>
 
@@ -51,12 +37,12 @@
         <div class="hero">
             <div class="text-element-2">
                 <div class="left">
-                    <h1><?php echo "$category_display_name"; ?></h1>
+                    <h1 style="font-size: 2.5rem;">Search "<?php echo htmlspecialchars($query); ?>"</h1>
                     <div>
                         <?php if ($total_products > 0): ?>
-                            <p><b><?php echo $total_products; ?> <?php echo "$category_display_name"; ?> for your pet!</b></p>
+                            <p><b><?php echo $total_products; ?> result(s) found for "<?php echo htmlspecialchars($query); ?>"</b></p>
                         <?php else: ?>
-                            <p><b>No item yet</b></p>
+                            <p><b>No items found for "<?php echo htmlspecialchars($query); ?>"</b></p>
                         <?php endif ?>
                     </div>
                     <div class="hero-btn-container">
@@ -118,14 +104,14 @@
             </div>
         </div> 
 
-         <!-- Product Section -->
-         <div id="product-section">
+        <!-- Product Section -->
+        <div id="product-section">
             <div class="section-head">
                 <img src="./assets/images/cart-bag.svg" >
                 <h2>Products</h2>
             </div>
             <div class="product-grid">
-                <?php if ($result->num_rows > 0): ?>
+                <?php if ($total_products > 0): ?>
                     <?php while ($row = $result->fetch_assoc()) : ?>
                         <div class="product-card">
                             <img src="uploads/<?php echo htmlspecialchars($row['image']); ?>" alt="Product Image">
@@ -144,9 +130,8 @@
                 <?php else: ?>
                     <div class="no-item">
                         <img src="/phpets/assets/images/empty-light.svg" alt="">
-                        <p>No products found in this category.</p>
+                        <p>No items matched your search.</p>
                     </div>
-                    
                 <?php endif; ?>
             </div>
         </div>

@@ -32,7 +32,10 @@
 }
 
 .hero .text-element-2 .right{
+    display: flex;
+    flex-direction: column;
     width: 50%;
+    gap: 20px;
 }
 
 .no-item{
