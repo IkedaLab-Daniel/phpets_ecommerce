@@ -14,7 +14,7 @@
         <h1>U R banned</h1>
         <h3>💥SESSION DESTROYED💥</h3>
         <a href="../login.php">Log In</a><br/>
-        <a href="../signup.php">Sign Up</a>
+        <a href="../register.php">Sign Up</a>
 
         <div id="toast-container"></div>
         <script src="../assets/js/toast.js"></script>

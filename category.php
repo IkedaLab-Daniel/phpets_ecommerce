@@ -19,6 +19,23 @@
 
     // Get the full category name or default to "Unknown Category"
     $category_display_name = isset($fullcategoryname[$category]) ? $fullcategoryname[$category] : "Unknown Category";
+
+    // Get the full category name or default to "Unknown Category"
+    $category_display_name = isset($fullcategoryname[$category]) ? $fullcategoryname[$category] : "Unknown Category";
+
+    // Fetch products based on the category
+    $query = "SELECT p.product_id, p.name, p.description, p.price, p.image, c.name AS category, u.first_name AS seller 
+              FROM products p
+              JOIN categories c ON p.category_id = c.category_id
+              JOIN users u ON p.seller_id = u.user_id
+              WHERE c.category_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $category);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Get the total number of products
+    $total_products = $result->num_rows;
 ?>
 
 <!DOCTYPE html>
@@ -36,14 +53,18 @@
                 <div class="left">
                     <h1><?php echo "$category_display_name"; ?></h1>
                     <div>
-                        <p><b>10 <?php echo "$category_display_name"; ?> for your pet!</b></p>
+                        <?php if ($total_products > 0): ?>
+                            <p><b><?php echo $total_products; ?> <?php echo "$category_display_name"; ?> for your pet!</b></p>
+                        <?php else: ?>
+                            <p><b>No item yet</b></p>
+                        <?php endif ?>
                     </div>
                     <div class="hero-btn-container">
                         <a href="/phpets/index.php#categories-scroll" class="categories-btn long-btn">
                             <img src="/phpets/assets/images/back-dark.svg" alt="">
                             <span>Back</span>
                         </a>
-                        <a href="/phpets/index.php#categories-scroll" class="view-products long-btn">
+                        <a href="#product-section" class="view-products long-btn">
                             <img src="/phpets/assets/images/cart-bag.svg" alt="">
                             <span>Browse</span>
                         </a>
@@ -90,9 +111,42 @@
                 </div>
             </div>
         </div> 
+
+         <!-- Product Section -->
+         <div id="product-section">
+            <div class="section-head">
+                <img src="./assets/images/cart-bag.svg" >
+                <h2>Products</h2>
+            </div>
+            <div class="product-grid">
+                <?php if ($result->num_rows > 0): ?>
+                    <?php while ($row = $result->fetch_assoc()) : ?>
+                        <div class="product-card">
+                            <img src="uploads/<?php echo htmlspecialchars($row['image']); ?>" alt="Product Image">
+                            <span class="category-tag"><?php echo htmlspecialchars($row['category']); ?></span>
+                            <div class="product-card-detail">
+                                <h3><?php echo htmlspecialchars($row['name']); ?></h3>
+                                <p><?php echo htmlspecialchars($row['description']); ?></p>
+                                <p><strong>Seller:</strong> <?php echo htmlspecialchars($row['seller']); ?></p>
+                            </div>
+                            <div class="product-card-footer">
+                                <p>₱<?php echo number_format($row['price'], 2); ?></p>
+                                <a href="view_product.php?id=<?php echo $row['product_id']; ?>">View</a>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <div class="no-item">
+                        <img src="/phpets/assets/images/empty-light.svg" alt="">
+                        <p>No products found in this category.</p>
+                    </div>
+                    
+                <?php endif; ?>
+            </div>
+        </div>
     </body>
 </html>
 
 <?php 
-    include ('./includes/error_catch.php');
+    include ('./includes/cart_modal.php');
 ?>
