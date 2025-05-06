@@ -31,7 +31,7 @@
         <main>
             <div class="hero">
                 <div class="text-element">
-                    <h1>Welcome to <span class="violet">PHP</span>ets <?php echo ($view_mode); ?></h1>
+                    <h1>Welcome to <span class="violet">PHP</span>ets</h1>
                     <div>
                         <p><b>Shop the Best for Your Best Friend</b></p>
                         <p>From everyday basics to special treats—find everything your pet needs to live their best life.</p>
@@ -75,7 +75,11 @@
             </div>
 
             <div class="section-head" id="categories-scroll">
-                <img src="./assets/images/category.svg" >
+                <?php if ($view_mode === 'dark'): ?>
+                    <img src="./assets/images/category.svg" >
+                <?php else: ?>
+                    <img src="./assets/images/category-dark.svg" >
+                <?php endif ?>
                 <h2>Categories</h2>
             </div>
             <div id="categories">
@@ -117,7 +121,11 @@
 
             <div id="product-section">
                 <div class="section-head">
-                    <img src="./assets/images/cart-bag.svg" >
+                    <?php if ($view_mode === 'dark'): ?>
+                        <img src="./assets/images/cart-bag.svg" >
+                    <?php else: ?>
+                        <img src="./assets/images/cart-dark.svg" >
+                    <?php endif ?>
                     <h2>Products</h2>
                 </div>
                 <div class="product-grid">
