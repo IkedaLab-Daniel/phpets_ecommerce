@@ -1,0 +1,127 @@
+nav{
+    width: 100%;
+    height: 4rem;
+    background-color: rgb(210, 210, 210);
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid rgb(110, 110, 110);
+    position: fixed;
+    top: 0;
+    z-index: 4;
+}
+
+nav span{
+    font-size: 2rem;
+}
+
+.logo img{
+    width: 2rem;
+}
+
+.login-signup-btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-signup-btns .login-btn{
+    background-color: none;
+    border: 2px solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: .4s;
+}
+
+.login-signup-btns .login-btn:hover{
+    cursor: pointer;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    transform: scale(105%);
+}
+
+.login-signup-btns .login-btn:active{
+    transform: scale(95%);
+    opacity: .5;
+}
+
+.login-signup-btns .signup-btn{
+    background-color: rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: .4s;
+}
+
+.login-signup-btns .signup-btn:hover{
+    cursor: pointer;
+    background-color: #8892BF;
+    color: white;
+    transform: scale(105%);
+    border: 2px solid #8892BF;
+}
+
+.login-signup-btns .signup-btn:active{
+    transform: scale(95%);
+    opacity: .5;
+}
+.login-signup-btns .logout-btn{
+    background-color: none;
+    border: 2px solid rgb(255, 53, 53);
+    color: black;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: .4s;
+    color: rgb(255, 53, 53);
+    font-weight: 600;
+}
+
+.login-signup-btns .logout-btn:hover{
+    cursor: pointer;
+    background-color: rgb(255, 53, 53);
+    color: white;
+    transform: scale(105%);
+    border: 2px solid rgb(255, 53, 53);
+}
+
+.login-signup-btns .logout-btn:active{
+    transform: scale(95%);
+    opacity: .5;
+}
+
+.nav-middle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-middle .nav-link {
+    font-size: 1.2rem;
+    color: rgb(32, 32, 32);
+    transition: 0.2s;
+    position: relative; 
+}
+
+.nav-middle .nav-link:hover {
+    color: rgb(0, 0, 0);
+}
+
+.nav-middle .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; 
+    left: 0;
+    width: 0;
+    height: 2px; 
+    background-color: rgb(7, 7, 7); 
+    transition: width 0.3s ease; 
+}
+
+.nav-middle .nav-link:hover::after {
+    width: 100%;
+}

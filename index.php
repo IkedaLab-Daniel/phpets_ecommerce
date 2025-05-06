@@ -2,7 +2,10 @@
     include './includes/header.php';
     include './includes/db_connect.php'; 
     include './includes/protect.php';
-    // Fetch products
+    session_start();
+
+    $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
+
     $query = "SELECT products.*, categories.name AS category, CONCAT(users.first_name, ' ', users.last_name) AS seller
             FROM products 
             JOIN categories ON products.category_id = categories.category_id
@@ -10,7 +13,6 @@
             WHERE products.status = 'approved'";
 
     $result = mysqli_query($conn, $query);
-    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -18,14 +20,18 @@
     <head>
         <title>PHPets</title>
         <link rel="icon" type="image/svg" href="/phpets/assets/images/paw.svg" />
-        <link rel="stylesheet" href="assets/css/index.css">
+        <?php if ($view_mode === 'dark'): ?>
+            <link rel="stylesheet" href="assets/css/index-light.css">
+        <?php else: ?>
+            <link rel="stylesheet" href="assets/css/index.css">
+        <?php endif ?>
         <link rel="icon" type="image/svg" href="./assets/images/paw.svg" />
     </head>
     <body>
         <main>
             <div class="hero">
                 <div class="text-element">
-                    <h1>Welcome to <span class="violet">PHP</span>ets</h1>
+                    <h1>Welcome to <span class="violet">PHP</span>ets <?php echo ($view_mode); ?></h1>
                     <div>
                         <p><b>Shop the Best for Your Best Friend</b></p>
                         <p>From everyday basics to special treats—find everything your pet needs to live their best life.</p>
@@ -132,7 +138,6 @@
                     <?php endwhile; ?>
                 </div>
             </div>
-
         </main>
     </body>
 </html>
@@ -141,4 +146,5 @@
     if ($_SESSION['role'] == 'buyer'){
         include ("./includes/cart_modal.php");
     }
+    include ('./includes/view-modal.php');
 ?>

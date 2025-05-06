@@ -1,6 +1,10 @@
 <?php 
     include ('../includes/header.php');
     include ('../includes/db_connect.php');
+    session_start();
+    if (isset($_SESSION['view'])){
+        $_SESSION['view'] == 'light';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +12,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../assets/css/add-product.css">
+        <?php if ($_SESSION['view'] == 'light'): ?>
+            <link rel="stylesheet" href="../assets/css/add-product-light.css">
+            <link rel="stylesheet" href="../assets/css/index-light.css">
+        <?php else: ?>
+            <link rel="stylesheet" href="../assets/css/add-product.css">
+        <?php endif ?>
         <title>Add a Product</title>
     </head>
 

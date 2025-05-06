@@ -1,5 +1,9 @@
 <?php
     session_start(); 
+
+    if (isset($_SESSION['view'])){
+        $_SESSION['view'] == 'light';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +12,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/phpets/assets/css/index.css" />
-        <link rel="stylesheet" href="/phpets/assets/css/header.css" />
+        <?php if ($_SESSION['view'] = 'light'): ?>
+            <link rel="stylesheet" href="/phpets/assets/css/header-light.css" />
+        <?php else: ?>
+            <link rel="stylesheet" href="/phpets/assets/css/header.css" />
+        <?php endif ?>
+       
         <link rel="icon" type="image/svg" href="/phpets/assets/images/paw.svg" />
     </head>
     <body>

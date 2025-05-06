@@ -7,6 +7,10 @@
         exit();
     }
 
+    if (isset($_SESSION['view'])){
+        $_SESSION['view'] == 'light';
+    }
+
     $buyer_id = $_SESSION['user_id'];
     $first_name = $_SESSION['first_name'];
     $middle_name = $_SESSION['middle_name'];
@@ -257,8 +261,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/phpets/assets/css/index.css" />
-        <link rel="stylesheet" href="/phpets/assets/css/buyer.css" />
+        <?php if ($_SESSION['view'] == 'light'): ?>
+            <link rel="stylesheet" href="/phpets/assets/css/buyer-light.css" />
+            <link rel="stylesheet" href="/phpets/assets/css/index-light.css" />
+        <?php else: ?>
+            <link rel="stylesheet" href="/phpets/assets/css/buyer.css" />
+            <link rel="stylesheet" href="/phpets/assets/css/index.css" />
+        <?php endif ?>
         <link rel="icon" type="image/svg" href="/phpets/assets/images/paw.svg" />
         <title><?php echo $first_name . ' ' . $last_name; ?> </title>
     </head>

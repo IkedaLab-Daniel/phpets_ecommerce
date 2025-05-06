@@ -1,4 +1,4 @@
-.cart-modal{
+.view-modal{
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -9,34 +9,27 @@
     justify-content: center;
     position: fixed;
     bottom: 30px;
-    right: 110px;
+    right: 30px;
     box-shadow: 0px 0px 10px 4px #8892BF;
     transition: .4s;
     /* animation: fade-in-right 2s forwards ease; */
 }
 
-.cart-modal:hover{
+.view-modal:hover{
     transform: scale(105%) translateY(-5px);
 }
 
-.cart-modal img{
-    width: 30px;
-    height: 30px;
-}
-
-.cart-count{
-    color: white;
-    font-weight: 600;
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background-color: rgb(254, 86, 86);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+.view-modal button{
+    border: 0px solid white;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(208, 208, 208, 0);
+}
+
+.view-modal img{
+    width: 30px;
+    height: 30px;
 }
 
 @keyframes fade-in-right {
