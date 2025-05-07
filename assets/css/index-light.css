@@ -131,6 +131,7 @@ main{
     z-index: 3;
     height: 100%;
     gap: 4%;
+    color: white;
 }
 
 .hero h1 {
@@ -144,7 +145,7 @@ main{
 .hero p {
     font-size: 1.4rem;
     text-align: center;
-    color: #e2e2e2; /* Medium gray for a softer look */
+    color: #e7e7e7; /* Medium gray for a softer look */
     text-shadow: 1px 1px 3px rgba(26, 26, 26, 0.6); /* Subtle light shadow */
     line-height: 1.6; /* Improve readability */
 }
@@ -168,6 +169,11 @@ main{
     gap: 10px;
 }
 
+.view-products span{
+    color: white;
+}
+
+
 .view-products img{
     width: 1.5rem;
 }
@@ -178,7 +184,6 @@ main{
     border-radius: 30px;
     margin-top: 20px;
     transition: .4s;
-    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -292,10 +297,11 @@ main{
 
 .product-card-footer a{
     font-size: 1.1rem;
-    background-color: #8892BF;
+    background-color: #9ea6c6;
     padding: 7px 25px;
     border-radius: 4px;
     transition: .4s;
+    color: white;
 }
 
 .product-card-footer a:hover{
@@ -322,6 +328,8 @@ main{
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     border-radius: 8px;
+    box-shadow: 2px 2px 8px 2px rgba(0,0,0,0.2), -2px -2px 8px 2px rgba(0,0,0,0.2);
+    background-color: white;
 }
 
 .div1 { grid-area: 1 / 1 / 2 / 2; }
@@ -338,7 +346,7 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(205, 205, 205);
+    background-color: rgb(245, 245, 245);
     padding: 30px 15px;
     border: 1px solid rgb(99, 99, 99);
     transition: .4s;
@@ -346,11 +354,11 @@ main{
 }
 
 .category-btn:hover{
-    border: 1px solid rgb(192, 192, 192);
+    border: 1px solid #707fc1;
     border-radius: 4px;
     cursor: pointer;
     transform: scale(105%);
-    background-color: rgb(184, 184, 184);
+    background-color: #dde3ff;
 }
 
 .category-btn img{
@@ -411,6 +419,11 @@ main{
 
 .search-bar button img{
     width: 100%;
+}
+
+.bold-text{
+    color: white;
+    font-weight: 600;
 }
 
 @keyframes fadein {

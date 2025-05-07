@@ -33,7 +33,7 @@
                 <div class="text-element">
                     <h1>Welcome to <span class="violet">PHP</span>ets</h1>
                     <div>
-                        <p><b>Shop the Best for Your Best Friend</b></p>
+                        <p class="bold-text">Shop the Best for Your Best Friend</p>
                         <p>From everyday basics to special treats—find everything your pet needs to live their best life.</p>
                     </div>
 
@@ -113,7 +113,11 @@
                         <span>Clothes</span>
                     </a>
                     <a href="/phpets/category.php?q=8" class="div8 category-btn bottom-right">
-                        <img src="./assets/images/others.svg" alt="Others">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="./assets/images/others.svg" alt="Others">
+                        <?php else: ?>
+                            <img src="./assets/images/others-dark.svg" width="20px" alt="Others">
+                        <?php endif ?>
                         <span>Others</span>
                     </a>
                 </div>

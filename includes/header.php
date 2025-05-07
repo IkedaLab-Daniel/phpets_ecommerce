@@ -1,9 +1,7 @@
 <?php
     session_start(); 
 
-    if (isset($_SESSION['view'])){
-        $_SESSION['view'] == 'light';
-    }
+    $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +10,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/phpets/assets/css/index.css" />
-        <?php if ($_SESSION['view'] = 'light'): ?>
+        <?php if ($view_mode == 'light'): ?>
             <link rel="stylesheet" href="/phpets/assets/css/header-light.css" />
         <?php else: ?>
             <link rel="stylesheet" href="/phpets/assets/css/header.css" />
