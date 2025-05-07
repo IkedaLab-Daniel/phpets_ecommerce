@@ -3,7 +3,7 @@
     include ('./includes/db_connect.php');
     session_start();
     
-    // Get the search query from the URL
+    $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
     $query = isset($_GET['q']) ? trim($_GET['q']) : '';
 
     // Fetch products matching the search query and with status 'approved'
@@ -30,7 +30,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Search - <?php echo htmlspecialchars($query); ?></title>
-        <link rel="stylesheet" href="/phpets/assets/css/category.css" >
+        <?php if ($view_mode == 'dark'): ?>
+            <link rel="stylesheet" href="/phpets/assets/css/category.css" >
+            <link rel="stylesheet" href="/phpets/assets/css/index.css" >
+        <?php else: ?>
+            <link rel="stylesheet" href="/phpets/assets/css/category-light.css" >
+            <link rel="stylesheet" href="/phpets/assets/css/index-light.css" >
+        <?php endif ?>
     </head>
 
     <body style="margin-top: 4rem;">
@@ -107,7 +113,11 @@
         <!-- Product Section -->
         <div id="product-section">
             <div class="section-head">
-                <img src="./assets/images/cart-bag.svg" >
+                <?php if ($view_mode == 'dark'): ?>
+                    <img src="./assets/images/cart-bag.svg" >
+                <?php else: ?>
+                    <img src="./assets/images/cart-dark.svg" >
+                <?php endif ?>
                 <h2>Products</h2>
             </div>
             <div class="product-grid">
@@ -129,7 +139,11 @@
                     <?php endwhile; ?>
                 <?php else: ?>
                     <div class="no-item">
-                        <img src="/phpets/assets/images/empty-light.svg" alt="">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/empty-light-2.svg" alt="">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/empty-dark-2.svg" alt="">
+                        <?php endif ?>
                         <p>No items matched your search.</p>
                     </div>
                 <?php endif; ?>
@@ -139,5 +153,8 @@
 </html>
 
 <?php 
-    include ('./includes/cart_modal.php');
+    if ($_SESSION['role'] == 'buyer'){
+        include ("./includes/cart_modal.php");
+    }
+    include ('./includes/view-modal.php');
 ?>
