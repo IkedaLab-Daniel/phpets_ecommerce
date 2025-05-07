@@ -108,12 +108,13 @@ function validatePasswordInput() {
     if (!validatePassword(passwordInput.value.trim())) {
         passwordError.textContent = 'Password must be at least 8 characters long, include an uppercase letter, a number, and a special character.';
         passwordInput.classList.add('error'); // Add error styling
-        btn.disabled = true;
-        btn.classList.add('disable-btn');
-        btn.classList.remove('black-btn');
+        signup.disabled = true;
+        signup.classList.add('disable-btn');
     } else {
+        signup.disabled = false;
         passwordError.textContent = '';
         passwordInput.classList.remove('error'); // Remove error styling
+        signup.classList.remove('disable-btn');
         validatePart1(); // Revalidate the form
     }
 }
