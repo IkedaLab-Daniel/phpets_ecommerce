@@ -83,14 +83,38 @@ function validateEmailInput() {
         emailError.textContent = 'Please enter a valid email address.';
         emailInput.classList.add('error'); 
         btn.disabled = true;
-        btn.classList.add('disable-btn'); // Add the disable-btn class
+        btn.classList.add('disable-btn'); 
         btn.classList.remove('black-btn');
     } else {
         emailError.textContent = '';
         emailInput.classList.remove('error'); 
         btn.disabled = false;
-        btn.classList.remove('disable-btn'); // Remove the disable-btn class
+        btn.classList.remove('disable-btn'); 
         btn.classList.add('black-btn');
+    }
+}
+
+// Function to validate password format
+function validatePassword(password) {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
+}
+
+// Function to validate password input and show feedback
+function validatePasswordInput() {
+    const passwordInput = document.querySelector('input[name="password"]');
+    const passwordError = document.querySelector('.password-error'); // Add a span for error messages
+
+    if (!validatePassword(passwordInput.value.trim())) {
+        passwordError.textContent = 'Password must be at least 8 characters long, include an uppercase letter, a number, and a special character.';
+        passwordInput.classList.add('error'); // Add error styling
+        btn.disabled = true;
+        btn.classList.add('disable-btn');
+        btn.classList.remove('black-btn');
+    } else {
+        passwordError.textContent = '';
+        passwordInput.classList.remove('error'); // Remove error styling
+        validatePart1(); // Revalidate the form
     }
 }
 
@@ -120,3 +144,7 @@ radioChoices.forEach(choice => {
 // Add event listener to validate email on input
 const emailInput = document.querySelector('input[name="email"]');
 emailInput.addEventListener('input', validateEmailInput);
+
+// Add event listener to validate password on input
+const passwordInput = document.querySelector('input[name="password"]');
+passwordInput.addEventListener('input', validatePasswordInput);

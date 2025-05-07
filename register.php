@@ -29,7 +29,7 @@
             $check_stmt->store_result();
 
             if ($check_stmt->num_rows > 0) {
-                echo "<div id='toast-data' data-message=' ❌ Email Already Exist' data-type='error'></div>";
+                echo "<div id='toast-data' data-message=' ❌ Email Alredy exist' data-type='error' data-img='/phpets/hell_nah.png'></div>";
             } else {
                 // Email is unique, proceed with registration
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -149,13 +149,21 @@
                                 id="email" 
                                 name="email" 
                                 placeholder="Enter your email" 
+                                value="<?php echo isset($_POST['last_name']) ? htmlspecialchars($_POST['email']) : ''; ?>" 
                                 required 
                             />
                             <span class="email-error" style="color: red; font-size: 0.9rem;"></span>
                         </div>
                         <div class="signin-part-2 hidden">
                             <label for="password">Password:</label>
-                            <input type="password" id="password" name="password" placeholder="Enter your password" required />
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Enter your password" 
+                                required 
+                            />
+                            <span class="password-error" style="color: red; font-size: 0.9rem;"></span>
 
                             <label for="confirm_password">Confirm Password:</label>
                             <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required />
