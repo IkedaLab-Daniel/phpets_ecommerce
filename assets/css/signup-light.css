@@ -1,12 +1,12 @@
-.login-page{
+.signup-page{
     width: 100vw;
     height: 100vh;
 }
 
-.login-main{
+.signup-main{
     width: 60vw;
     height: auto;
-    background-color: rgb(242, 242, 242);
+    background-color: rgb(243, 243, 243);
     position: fixed;
     top: 50%;
     left: 50%;
@@ -15,20 +15,20 @@
     display: flex;
     justify-content: center;
     overflow: hidden; 
-    box-shadow: 1px 2px 30px 6px rgba(0,0,0,0.5);
+    box-shadow: 1px 2px 15px 6px rgba(0,0,0,0.5);
 }
 
-.login-main .left{
+.signup-main .left{
     width: 50%;
     position: relative; 
-    background-image: url('../images/pexels-peng-louis-587527-1643456.jpg');
+    background-image: url('../images/sign-up-img.jpg');
     background-size: cover;
     background-position: center;
     border-radius: 30px;
     padding: 20px;
 }
 
-.login-main .left .text-content {
+.signup-main .left .text-content {
     position: relative;
     z-index: 2;
     display: flex;
@@ -37,7 +37,7 @@
     height: 100%;
 }
 
-.login-main .left::before {
+.signup-main .left::before {
     content: '';
     position: absolute;
     top: 0;
@@ -49,15 +49,15 @@
     z-index: 1; 
 }
 
-.login-main .left .logo{
+.signup-main .left .logo{
     font-size: 2rem;
 }
 
-.login-main .left .logo img{
+.signup-main .left .logo img{
     width: 2rem;
 }
 
-.login-main .left p{
+.signup-main .left p{
     font-size: 1.5rem;
     text-align: center;
     margin-bottom: 20px;
@@ -87,7 +87,7 @@
     cursor: pointer;
 }
 
-.login-main .right{
+.signup-main .right{
     width: 50%;
     z-index: 2;
     display: flex;
@@ -112,7 +112,7 @@ form h1{
 
 form label{
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-size: 1.2rem;
     color: #202020;
 }
@@ -134,10 +134,11 @@ form input:focus{
     border-color: #000000; /* Optional: Add a custom border color for focus */
 }
 
+
 form .black-btn{
     padding: 12px;
     width: 100%;
-    background-color: rgb(65, 65, 65);
+    background-color: black;
     color: white;
     border: none;
     border-radius: 8px;
@@ -183,7 +184,96 @@ form .white-btn:active{
     transform: scale(98%) translateY(0px);
 }
 
+form .signup-btn{
+    padding: 12px;
+    width: 100%;
+    background-color: #8f99c4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: .4s;
+    margin: 15px 0;
+}
+
+form .signup-btn:hover{
+    cursor: pointer;
+    transform: scale(102%) translateY(-2px);
+}
+
+form .signup-btn:active{
+    cursor: pointer;
+    transform: scale(98%) translateY(0px);
+}
+
+.show{
+    display: block;
+}
+
+.radio-group{
+    display: flex;
+    gap: 20px;
+}
+
+.choice{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;   
+    padding: 5px 25px;
+    border-radius: 8px;
+    border: 2px rgb(42, 42, 42) dashed;
+}
+
+.choice span{
+    font-size: 1.3rem;
+}
+
+.choice input{
+    width: 2rem;
+    margin: 0;
+}
+
+.selected{
+    background-color: #8f99c4;
+    border: 0px white solid;
+    color: white;
+}
+
+.page-indicator{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-indicator img{
+    width: 70px;
+}
+
+.disable-btn{
+    opacity: .4;
+    cursor: not-allowed;
+    padding: 12px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: .4s;
+    display: block;
+    margin: 15px 0;
+}
+
+.disable-btn:hover{
+    opacity: .4;
+    cursor: not-allowed;
+}
+
 .middle p{
     color: white;
-    text-shadow: 2px 2px 5px rgba(26, 26, 26, 0.8);
+    text-shadow: 2px 2px 5px rgba(26, 26, 26, 0.8); 
 }
