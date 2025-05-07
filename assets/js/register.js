@@ -68,6 +68,33 @@ function handleRadioSelection(event) {
     }
 }
 
+// Function to validate email format
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
+    return emailRegex.test(email);
+}
+
+// Function to validate email input and show feedback
+function validateEmailInput() {
+    const emailInput = document.querySelector('input[name="email"]');
+    const emailError = document.querySelector('.email-error'); 
+
+    if (!validateEmail(emailInput.value.trim())) {
+        emailError.textContent = 'Please enter a valid email address.';
+        emailInput.classList.add('error'); 
+        btn.disabled = true;
+        btn.classList.add('disable-btn'); // Add the disable-btn class
+        btn.classList.remove('black-btn');
+    } else {
+        emailError.textContent = '';
+        emailInput.classList.remove('error'); 
+        btn.disabled = false;
+        btn.classList.remove('disable-btn'); // Remove the disable-btn class
+        btn.classList.add('black-btn');
+    }
+}
+
+
 // Initial page setup
 updatePage();
 
@@ -89,3 +116,7 @@ radioChoices.forEach(choice => {
         radioInput.addEventListener('change', handleRadioSelection);
     }
 });
+
+// Add event listener to validate email on input
+const emailInput = document.querySelector('input[name="email"]');
+emailInput.addEventListener('input', validateEmailInput);

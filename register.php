@@ -115,16 +115,43 @@
                         </div>
                         <div class="signin-part-1">
                             <label for="first_name">First Name:</label>
-                            <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required />
+                            <input 
+                                type="text" 
+                                id="first_name" 
+                                name="first_name" 
+                                placeholder="Enter your first name" 
+                                value="<?php echo isset($_POST['first_name']) ? htmlspecialchars($_POST['first_name']) : ''; ?>" 
+                                required 
+                            />
 
                             <label for="middle_name">Middle Name:</label>
-                            <input type="text" id="middle_name" name="middle_name" placeholder="Enter your middle name (optional)" />
+                            <input 
+                                type="text" 
+                                id="middle_name" 
+                                name="middle_name" 
+                                placeholder="Enter your middle name (optional)" 
+                                value="<?php echo isset($_POST['middle_name']) ? htmlspecialchars($_POST['middle_name']) : ''; ?>" 
+                            />
 
                             <label for="last_name">Last Name:</label>
-                            <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" />
+                            <input 
+                                type="text" 
+                                id="last_name" 
+                                name="last_name" 
+                                placeholder="Enter your last name" 
+                                value="<?php echo isset($_POST['last_name']) ? htmlspecialchars($_POST['last_name']) : ''; ?>" 
+                                required 
+                            />
 
                             <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                placeholder="Enter your email" 
+                                required 
+                            />
+                            <span class="email-error" style="color: red; font-size: 0.9rem;"></span>
                         </div>
                         <div class="signin-part-2 hidden">
                             <label for="password">Password:</label>
@@ -134,18 +161,33 @@
                             <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required />
 
                             <label for="address">Address:</label>
-                            <input type="tex" name="address" placeholder="Street, Barangay, Municipal, Province">
+                            <input 
+                                type="text" 
+                                name="address" 
+                                placeholder="Street, Barangay, Municipal, Province" 
+                                value="<?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address']) : ''; ?>" 
+                            />
 
                             <div class="radio-group">
-                                <div class="choice selected">
-                                    <input type="radio" name="account_type" value="buyer" checked required />
+                                <div class="choice <?php echo (isset($_POST['account_type']) && $_POST['account_type'] === 'buyer') ? 'selected' : ''; ?>">
+                                    <input 
+                                        type="radio" 
+                                        name="account_type" 
+                                        value="buyer" 
+                                        <?php echo (isset($_POST['account_type']) && $_POST['account_type'] === 'buyer') ? 'checked' : ''; ?> 
+                                        required 
+                                    />
                                     <span> Buyer</span>
-                                    <span></span>
                                 </div>
-                                <div class="choice ">
-                                    <input type="radio" name="account_type" value="seller" required />
+                                <div class="choice <?php echo (isset($_POST['account_type']) && $_POST['account_type'] === 'seller') ? 'selected' : ''; ?>">
+                                    <input 
+                                        type="radio" 
+                                        name="account_type" 
+                                        value="seller" 
+                                        <?php echo (isset($_POST['account_type']) && $_POST['account_type'] === 'seller') ? 'checked' : ''; ?> 
+                                        required 
+                                    />
                                     <span> Seller</span>
-                                    <span></span>
                                 </div>
                             </div>
                         </div>
