@@ -3,6 +3,7 @@
     include ('./includes/db_connect.php');
     session_start();
     
+    $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
     $category = $_GET['q'];
 
     // * Map category query to their actual value
@@ -44,7 +45,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Category - <?php echo htmlspecialchars($category_display_name); ?></title>
-        <link rel="stylesheet" href="/phpets/assets/css/category.css" >
+        <?php if ($view_mode == 'dark'): ?>
+            <link rel="stylesheet" href="/phpets/assets/css/category.css" >
+            <link rel="stylesheet" href="/phpets/assets/css/index.css" >
+        <?php else: ?>
+            <link rel="stylesheet" href="/phpets/assets/css/category-light.css" >
+            <link rel="stylesheet" href="/phpets/assets/css/index-light.css" >
+        <?php endif ?>
     </head>
 
     <body style="margin-top: 4rem;">
@@ -54,7 +61,7 @@
                     <h1><?php echo "$category_display_name"; ?></h1>
                     <div>
                         <?php if ($total_products > 0): ?>
-                            <p><b><?php echo $total_products; ?> <?php echo "$category_display_name"; ?> for your pet!</b></p>
+                            <p><?php echo $total_products; ?> <?php echo "$category_display_name"; ?> for your pet!</p>
                         <?php else: ?>
                             <p><b>No item yet</b></p>
                         <?php endif ?>
@@ -109,7 +116,11 @@
                                 <span>Clothes</span>
                             </a>
                             <a href="/phpets/category.php?q=8" class="div8 category-btn bottom-right">
+                                <?php if ($view_mode == 'dark'): ?>
                                 <img src="./assets/images/others.svg" alt="Others">
+                                <?php else: ?>
+                                    <img src="./assets/images/others-dark.svg" width="20px" alt="Others">
+                                <?php endif ?>
                                 <span>Others</span>
                             </a>
                         </div>
@@ -121,7 +132,11 @@
          <!-- Product Section -->
          <div id="product-section">
             <div class="section-head">
-                <img src="./assets/images/cart-bag.svg" >
+                <?php if ($view_mode == 'dark'): ?>
+                    <img src="./assets/images/cart-bag.svg" >
+                <?php else: ?>
+                    <img src="./assets/images/cart-dark.svg" >
+                <?php endif ?>
                 <h2>Products</h2>
             </div>
             <div class="product-grid">
@@ -143,7 +158,11 @@
                     <?php endwhile; ?>
                 <?php else: ?>
                     <div class="no-item">
-                        <img src="/phpets/assets/images/empty-light.svg" alt="">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/empty-light-2.svg" alt="">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/empty-dark-2.svg" alt="">
+                        <?php endif ?>
                         <p>No products found in this category.</p>
                     </div>
                     
@@ -154,5 +173,8 @@
 </html>
 
 <?php 
-    include ('./includes/cart_modal.php');
+    if ($_SESSION['role'] == 'buyer'){
+        include ("./includes/cart_modal.php");
+    }
+    include ('./includes/view-modal.php');
 ?>
