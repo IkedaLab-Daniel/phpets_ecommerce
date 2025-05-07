@@ -2,6 +2,9 @@
     session_start();
     include '../includes/db_connect.php';
     include '../includes/header.php';
+
+    $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
+
     if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'seller') {
         header("Location: ../login.php");
         exit();
@@ -195,7 +198,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <?php if ($_SESSION['view'] == 'light'): ?>
+        <?php if ($view_mode == 'light'): ?>
             <link rel="stylesheet" href="/phpets/assets/css/seller-light.css" />
             <link rel="stylesheet" href="/phpets/assets/css/index-light.css" />
         <?php else: ?>
@@ -420,7 +423,5 @@
 </html>
 
 <?php 
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    include ('../includes/view-modal.php');
 ?>
