@@ -21,9 +21,9 @@
         <title>PHPets</title>
         <link rel="icon" type="image/svg" href="/phpets/assets/images/paw.svg" />
         <?php if ($view_mode === 'light'): ?>
-            <link rel="stylesheet" href="assets/css/index-light.css">
+            <link rel="stylesheet" href="/phpets/assets/css/index-light.css">
         <?php else: ?>
-            <link rel="stylesheet" href="assets/css/index.css">
+            <link rel="stylesheet" href="/phpets/assets/css/index.css">
         <?php endif ?>
         <link rel="icon" type="image/svg" href="./assets/images/paw.svg" />
     </head>

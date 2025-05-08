@@ -63,7 +63,7 @@
                         <?php if ($total_products > 0): ?>
                             <p><?php echo $total_products; ?> <?php echo "$category_display_name"; ?> for your pet!</p>
                         <?php else: ?>
-                            <p><b>No item yet</b></p>
+                            <p>No item yet</p>
                         <?php endif ?>
                     </div>
                     <div class="hero-btn-container">

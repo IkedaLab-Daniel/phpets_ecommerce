@@ -190,6 +190,10 @@ main{
     gap: 10px;
 }
 
+.categories-btn span{
+    color: black;
+}
+
 .cool-btn{
     transition: .4s;
 }
@@ -424,6 +428,11 @@ main{
 .bold-text{
     color: white;
     font-weight: 600;
+}
+
+.white{
+    color: black;
+    text-shadow: 0px 0px 0px white;
 }
 
 @keyframes fadein {

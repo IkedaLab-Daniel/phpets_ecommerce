@@ -23,7 +23,7 @@
     <body>
         <a  class="cart-modal" href="/phpets/buyer/buyer.php">
             <div class="cart-count">
-                <span><?php echo $total_items; ?></span>
+                <span class="num"><?php echo $total_items; ?></span>
             </div>
             
             <img src="/phpets/assets/images/cart-black.svg" > 

@@ -9,6 +9,8 @@
     }
 
     $product_id = intval($_GET['id']);
+    $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
+
 
     // Fetch product details
     $product_sql = "SELECT p.*, u.first_name, u.last_name, u.profile_photo, c.name AS category_name 
@@ -179,7 +181,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/svg" href="./assets/images/paw.svg" />
-        <link rel="stylesheet" href="assets/css/view_product.css">
+        <?php if ($view_mode == 'dark'): ?>
+            <link rel="stylesheet" href="assets/css/view_product.css">
+        <?php else: ?>
+            <link rel="stylesheet" href="assets/css/view_product-light.css">
+            <link rel="stylesheet" href="assets/css/index-light.css">
+        <?php endif ?>
         <title><?php echo htmlspecialchars($product['name']); ?> | Product Detail</title>
 
     </head>
@@ -339,10 +346,10 @@
 </html>
 
 <?php 
-    include('./includes/error_catch.php');
     if ($_SESSION['role'] == 'buyer'){
         include ("./includes/cart_modal.php");
     }
+    include ('./includes/view-modal.php');
 ?>
 
 <script>
