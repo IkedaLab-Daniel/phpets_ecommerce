@@ -2,6 +2,8 @@
     include '../includes/header.php';
     session_start();
 
+    $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
+
     // ? Check if the session contains checkout data
     if (!isset($_SESSION['checkout_product']) && !isset($_SESSION['checkout_items'])) {
         header("Location: /phpets/index.php");
@@ -22,6 +24,7 @@
         'last_name' => $_SESSION['last_name'],
         'email' => $_SESSION['email'],
         'address' => $_SESSION['address'],
+        'contact_number' => $_SESSION['contact_number'],
     ];
 
     // ? calculate total price
@@ -36,14 +39,23 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/phpets/assets/css/checkout.css">
+        <?php if ($view_mode == 'dark'): ?>
+            <link rel="stylesheet" href="/phpets/assets/css/checkout.css">
+        <?php else: ?>
+            <link rel="stylesheet" href="/phpets/assets/css/checkout-light.css">
+            <link rel="stylesheet" href="/phpets/assets/css/index-light.css">
+        <?php endif ?>
         <title>Checkout</title>
     </head>
     <body>
         <div id="checkout-page">
             <div class="checkout-container">
                 <div class="heading">
-                    <img src="/phpets/assets/images/credit-card.svg" >
+                    <?php if ($view_mode == 'dark'): ?>
+                        <img src="/phpets/assets/images/credit-card.svg" >
+                    <?php else: ?>
+                        <img src="/phpets/assets/images/credit-card-dark.svg" >
+                    <?php endif ?>
                     <h2>Checkout</h2>
                 </div>
                 
@@ -73,19 +85,24 @@
 
                 <div class="user-info">
                     <div class="user-wrapper">
-                        <img src="/phpets/assets/images/user.svg" alt="">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/user.svg" alt="">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/user-dark.svg" alt="">
+                        <?php endif ?>
                         <h3>Shipping Information</h3>
                     </div>
                     
                     <p><strong>Buyer:</strong> <?php echo htmlspecialchars($user_info['first_name'] . ' ' . $user_info['middle_name'] . ' ' . $user_info['last_name']); ?></p>
                     <p><strong>Email:</strong> <?php echo htmlspecialchars($user_info['email']); ?></p>
                     <p><strong>Address:</strong> <?php echo htmlspecialchars($user_info['address']); ?></p>
+                    <p><strong>Contact Number:</strong> <?php echo htmlspecialchars($user_info['contact_number']); ?></p>
                     <p class="cod">Cash on Delivery</p>
                     <a href="/phpets/buyer/buyer.php#edit-profile" class="edit-info">Edit Info</a>
                 </div>
                 
                 <div class="btn-container">
-                    <a href="/phpets/buyer/buyer.php#edit-profile" class="edit-btn cool-btn">Edit Info</a>
+                    <a href="/phpets/buyer/buyer.php" class="edit-btn cool-btn">Back</a>
                     <form method="POST" action="process_checkout.php">
                         <button class="confirm-btn cool-btn" type="submit" name="confirm_checkout" class="checkout-btn">Confirm Checkout</button>
                     </form>
@@ -96,3 +113,7 @@
         </div>
     </body>
 </html>
+
+<?php 
+    include ('../includes/view-modal.php');
+?>
