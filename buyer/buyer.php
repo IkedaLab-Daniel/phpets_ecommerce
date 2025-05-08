@@ -287,19 +287,31 @@
                 
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="#cart-details">
-                        <img src="/phpets/assets/images/cart-bag.svg">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/cart-bag.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/cart-dark.svg">
+                        <?php endif ?>
                         <span>My Cart</span>
                     </a>
                 </div>
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="#purchased-details">
-                        <img src="/phpets/assets/images/purchase.svg">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/purchase.svg">
+                        <?php else: ?>    
+                            <img src="/phpets/assets/images/orders-dark.svg">
+                        <?php endif ?>
                         <span>Purchased</span>
                     </a>
                 </div>
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="#all-transactions">
-                        <img src="/phpets/assets/images/transaction.svg">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/transaction.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/transaction-dark.svg">
+                        <?php endif ?>
                         <span>My Orders</span>
                     </a>
                 </div>
@@ -319,7 +331,11 @@
             <div class="right">
                 <div id="cart-details">
                     <div class="heading" style="margin-top: 10px;">
-                        <img src="/phpets/assets/images/cart-bag.svg" alt="">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/cart-bag.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/cart-dark.svg">
+                        <?php endif ?>
                         <h2>My Cart</h2>
                     </div>
                     
@@ -363,7 +379,11 @@
 
                 <div id="purchased-details">
                     <div class="heading">
-                        <img src="/phpets/assets/images/purchase.svg" alt="">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/purchase.svg">
+                        <?php else: ?>    
+                            <img src="/phpets/assets/images/orders-dark.svg">
+                        <?php endif ?>
                         <h2>Purchased</h2>
                     </div>
                     <?php while ($order = mysqli_fetch_assoc($purchased_result)): ?>
