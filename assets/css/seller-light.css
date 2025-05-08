@@ -19,10 +19,11 @@
 #seller .left .user-details{
     width: 100%;
     height: auto;
-    background-color: #c6c7c0;
+    background-color: #f4f4f4;
     border-radius: 12px;
     padding: 20px;
     animation: fadein-left 1s ease forwards;
+    box-shadow: 0px 0px 8px 6px rgba(0,0,0,0.3);
 }
 
 #seller .left .animate-fadein-left{
@@ -33,16 +34,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #c6c7c0;
+    background-color: #f4f4f4;
     border-radius: 12px;
     padding: 20px;
     gap: 10px;
     transition: .4s;
+    box-shadow: 0px 0px 6px 4px rgba(0,0,0,0.3);
 }
 
 #seller .left .link-navs:hover{
     transform: translateY(-3px) scale(105%);
-    background-color: #cbccc7;
+    background-color: #e4e4e4;
 }
 
 
@@ -58,11 +60,12 @@
 #seller .right{
     width: 80vw;
     height: auto;
-    background-color: #c0c3b2;
+    background-color: #f4f4f4;
     border-radius: 12px;
     padding: 20px;
     animation: fadein-top 1s ease forwards;
     margin-left: 21%;
+    box-shadow: 0px 0px 6px 4px rgba(0,0,0,0.3);
 }
 
 .user-details{
@@ -609,7 +612,7 @@ form input{
     padding: 10px;
     margin-bottom: 20px;
     color: rgb(40, 40, 40);
-    background-color: rgb(224, 224, 224);
+    background-color: rgb(236, 236, 236);
     outline: none;
 }
 

@@ -2,9 +2,8 @@
     include ('../includes/header.php');
     include ('../includes/db_connect.php');
     session_start();
-    if (isset($_SESSION['view'])){
-        $_SESSION['view'] == 'light';
-    }
+
+    $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +11,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <?php if ($_SESSION['view'] == 'light'): ?>
+        <?php if ($view_mode == 'light'): ?>
             <link rel="stylesheet" href="../assets/css/add-product-light.css">
             <link rel="stylesheet" href="../assets/css/index-light.css">
         <?php else: ?>
@@ -75,3 +74,7 @@
         </div>    
     </body>
 </html>
+
+<?php 
+    include ('../includes/view-modal.php');
+?>

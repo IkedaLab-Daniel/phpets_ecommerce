@@ -221,19 +221,31 @@
 
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="add-order.php">
-                        <img src="/phpets/assets/images/add.svg">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/add.svg" alt="">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/add-dark.svg" alt="">
+                        <?php endif ?>
                         <span>Add Product</span>
                     </a>
                 </div>
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="#cart-details">
-                        <img src="/phpets/assets/images/cart-bag.svg">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/cart-bag.svg" alt="">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/cart-dark.svg" alt="">
+                        <?php endif ?>
                         <span>My Listings</span>
                     </a>
                 </div>
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="#purchased-details">
-                        <img src="/phpets/assets/images/purchase.svg">
+                        <?php if ($view_mode == 'dark'): ?>
+                           <img src="/phpets/assets/images/purchase.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/orders-dark.svg" alt="">
+                        <?php endif ?>   
                         <span>Orders</span>
                     </a>
                 </div>
@@ -251,21 +263,33 @@
                 <div class="dashboard">
                     <div id="total-sales" class="data-card">
                         <div class="heading-2">
-                            <img src="/phpets/assets/images/earning.svg" alt="">
+                            <?php if ($view_mode == 'dark'): ?>
+                                <img src="/phpets/assets/images/earning.svg" alt="">
+                            <?php else: ?>
+                                <img src="/phpets/assets/images/earning-dark.svg" alt="">
+                            <?php endif ?>
                             <h2>Total Sales</h2>
                         </div>
                         <p class="strong">₱<?php echo number_format($total_earnings, 2); ?></p>
                     </div>
                     <div id="total-orders" class="data-card">
                         <div class="heading-2">
-                            <img src="/phpets/assets/images/transaction.svg" alt="">
+                            <?php if ($view_mode == 'dark'): ?>
+                                <img src="/phpets/assets/images/transaction.svg" alt="">
+                            <?php else: ?>
+                                <img src="/phpets/assets/images/transaction-dark.svg" alt="">
+                            <?php endif ?>
                             <h2>Total Orders</h2>
                         </div>
                         <p class="strong"><?php echo $total_orders; ?></p>
                     </div>
                     <div id="total-products" class="data-card">
                         <div class="heading-2">
-                            <img src="/phpets/assets/images/cart-bag.svg" alt="">
+                            <?php if ($view_mode == 'dark'): ?>
+                                <img src="/phpets/assets/images/cart-bar.svg" alt="">
+                            <?php else: ?>
+                                <img src="/phpets/assets/images/cart-dark.svg" alt="">
+                            <?php endif ?>
                             <h2>Total Products</h2>
                         </div>
                         <div class="wrapper">
@@ -278,7 +302,11 @@
                 
                 <div id="cart-details">
                     <div class="heading" style="margin-top: 10px;">
-                        <img src="/phpets/assets/images/cart-bag.svg" alt="">
+                         <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/cart-bar.svg" alt="">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/cart-dark.svg" alt="">
+                        <?php endif ?>
                         <h2>My Listings</h2>
                     </div>
                     <div class="list-table-content">
@@ -308,7 +336,11 @@
                 
                 <div id="purchased-details">
                     <div class="heading">
-                        <img src="/phpets/assets/images/purchase.svg" alt="">
+                        <?php if ($view_mode == 'dark'): ?>
+                           <img src="/phpets/assets/images/purchase.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/orders-dark.svg" alt="">
+                        <?php endif ?>   
                         <h2>Orders</h2>
                     </div>
                     <?php if ($orders_result->num_rows > 0): ?>

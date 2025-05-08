@@ -46,13 +46,13 @@
                     <h1 style="font-size: 2.5rem;">Search "<?php echo htmlspecialchars($query); ?>"</h1>
                     <div>
                         <?php if ($total_products > 0): ?>
-                            <p><b><?php echo $total_products; ?> result(s) found for "<?php echo htmlspecialchars($query); ?>"</b></p>
+                            <p><?php echo $total_products; ?> result(s) found for "<?php echo htmlspecialchars($query); ?>"</p>
                         <?php else: ?>
                             <p><b>No items found for "<?php echo htmlspecialchars($query); ?>"</b></p>
                         <?php endif ?>
                     </div>
                     <div class="hero-btn-container">
-                        <a href="/phpets/index.php#categories-scroll" class="categories-btn long-btn">
+                        <a href="/phpets/index.php" class="categories-btn long-btn">
                             <img src="/phpets/assets/images/back-dark.svg" alt="">
                             <span>Back</span>
                         </a>
@@ -101,7 +101,11 @@
                                 <span>Clothes</span>
                             </a>
                             <a href="/phpets/category.php?q=8" class="div8 category-btn bottom-right">
+                                <?php if ($view_mode == 'dark'): ?>
                                 <img src="./assets/images/others.svg" alt="Others">
+                                <?php else: ?>
+                                    <img src="./assets/images/others-dark.svg" width="20px" alt="Others">
+                                <?php endif ?>
                                 <span>Others</span>
                             </a>
                         </div>

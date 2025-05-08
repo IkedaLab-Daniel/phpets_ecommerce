@@ -1,16 +1,17 @@
 #add-product{
-    margin-top: 5rem;
+    padding-top: 6rem;
+    height: 100vh;
 }
 
 .add-product-main{
-    background-color: #d4d4d4;
+    background-color: #f4f4f4;
     width: 50%;
     min-width: 600px;
     height: auto;
     margin: auto;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 20px 6px rgba(0,0,0,0.3);
 }
 
 .add-product-main h2{
@@ -62,7 +63,7 @@ textarea{
 
 .btn-container .back{
     background-color: #ffffff00;
-    border: 2px solid rgb(24, 24, 24);
+    border: 1.5px solid rgb(24, 24, 24);
     color: rgb(31, 31, 31);
     border-radius: 8px;
     width: 50%;
