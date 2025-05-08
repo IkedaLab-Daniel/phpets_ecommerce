@@ -3,6 +3,8 @@
     include '../includes/header.php';
     session_start();
 
+    $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
+
     if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
         header("Location: ../login.php");
         exit();
@@ -140,7 +142,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/phpets/assets/css/admin.css" />
+        <?php if ($view_mode == 'dark'): ?>
+            <link rel="stylesheet" href="/phpets/assets/css/admin.css" />
+            <link rel="stylesheet" href="/phpets/assets/css/index.css" />
+        <?php else: ?>
+            <link rel="stylesheet" href="/phpets/assets/css/admin-light.css" />
+            <link rel="stylesheet" href="/phpets/assets/css/index-light.css" />
+        <?php endif ?>
         <title>Admin Pannel</title>
     </head>
 
@@ -162,20 +170,32 @@
 
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="#accounts">
-                        <img src="/phpets/assets/images/user.svg">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/user.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/user-dark.svg">
+                        <?php endif ?>
                         <span>Accounts</span>
                     </a>
                 </div>
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="#products">
-                        <img src="/phpets/assets/images/cart-bag.svg">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/cart-bag.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/cart-dark.svg">
+                        <?php endif ?>
                         <span>Products</span>
                     </a>
                 </div>
 
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="#edit-profile">
-                        <img src="/phpets/assets/images/edit-profile.svg">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/edit-profile.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/edit-profile-dark.svg">
+                        <?php endif ?>
                         <span>Edit Profile</span>
                     </a>
                 </div>                
@@ -185,7 +205,11 @@
                 <div class="dashboard">
                     <div id="total-accounts" class="data-card">
                         <div class="heading-2">
-                            <img src="/phpets/assets/images/user.svg">
+                            <?php if ($view_mode == 'dark'): ?>
+                                <img src="/phpets/assets/images/user.svg">
+                            <?php else: ?>
+                                <img src="/phpets/assets/images/user-dark.svg">
+                            <?php endif ?>
                             <h2>Total Accounts</h2>
                         </div>
                         <p class="strong"><?php echo $total_users; ?></p>
@@ -196,14 +220,22 @@
                     </div>
                     <div id="total-products" class="data-card">
                         <div class="heading-2">
-                            <img src="/phpets/assets/images/cart-bag.svg">
+                            <?php if ($view_mode == 'dark'): ?>
+                                <img src="/phpets/assets/images/cart-bag.svg">
+                            <?php else: ?>
+                                <img src="/phpets/assets/images/cart-dark.svg">
+                            <?php endif ?>
                             <h2>Total Products</h2>
                         </div>
                         <p class="strong"><?php echo $total_products; ?></p>
                     </div>
                     <div id="total-transactions" class="data-card">
                         <div class="heading-2">
-                            <img src="/phpets/assets/images/transaction.svg">
+                            <?php if ($view_mode == 'dark'): ?>
+                                <img src="/phpets/assets/images/transaction.svg">
+                            <?php else: ?>
+                               <img src="/phpets/assets/images/transaction-dark.svg">
+                            <?php endif ?>
                             <h2>Transactions</h2>
                         </div>
                         <p class="strong"><?php echo $total_orders; ?></p>
@@ -212,7 +244,11 @@
                 
                 <div id="accounts">
                     <div class="heading">
-                        <img src="/phpets/assets/images/user.svg" alt="">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/user.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/user-dark.svg">
+                        <?php endif ?>
                         <h2>All Accounts</h2>
                     </div>
                     <div class="list-table-content">
@@ -263,7 +299,11 @@
 
                 <div id="products">
                     <div class="heading" style="margin-top: 10px;">
-                        <img src="/phpets/assets/images/cart-bag.svg" alt="">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/cart-bag.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/cart-dark.svg">
+                        <?php endif ?>
                         <h2>All Products</h2>
                     </div>
                     <div class="list-table-content">
@@ -320,7 +360,11 @@
 
                 <div id="edit-profile" style="margin-top: 40px">
                     <div class="heading mb-20">
-                        <img src="/phpets/assets/images/edit-profile.svg" alt="">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/edit-profile.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/edit-profile-dark.svg">
+                        <?php endif ?>
                         <h2>Edit Profile</h2>
                     </div>
                     <form action="" method="POST">
@@ -354,6 +398,6 @@
     </body>
 </html>
 
-<?php
-    include '../includes/error_catch.php';
+<?php 
+    include ('../includes/view-modal.php');
 ?>

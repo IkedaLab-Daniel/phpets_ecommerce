@@ -305,7 +305,11 @@
                 </div>
                 <div class="animate-fadein-left">
                     <a class="link-navs" href="#edit-profile">
-                        <img src="/phpets/assets/images/edit-profile.svg">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/edit-profile.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/edit-profile-dark.svg">
+                        <?php endif ?>
                         <span>Edit Profile</span>
                     </a>
                 </div>
@@ -472,7 +476,11 @@
 
                 <div id="edit-profile" style="margin-top: 40px">
                     <div class="heading mb-20">
-                        <img src="/phpets/assets/images/edit-profile.svg" alt="">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/edit-profile.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/edit-profile-dark.svg">
+                        <?php endif ?>
                         <h2>Edit Profile</h2>
                     </div>
                     <form action="" method="POST">

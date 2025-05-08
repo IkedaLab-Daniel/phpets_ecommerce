@@ -618,7 +618,7 @@ form input{
 
 form input:focus{
     outline: none; 
-    border-color: #8892BF; 
+    border-color: #000000; 
 }
 
 .mb-20{
@@ -745,7 +745,7 @@ form input:focus{
 
 .dashboard{
     display: flex;
-    gap: 10px;
+    gap: 30px;
     justify-content: center;
 }
 
