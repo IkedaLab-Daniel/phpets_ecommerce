@@ -1,6 +1,4 @@
 <?php
-    // ! include './db_connect.php';    throws error, pero ok lang since connected naman mga components na sasalihan
-
     $buyer_id = $_SESSION['user_id'] ?? null;
     $total_items = 0;
 

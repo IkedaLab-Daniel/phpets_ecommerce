@@ -1,13 +1,20 @@
 <?php
     include ('../includes/header.php');
     $status = $_GET['status'] ?? 0;
+
+    $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
 ?>
 
 <!DOCTYPE html>
 <html>
     <head>
         <title>Checkout Result</title>
-        <link rel="stylesheet" href="/phpets/assets/css/checkout.css">
+        <?php if ($view_mode == 'dark'): ?>
+            <link rel="stylesheet" href="/phpets/assets/css/checkout.css">
+        <?php else: ?>
+            <link rel="stylesheet" href="/phpets/assets/css/checkout-light.css">
+            <link rel="stylesheet" href="/phpets/assets/css/index-light.css">
+        <?php endif ?>
     </head>
     <body>
         <div id="checkout-result">
@@ -30,3 +37,7 @@
         
     </body>
 </html>
+
+<?php 
+    include ('../includes/view-modal.php');
+?>

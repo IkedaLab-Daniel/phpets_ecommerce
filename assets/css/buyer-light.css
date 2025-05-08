@@ -502,7 +502,7 @@ form input:focus{
 .empty-cart-message{
     text-align: center;
     padding: 10px;
-    background-color: #bfc0bb;
+    background-color: #f4f4f4;
     font-size: 1.4rem;
 }
 
