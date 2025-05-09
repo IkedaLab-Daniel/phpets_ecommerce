@@ -1,5 +1,9 @@
-<?php
+<?php   
+    include ('./includes/db_connect.php');
     include ('./includes/header.php');
+    session_start();
+    $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
+    echo "<script> console.log('upper loaded'); </script>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +11,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/svg" href="./assets/images/paw.svg" />
-        <link rel="stylesheet" href="assets/css/about.css">
+        <?php if ($view_mode == 'dark'): ?>
+            <link rel="stylesheet" href="assets/css/about.css">
+        <?php else: ?>   
+            <link rel="stylesheet" href="assets/css/about-light.css">
+            <link rel="stylesheet" href="assets/css/index-light.css">
+        <?php endif ?>
         <title>About</title>
     </head>
 
@@ -30,7 +39,11 @@
             </div>    
             <div id="developers">
                 <div class="section-head">
-                    <img src="./assets/images/code.svg" >
+                    <?php if ($view_mode == 'dark'): ?>
+                        <img src="./assets/images/code.svg" >
+                    <?php else: ?>
+                        <img src="./assets/images/code-dark.svg" >
+                    <?php endif ?>
                     <h2>Developers</h2>
                 </div>
                 <div class="devs-card-container">
@@ -57,7 +70,7 @@
                     </div>
 
                     <!-- Brix -->
-                    <div class="dev-card brix">
+                    <!-- <div class="dev-card brix">
                         <div class="dev-img-container">
                             <img src="./assets/images/brix.jpeg" alt="">
                         </div>
@@ -75,7 +88,7 @@
                         </div>
                     </div>
 
-                    <!-- Alvin -->
+                    
                     <div class="dev-card alvin">
                         <div class="dev-img-container">
                             <img src="./assets/images/alvin.jpg" alt="">
@@ -91,8 +104,16 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
     </body>
 </html>
+
+<?php 
+    if ($_SESSION['role'] == 'buyer'){
+        include ("./includes/cart_modal.php");
+    }
+    include ("./includes/view-modal.php");
+    echo "<script> console.log('working'); </script>";
+?>

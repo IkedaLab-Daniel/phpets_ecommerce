@@ -152,9 +152,16 @@
         $stmt->bind_param("iiis", $buyer_id, $product_id, $rating, $comment);
 
         if ($stmt->execute()) {
-            echo "<p>Review added successfully!</p>";
+            echo "<div class = 'added-to-cart'>
+                <img class = 'check' src='/phpets/assets/images/green-check.svg' width = '30'>
+                <p>Review added successfully!</p>
+                <img class = 'cat' src='/phpets/assets/images/happy-cat.gif' width = '50'>
+            </div>";
         } else {
-            echo "<p>Failed to add review. Please try again.</p>";
+            echo "<div class = 'added-to-cart'>
+                    <img class = 'error' src='/phpets/assets/images/green-check.svg' width = '30'>
+                    <p>Failed to review.</p>
+            </div>";
         }
     }
 
@@ -168,9 +175,16 @@
         $stmt->bind_param("isii", $rating, $comment, $buyer_id, $product_id);
 
         if ($stmt->execute()) {
-            echo "<p>Review updated successfully!</p>";
+            echo "<div class = 'added-to-cart'>
+                    <img class = 'check' src='/phpets/assets/images/green-check.svg' width = '30'>
+                    <p>Review edited successfully!</p>
+                    <img class = 'cat' src='/phpets/assets/images/happy-cat.gif' width = '50'>
+                </div>";
         } else {
-            echo "<p>Failed to update review. Please try again.</p>";
+            echo "<div class = 'added-to-cart'>
+                    <img class = 'check' src='/phpets/assets/images/green-check.svg' width = '30'>
+                    <p>Failed to update. Try again.</p>
+            </div>";
         }
     }
 ?>
@@ -194,11 +208,19 @@
         <div class="single-item-view">
             <div class="mini-nav">
                 <div class="left">
-                    <img src="/phpets/assets/images/detail.svg" alt="">
+                    <?php if ($view_mode == 'dark'): ?>
+                        <img src="/phpets/assets/images/detail.svg" alt="">
+                    <?php else: ?>
+                        <img src="/phpets/assets/images/menu-dark.svg" alt="">
+                    <?php endif ?>
                      <h3>Product Details</h3>
                 </div>
                 <a href="/phpets/index.php#product-section" class="right">
-                    <img src="/phpets/assets/images/back2.svg" alt="">
+                    <?php if ($view_mode == 'dark'): ?>
+                        <img src="/phpets/assets/images/back2.svg" alt="">
+                        <?php else: ?>
+                        <img src="/phpets/assets/images/back2-dark.svg" alt="">
+                    <?php endif ?>
                     <span>Back</span>
                 </a>
                 
@@ -252,7 +274,11 @@
         <div id="add-edit-review">
             <?php if ($has_purchased): ?>
                 <div class="icon-text" style="justify-content: left;">
-                    <img src="/phpets/assets/images/write.svg" >
+                    <?php if ($view_mode == 'dark'): ?>
+                        <img src="/phpets/assets/images/write.svg" >
+                    <?php else: ?>
+                        <img src="/phpets/assets/images/write-dark.svg" >
+                    <?php endif ?>
                     <h3><?php echo $existing_review ? "Edit Your Review" : "Add a Review"; ?></h3>
                 </div>
                 <form method="POST" action="">
@@ -307,7 +333,11 @@
         <div id="reviews">
             <div class="header">
                 <div class="icon-text">
-                    <img src="/phpets/assets/images/reviews.svg" alt="">
+                    <?php if ($view_mode == 'dark'): ?>
+                        <img src="/phpets/assets/images/reviews.svg" alt="">
+                    <?php else: ?>
+                        <img src="/phpets/assets/images/reviews-dark.svg" alt="">
+                    <?php endif ?>
                     <h3>Customer Reviews</h3>
                 </div>
                 
