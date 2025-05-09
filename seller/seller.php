@@ -321,7 +321,13 @@
                                     <span class="category-tag"> <?php echo htmlspecialchars($product['category_name']); ?></span>
                                     <div class="product-card-detail">
                                         <h3><?php echo htmlspecialchars($product['name']); ?></h3>
-                                        <p> <?php echo htmlspecialchars($product['description']); ?></p>
+                                        <p>
+                                            <?php 
+                                                echo htmlspecialchars(mb_strlen($product['description']) > 50 
+                                                    ? mb_substr($product['description'], 0, 50) . '...' 
+                                                    : $product['description']); 
+                                            ?>
+                                        </p>
                                         <p>Stock: <?php echo $product['stock']; ?> pcs</p>
                                         <p>₱<?php echo number_format($product['price'], 2); ?></p>
                                         <p class="<?php echo ($product['status']); ?> status"> <?php echo ucfirst($product['status']); ?></p>
