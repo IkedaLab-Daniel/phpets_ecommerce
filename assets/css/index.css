@@ -400,9 +400,6 @@ main{
     width: 100%;
 }
 
-
-
-
 @keyframes fadein {
     from { opacity: 0; right: 0; }
     to { opacity: 1; right: 20px; }
