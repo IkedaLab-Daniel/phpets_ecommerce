@@ -237,7 +237,6 @@
                         <span><?php echo $average_rating; ?> </span>
                     </div>
                     <p class="description"><strong>Description:</strong> <?php echo htmlspecialchars($product['description']); ?></p>
-                    <p><strong>Category:</strong> <?php echo htmlspecialchars($product['category_name']); ?></p> <!-- Render category -->
                     <div class="seller">
                         <img src="/phpets/uploads/<?php echo htmlspecialchars($product['profile_photo']); ?>" alt="Seller Profile Photo">
                         <p><?php echo htmlspecialchars($product['first_name'] . ' ' . $product['last_name']); ?></p>
