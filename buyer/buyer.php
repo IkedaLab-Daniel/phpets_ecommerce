@@ -282,7 +282,7 @@
                     <img src="../uploads/<?php echo htmlspecialchars($profile_photo); ?>" alt="Profile Picture" width="100">
                     <span class="fullname"> <?php echo $first_name . ' ' . $middle_name . ' ' . $last_name; ?></span>
                     <span class="role"><?php echo ucfirst($_SESSION['role']); ?></span>
-                    <span class="address"><?php echo $address; ?> - <?php echo $contact_number; ?></span>
+                    <span class="address"><?php echo $address; ?></span>
                 </div>
                 
                 <div class="animate-fadein-left">

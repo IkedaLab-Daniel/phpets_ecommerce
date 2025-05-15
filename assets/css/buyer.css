@@ -7,10 +7,10 @@
 
 #buyer .left{
     width: 20%;
-    height: auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     position: fixed;
     left: 10px;
     top: 5rem;
@@ -18,7 +18,7 @@
 
 #buyer .left .user-details{
     width: 100%;
-    height: auto;
+    height: 45%;
     background-color: #454640;
     border-radius: 12px;
     padding: 20px;
@@ -35,8 +35,8 @@
     align-items: center;
     background-color: #454640;
     border-radius: 12px;
-    padding: 20px;
-    gap: 10px;
+    padding: 15px;
+    gap: 5px;
     transition: .4s;
 }
 
@@ -45,13 +45,12 @@
     background-color: #31322d;
 }
 
-
 #buyer .left .link-navs img{
-    width: 40px;
+    width: 30px;
 }
 
 #buyer .left .link-navs span{
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 
 
