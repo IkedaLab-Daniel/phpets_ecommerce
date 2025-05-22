@@ -32,6 +32,14 @@
     foreach ($checkout_items as $item) {
         $total_price += $item['price'] * $item['quantity'];
     }
+
+    // > Back button - clear $_session data that no need
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['clear_checkout'])) {
+        unset($_SESSION['checkout_product']);
+        unset($_SESSION['checkout_items']);
+        header("Location: /phpets/buyer/buyer.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -102,7 +110,9 @@
                 </div>
                 
                 <div class="btn-container">
-                    <a href="/phpets/buyer/buyer.php" class="edit-btn cool-btn">Back</a>
+                    <form method="POST" style="display:inline;">
+                        <button type="submit" name="clear_checkout" class="edit-btn cool-btn">Back</button>
+                    </form>
                     <form method="POST" action="process_checkout.php">
                         <button class="confirm-btn cool-btn" type="submit" name="confirm_checkout" class="checkout-btn">Confirm Checkout</button>
                     </form>

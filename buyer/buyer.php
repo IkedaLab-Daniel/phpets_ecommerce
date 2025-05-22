@@ -65,6 +65,7 @@
         }
 
         // Redirect to the checkout page
+
         header("Location: /phpets/buyer/checkout.php");
         exit();
     }
@@ -105,8 +106,8 @@
 
     // ? Checkout (redirect to separate file)
     if (isset($_POST['checkout_now'])) {
-        // Fetch all items in the cart
-        $cart_items_query = "SELECT c.product_id, c.quantity, p.price, p.name, p.image 
+        // Fetch all items in the cart, including seller_id
+        $cart_items_query = "SELECT c.cart_id, c.product_id, c.quantity, p.price, p.name, p.image, p.seller_id 
                             FROM cart c
                             JOIN products p ON c.product_id = p.product_id
                             WHERE c.buyer_id = ?";
@@ -115,14 +116,17 @@
         $stmt->execute();
         $cart_items_result = $stmt->get_result();
 
-        // Store all cart items in the session for checkout
-        $_SESSION['checkout_items'] = [];
+        // Group items by seller
+        $seller_cart = [];
         while ($item = $cart_items_result->fetch_assoc()) {
-            $_SESSION['checkout_items'][] = $item;
+            $seller_cart[$item['seller_id']][] = $item;
         }
 
+        // Store grouped items in session for checkout
+        $_SESSION['checkout_grouped'] = $seller_cart;
+
         // Redirect to the checkout page
-        header("Location: /phpets/buyer/checkout.php");
+        header("Location: /phpets/buyer/checkout-cart.php");
         exit();
     }
 
