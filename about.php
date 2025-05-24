@@ -70,7 +70,7 @@
                     </div>
 
                     <!-- Brix -->
-                    <!-- <div class="dev-card brix">
+                    <div class="dev-card brix">
                         <div class="dev-img-container">
                             <img src="./assets/images/brix.jpeg" alt="">
                         </div>
@@ -88,7 +88,6 @@
                         </div>
                     </div>
 
-                    
                     <div class="dev-card alvin">
                         <div class="dev-img-container">
                             <img src="./assets/images/alvin.jpg" alt="">
@@ -104,7 +103,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
     </body>

@@ -1,6 +1,5 @@
 <?php
     include '../includes/header.php';
-    include '../includes/error_catch.php';
     include '../includes/db_connect.php';
     session_start();
 
@@ -89,9 +88,9 @@
                                 <span class="total">₱<?php echo number_format($total_price, 2); ?></span>
                             </div>
                         </div>
-                        <form method="POST" action="process_checkout_cart.php">
+                        <form class="confirm-container" method="POST" action="process_checkout_cart.php">
                             <input type="hidden" name="seller_id" value="<?php echo $seller_id; ?>">
-                            <button class="confirm-btn cool-btn" type="submit" name="confirm_checkout">Confirm Checkout for this Seller</button>
+                            <button class="confirm-btn-buyer cool-btn" type="submit" name="confirm_checkout">Confirm Checkout for this Seller</button>
                         </form>
                     </div>
                 <?php endforeach; ?>

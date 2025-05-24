@@ -135,7 +135,23 @@
     gap: 10px;
 }
 
-.btn-container .confirm-btn{
+.confirm-btn{
+    background-color: #8892BF;
+    color: white;
+    border: 2px solid #8892BF;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 4px;
+}
+
+.confirm-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.confirm-btn-buyer{
     background-color: #8892BF;
     color: white;
     border: 2px solid #8892BF;
