@@ -132,7 +132,13 @@
                             <span class="category-tag"><?php echo htmlspecialchars($row['category']); ?></span>
                             <div class="product-card-detail">
                                 <h3><?php echo htmlspecialchars($row['name']); ?></h3>
-                                <p><?php echo htmlspecialchars($row['description']); ?></p>
+                                <p class="product-description">
+                                    <?php 
+                                        echo htmlspecialchars(mb_strlen($row['description']) > 50 
+                                            ? mb_substr($row['description'], 0, 50) . '...' 
+                                            : $row['description']); 
+                                        ?>
+                                </p>
                                 <p><strong>Seller:</strong> <?php echo htmlspecialchars($row['seller']); ?></p>
                             </div>
                             <div class="product-card-footer">
