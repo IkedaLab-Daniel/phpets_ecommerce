@@ -1,6 +1,6 @@
 <?php
-    session_start();
-
+    include ('./error_catch.php');
+    
     if (isset($_COOKIE['view']) && $_COOKIE['view'] === 'dark') {
         setcookie('view', 'light', time() + (86400 * 30), "/"); // Set to 'dark' for 30 days
     } else {

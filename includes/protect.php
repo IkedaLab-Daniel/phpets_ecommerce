@@ -1,6 +1,5 @@
 <?php
     include 'db_connect.php';
-    include './error_catch.php';
 
     if (isset($_SESSION['user_id'])) {
 

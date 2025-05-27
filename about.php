@@ -1,9 +1,6 @@
 <?php   
     include ('./includes/db_connect.php');
     include ('./includes/header.php');
-    session_start();
-    $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
-    echo "<script> console.log('upper loaded'); </script>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,9 +107,11 @@
 </html>
 
 <?php 
-    if ($_SESSION['role'] == 'buyer'){
-        include ("./includes/cart_modal.php");
+    if (isset($_SESSION['role'])){
+        if ($_SESSION['role'] == 'buyer'){
+            include ("./includes/cart_modal.php");
+        }
     }
+    
     include ("./includes/view-modal.php");
-    echo "<script> console.log('working'); </script>";
 ?>

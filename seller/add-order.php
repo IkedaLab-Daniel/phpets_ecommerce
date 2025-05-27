@@ -1,7 +1,6 @@
 <?php 
     include ('../includes/header.php');
     include ('../includes/db_connect.php');
-    session_start();
 
     $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
 ?>

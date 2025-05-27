@@ -1,7 +1,6 @@
 <?php 
     include ('./includes/header.php');
     include ('./includes/db_connect.php');
-    session_start();
     
     $view_mode = isset($_COOKIE['view']) ? $_COOKIE['view'] : 'light';
     $category = $_GET['q'];
@@ -179,8 +178,10 @@
 </html>
 
 <?php 
-    if ($_SESSION['role'] == 'buyer'){
-        include ("./includes/cart_modal.php");
+    if (isset($_SESSION['role'])){
+        if ($_SESSION['role'] == 'buyer'){
+            include ("./includes/cart_modal.php");
+        }
     }
     include ('./includes/view-modal.php');
 ?>

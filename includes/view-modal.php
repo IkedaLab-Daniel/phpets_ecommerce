@@ -1,4 +1,7 @@
 <?php 
+    if (!isset($_COOKIE['view'])){
+        $_COOKIE['view'] = 'dark';
+    }
     $view_mode = $_COOKIE['view'];
 ?>
 
@@ -15,8 +18,7 @@
                     <img class="<?php echo $view_mode; ?>" src="/phpets/assets/images/light.svg" > 
                 <?php else: ?>
                     <img class="<?php echo $view_mode; ?>" src="/phpets/assets/images/moon.svg" > 
-                <?php endif ?>
-                
+                <?php endif ?>          
             </button>
         </form>          
     </body>
