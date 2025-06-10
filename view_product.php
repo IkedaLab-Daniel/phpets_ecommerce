@@ -51,7 +51,7 @@
     $avg_row = $avg_result->fetch_assoc();
     $average_rating = $avg_row['average_rating'] ? number_format($avg_row['average_rating'], 1) : "No ratings yet";
 
-    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'buyer') {
+    if (!isset($_SESSION['user_id'])) {
         header("Location: login.php");
         exit();
     }

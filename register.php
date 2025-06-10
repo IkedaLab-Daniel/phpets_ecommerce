@@ -14,8 +14,14 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
         $confirm = $_POST['confirm_password'];
-        $address = $_POST['address'];
         $role = $_POST['account_type'];
+        $address = trim($_POST['address']);
+        $address_parts = array_map('trim', explode(',', $address));
+
+        if (count($address_parts) < 4 || in_array('', $address_parts)) {
+            echo "<script>alert('❌ Please enter a valid address: Street, Barangay, Municipal, Province'); window.location.href = 'register.php';</script>";
+            exit();
+        }
 
         // Check if passwords match
         if ($password !== $confirm) {
@@ -175,7 +181,7 @@
                                 placeholder="Street, Barangay, Municipal, Province" 
                                 value="<?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address']) : ''; ?>" 
                             />
-
+                            <span class="address-error" style="color: red; font-size: 0.9rem;"></span>
                             <div class="radio-group">
                                 <div class="choice <?php echo (isset($_POST['account_type']) && $_POST['account_type'] === 'buyer') ? 'selected' : ''; ?>">
                                     <input 
@@ -217,5 +223,4 @@
 
 <?php 
     include 'includes/view-modal.php';
-
 ?>

@@ -100,6 +100,7 @@ function validatePassword(password) {
     return passwordRegex.test(password);
 }
 
+
 // Function to validate password input and show feedback
 function validatePasswordInput() {
     const passwordInput = document.querySelector('input[name="password"]');
