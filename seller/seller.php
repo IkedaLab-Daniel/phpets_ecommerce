@@ -315,7 +315,7 @@
                     <div class="list-table-content">
                         <?php if ($products_result->num_rows > 0): ?>
                             <?php while ($product = $products_result->fetch_assoc()): ?>
-                                <div class="product-card">
+                                <div class="product-card" style="padding-bottom: 80px;">
                                     <img src="../uploads/<?php echo htmlspecialchars($product['image']); ?>" style="margin-right: 10px;" alt="Product Image" width="100">
                                     <span class="category-tag"> <?php echo htmlspecialchars($product['category_name']); ?></span>
                                     <div class="product-card-detail">
