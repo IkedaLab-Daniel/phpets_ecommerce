@@ -130,13 +130,13 @@
         $updated_email = htmlspecialchars(trim($_POST['email']));
         $updated_address = htmlspecialchars(trim($_POST['address']));
 
-        // Update the user's information in the database
+        // ? Update the user's information in the database
         $update_user_query = "UPDATE users SET first_name = ?, middle_name = ?, last_name = ?, email = ?, address = ? WHERE user_id = ?";
         $stmt = $conn->prepare($update_user_query);
         $stmt->bind_param("sssssi", $updated_first_name, $updated_middle_name, $updated_last_name, $updated_email, $updated_address, $buyer_id);
 
         if ($stmt->execute()) {
-            // Update session variables
+            // ? Update session into new variables
             $_SESSION['first_name'] = $updated_first_name;
             $_SESSION['middle_name'] = $updated_middle_name;
             $_SESSION['last_name'] = $updated_last_name;
@@ -331,8 +331,11 @@
                                         <p>₱<?php echo number_format($product['price'], 2); ?></p>
                                         <p class="<?php echo ($product['status']); ?> status"> <?php echo ucfirst($product['status']); ?></p>
                                     </div>      
-                                    <form method="POST" action="unlist_product.php" class="product-card-footer">
+                                    <form method="POST" action="unlist_product.php" class="product-card-footer-seller">
                                         <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                                        <a href="/phpets/view_product.php?id=<?php echo $product['product_id']; ?>" class="view cool-btn">
+                                            View
+                                        </a>
                                         <button type="submit" class="delete cool-btn">Unlist</button>
                                     </form>                           
                                 </div>

@@ -727,12 +727,34 @@ form input:focus{
     display: inline-block;
 }
 
-.product-card-footer .delete{
+.product-card-footer-seller{
+    border-top: 1px solid rgb(217, 217, 217);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    gap: 10px;
+}
+
+.product-card-footer-seller .delete{
     color: white;
     border: 0px solid white;
     padding: 10px;
     width: 100%;
     background-color: rgb(247, 52, 52);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.product-card-footer-seller .view{
+    color: white;
+    border: 2px solid white;
+    padding: 10px;
+    width: 100%;
+    background-color: rgba(247, 52, 52, 0);
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
