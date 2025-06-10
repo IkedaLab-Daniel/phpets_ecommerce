@@ -438,7 +438,11 @@
 
                 <div id="all-transactions">
                     <div class="heading">
-                        <img src="/phpets/assets/images/transaction.svg" alt="">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/transaction.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/transaction-dark.svg">
+                        <?php endif ?>
                         <h2>My Orders</h2>
                     </div>
                     <?php foreach ($all_orders as $order): ?>

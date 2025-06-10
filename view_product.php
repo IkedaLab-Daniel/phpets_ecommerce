@@ -50,11 +50,6 @@
     $avg_result = $stmt->get_result();
     $avg_row = $avg_result->fetch_assoc();
     $average_rating = $avg_row['average_rating'] ? number_format($avg_row['average_rating'], 1) : "No ratings yet";
-
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: login.php");
-        exit();
-    }
     
     $buyer_id = $_SESSION['user_id'];
     $product_id = $_GET['id']; 
@@ -249,85 +244,86 @@
                 </div>
             </div>    
         </div>
-
-        <div class="add-to-cart-checkout-form">
-             <form method="POST" action="">
-                <div class="div1">
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" name="quantity" value="1" min="1" required> 
-                    <input type="hidden" name="product_id" value="<?= $product_id ?>">
-                </div>
-                <div class="div2 cool-btn">
-                    <button type="submit" name="add_to_cart">
-                        <!-- <span class="loading">Loading</span> -->
-                        <span class="okay">Add to Cart 🛒</span>          
-                    </button>
-                </div>
-                <div class="div3 cool-btn">
-                    <button type="submit" name="checkout_now">Check Out 💳</button>
-                </div>  
-            </form>
-        </div>
-
-        <div id="add-edit-review">
-            <?php if ($has_purchased): ?>
-                <div class="icon-text" style="justify-content: left;">
-                    <?php if ($view_mode == 'dark'): ?>
-                        <img src="/phpets/assets/images/write.svg" >
-                    <?php else: ?>
-                        <img src="/phpets/assets/images/write-dark.svg" >
-                    <?php endif ?>
-                    <h3><?php echo $existing_review ? "Edit Your Review" : "Add a Review"; ?></h3>
-                </div>
+        
+        <?php if ($_SESSION["role"] == "buyer"): ?>
+            <div class="add-to-cart-checkout-form">
                 <form method="POST" action="">
-                    <div class="rating-container">
-                        <label for="rating">Rating:</label>
-                        <div class="star-rating">
-                            <input type="radio" id="star5" name="rating" value="5" <?php echo $existing_review && $existing_review['rating'] == 5 ? "checked" : ""; ?> />
-                            <label for="star5">
-                                <img src="/phpets/assets/images/star-grey.svg" alt="5 stars" data-value="5">
-                            </label>
-
-                            <input type="radio" id="star4" name="rating" value="4" <?php echo $existing_review && $existing_review['rating'] == 4 ? "checked" : ""; ?> />
-                            <label for="star4">
-                                <img src="/phpets/assets/images/star-grey.svg" alt="4 stars" data-value="4">
-                            </label>
-
-                            <input type="radio" id="star3" name="rating" value="3" <?php echo $existing_review && $existing_review['rating'] == 3 ? "checked" : ""; ?> />
-                            <label for="star3">
-                                <img src="/phpets/assets/images/star-grey.svg" alt="3 stars" data-value="3">
-                            </label>
-
-                            <input type="radio" id="star2" name="rating" value="2" <?php echo $existing_review && $existing_review['rating'] == 2 ? "checked" : ""; ?> />
-                            <label for="star2">
-                                <img src="/phpets/assets/images/star-grey.svg" alt="2 stars" data-value="2">
-                            </label>
-
-                            <input type="radio" id="star1" name="rating" value="1" <?php echo $existing_review && $existing_review['rating'] == 1 ? "checked" : ""; ?> />
-                            <label for="star1">
-                                <img src="/phpets/assets/images/star-grey.svg" alt="1 star" data-value="1">
-                            </label>
-                        </div>
+                    <div class="div1">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" name="quantity" value="1" min="1" required> 
+                        <input type="hidden" name="product_id" value="<?= $product_id ?>">
                     </div>
-                    <div class="comment-container">
-                        <label for="comment">Comment:</label>
-                        <textarea name="comment" id="comment" required><?php echo $existing_review ? htmlspecialchars($existing_review['comment']) : ""; ?></textarea>
-                    </div>
-                    <div class="btn-container">
-                        <?php if ($existing_review): ?>
-                            <button class="delete-btn cool-btn" type="submit" name="delete_review">Delete Review</button>
-                        <?php endif; ?>
-                        <button class="submit-review cool-btn" type="submit" name="<?php echo $existing_review ? "edit_review" : "add_review"; ?>">
-                            <?php echo $existing_review ? "Update Review" : "Submit Review"; ?>
+                    <div class="div2 cool-btn">
+                        <button type="submit" name="add_to_cart">
+                                    <!-- <span class="loading">Loading</span> -->
+                         <span class="okay">Add to Cart 🛒</span>          
                         </button>
                     </div>
-                </form>
-            <?php else: ?>
-                <p>You can only leave a review if your order has been delivered.</p>
-                <?php include('./includes/error_catch.php'); ?>
-            <?php endif; ?>
-        </div>
-        
+                        <div class="div3 cool-btn">
+                            <button type="submit" name="checkout_now">Check Out 💳</button>
+                        </div>  
+                    </form>
+            </div>
+       
+            <div id="add-edit-review">
+                <?php if ($has_purchased): ?>
+                    <div class="icon-text" style="justify-content: left;">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/write.svg" >
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/write-dark.svg" >
+                        <?php endif ?>
+                        <h3><?php echo $existing_review ? "Edit Your Review" : "Add a Review"; ?></h3>
+                    </div>
+                    <form method="POST" action="">
+                        <div class="rating-container">
+                            <label for="rating">Rating:</label>
+                            <div class="star-rating">
+                                <input type="radio" id="star5" name="rating" value="5" <?php echo $existing_review && $existing_review['rating'] == 5 ? "checked" : ""; ?> />
+                                <label for="star5">
+                                    <img src="/phpets/assets/images/star-grey.svg" alt="5 stars" data-value="5">
+                                </label>
+
+                                <input type="radio" id="star4" name="rating" value="4" <?php echo $existing_review && $existing_review['rating'] == 4 ? "checked" : ""; ?> />
+                                <label for="star4">
+                                    <img src="/phpets/assets/images/star-grey.svg" alt="4 stars" data-value="4">
+                                </label>
+
+                                <input type="radio" id="star3" name="rating" value="3" <?php echo $existing_review && $existing_review['rating'] == 3 ? "checked" : ""; ?> />
+                                <label for="star3">
+                                    <img src="/phpets/assets/images/star-grey.svg" alt="3 stars" data-value="3">
+                                </label>
+
+                                <input type="radio" id="star2" name="rating" value="2" <?php echo $existing_review && $existing_review['rating'] == 2 ? "checked" : ""; ?> />
+                                <label for="star2">
+                                    <img src="/phpets/assets/images/star-grey.svg" alt="2 stars" data-value="2">
+                                </label>
+
+                                <input type="radio" id="star1" name="rating" value="1" <?php echo $existing_review && $existing_review['rating'] == 1 ? "checked" : ""; ?> />
+                                <label for="star1">
+                                    <img src="/phpets/assets/images/star-grey.svg" alt="1 star" data-value="1">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="comment-container">
+                            <label for="comment">Comment:</label>
+                            <textarea name="comment" id="comment" required><?php echo $existing_review ? htmlspecialchars($existing_review['comment']) : ""; ?></textarea>
+                        </div>
+                        <div class="btn-container">
+                            <?php if ($existing_review): ?>
+                                <button class="delete-btn cool-btn" type="submit" name="delete_review">Delete Review</button>
+                            <?php endif; ?>
+                            <button class="submit-review cool-btn" type="submit" name="<?php echo $existing_review ? "edit_review" : "add_review"; ?>">
+                                <?php echo $existing_review ? "Update Review" : "Submit Review"; ?>
+                            </button>
+                        </div>
+                    </form>
+                <?php else: ?>
+                    <p>You can only leave a review if your order has been delivered.</p>
+                    <?php include('./includes/error_catch.php'); ?>
+                <?php endif; ?>
+            </div>
+        <?php endif ?>
         <div id="reviews">
             <div class="header">
                 <div class="icon-text">
