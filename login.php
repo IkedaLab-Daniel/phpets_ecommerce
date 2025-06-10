@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 echo "<div id='toast-data' data-message=' Logged In' data-type='success'></div>";
                 echo "<script>console.log('logged in')</script>";
             } elseif ($user['role'] === 'seller') {
-                header("Location: index.php");
+                header("Location: ./seller/seller.php");
                 echo "<div id='toast-data' data-message=' Logged In' data-type='success'></div>";
             } else {
                 header("Location: index.php");
