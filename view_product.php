@@ -151,6 +151,7 @@
                 <p>Review added successfully!</p>
                 <img class = 'cat' src='/phpets/assets/images/happy-cat.gif' width = '50'>
             </div>";
+            echo "<script>setTimeout(function(){ window.location.href = window.location.href; }, 1200);</script>";
         } else {
             echo "<div class = 'added-to-cart'>
                     <img class = 'error' src='/phpets/assets/images/green-check.svg' width = '30'>
@@ -174,6 +175,7 @@
                     <p>Review edited successfully!</p>
                     <img class = 'cat' src='/phpets/assets/images/happy-cat.gif' width = '50'>
                 </div>";
+            echo "<script>setTimeout(function(){ window.location.href = window.location.href; }, 1200);</script>";
         } else {
             echo "<div class = 'added-to-cart'>
                     <img class = 'check' src='/phpets/assets/images/green-check.svg' width = '30'>
