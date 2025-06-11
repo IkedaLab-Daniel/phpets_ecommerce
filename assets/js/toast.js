@@ -9,7 +9,6 @@ function showToast(message, type = "", imgSrc = "") {
     const toast = document.createElement("div");
     toast.className = "toast " + type;
 
-    // Add image if imgSrc is provided
     if (imgSrc) {
         const img = document.createElement("img");
         img.src = imgSrc;

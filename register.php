@@ -17,6 +17,7 @@
         $role = $_POST['account_type'];
         $address = trim($_POST['address']);
         $address_parts = array_map('trim', explode(',', $address));
+        $contact_number = $_POST['contact_number'];
 
         if (count($address_parts) < 4 || in_array('', $address_parts)) {
             echo "<script>alert('❌ Please enter a valid address: Street, Barangay, Municipal, Province'); window.location.href = 'register.php';</script>";
@@ -40,14 +41,14 @@
                 // Email is unique, proceed with registration
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-                $sql = "INSERT INTO users (first_name, middle_name, last_name, email, password, address, role) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO users (first_name, middle_name, last_name, email, password, address, role, contact_number) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sssssss", $first_name, $middle_name, $last_name, $email, $hashed_password, $address, $role);
+                $stmt->bind_param("ssssssss", $first_name, $middle_name, $last_name, $email, $hashed_password, $address, $role, $contact_number);
 
                 if ($stmt->execute()) {
-                    echo "<div id='toast-data' data-message='Registration successful! You can now log in.' data-type='success' data-redirect='login.php'></div>";
+                    echo "<div style='color: black;' id='toast-data' data-message='Registration successful! Redirecting to log-in page...' data-type='success' data-redirect='login.php'></div>";
                 } else {
                     error_log("SQL Error: " . $stmt->error);
                     echo "<script>alert('Error: " . $stmt->error . "');</script>";
@@ -180,6 +181,15 @@
                                 name="address" 
                                 placeholder="Street, Barangay, Municipal, Province" 
                                 value="<?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address']) : ''; ?>" 
+                            />
+                             <label for="contact_number">Contact Number:</label>
+                            <input 
+                                type="text" 
+                                id="contact_number"
+                                name="contact_number" 
+                                placeholder="Enter your contact number" 
+                                value="<?php echo isset($_POST['contact_number']) ? htmlspecialchars($_POST['contact_number']) : ''; ?>" 
+                                required
                             />
                             <span class="address-error" style="color: red; font-size: 0.9rem;"></span>
                             <div class="radio-group">

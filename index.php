@@ -37,7 +37,7 @@
                     </div>
 
                     <form class="search-bar" action="search.php" method="GET">
-                        <input id="search" name="q" type="search" placeholder="Dog Food, pussy..." required />
+                        <input id="search" name="q" type="search" placeholder="Dog Food, vitamins..." required />
                         <button class="cool-btn" type="submit">
                             <img src="/phpets/assets/images/search-dark.svg" alt="">
                         </button>    

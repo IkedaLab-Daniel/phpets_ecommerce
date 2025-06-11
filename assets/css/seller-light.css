@@ -7,10 +7,10 @@
 
 #seller .left{
     width: 20%;
-    height: auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     position: fixed;
     left: 10px;
     top: 5rem;
@@ -18,7 +18,7 @@
 
 #seller .left .user-details{
     width: 100%;
-    height: auto;
+    height: 45%;
     background-color: #f4f4f4;
     border-radius: 12px;
     padding: 20px;
@@ -36,26 +36,25 @@
     align-items: center;
     background-color: #f4f4f4;
     border-radius: 12px;
-    padding: 20px;
-    gap: 10px;
+    padding: 15px;
+    gap: 5px;
     transition: .4s;
-    box-shadow: 0px 0px 6px 4px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 8px 6px rgba(0,0,0,0.3);
+
 }
 
 #seller .left .link-navs:hover{
     transform: translateY(-3px) scale(105%);
-    background-color: #e4e4e4;
+    background-color: #fffcfc;
 }
 
-
 #seller .left .link-navs img{
-    width: 40px;
+    width: 30px;
 }
 
 #seller .left .link-navs span{
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
-
 
 #seller .right{
     width: 80vw;
@@ -721,12 +720,34 @@ form input:focus{
     display: inline-block;
 }
 
-.product-card-footer .delete{
+.product-card-footer-seller{
+    border-top: 1px solid rgb(217, 217, 217);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    gap: 10px;
+}
+
+.product-card-footer-seller .delete{
     color: white;
     border: 0px solid white;
     padding: 10px;
     width: 100%;
     background-color: rgb(247, 52, 52);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.product-card-footer-seller .view{
+    color: rgb(31, 31, 31);
+    border: 2px solid rgb(25, 25, 25);
+    padding: 10px;
+    width: 100%;
+    background-color: rgba(247, 52, 52, 0);
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;

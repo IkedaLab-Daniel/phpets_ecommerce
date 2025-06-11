@@ -133,7 +133,7 @@ form input:focus{
 }
 
 
-form .black-btn{
+.black-btn{
     padding: 12px;
     width: 100%;
     background-color: black;
@@ -147,17 +147,17 @@ form .black-btn{
     margin: 15px 0;
 }
 
-form .black-btn:hover{
+.black-btn:hover{
     cursor: pointer;
     transform: scale(102%) translateY(-2px);
 }
 
-form .black-btn:active{
+.black-btn:active{
     cursor: pointer;
     transform: scale(98%) translateY(0px);
 }
 
-form .white-btn{
+.white-btn{
     display: block;
     padding: 12px;
     width: 100%;
@@ -172,17 +172,17 @@ form .white-btn{
     margin-bottom: 20px;
 }
 
-form .white-btn:hover{
+.white-btn:hover{
     cursor: pointer;
     transform: scale(102%) translateY(-2px);
 }
 
-form .white-btn:active{
+.white-btn:active{
     cursor: pointer;
     transform: scale(98%) translateY(0px);
 }
 
-form .signup-btn{
+.signup-btn{
     padding: 12px;
     width: 100%;
     background-color: #8892BF;
@@ -192,15 +192,15 @@ form .signup-btn{
     font-size: 1.2rem;
     font-weight: 500;
     transition: .4s;
-    margin: 15px 0;
+    margin: 20px 0 0 0;
 }
 
-form .signup-btn:hover{
+.signup-btn:hover{
     cursor: pointer;
     transform: scale(102%) translateY(-2px);
 }
 
-form .signup-btn:active{
+.signup-btn:active{
     cursor: pointer;
     transform: scale(98%) translateY(0px);
 }

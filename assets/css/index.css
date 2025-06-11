@@ -59,8 +59,11 @@ body::before {
 
 .toast.success {
     background-color: #e6f9ec; 
-    color: #2e7d32;            
     border: 1.5px solid #81c784; 
+}
+
+.toast.success span{
+    color: #2e7d32;            
 }
 
 .toast.error, .toast.banned {
