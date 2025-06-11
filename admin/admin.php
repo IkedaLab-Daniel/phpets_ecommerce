@@ -134,6 +134,61 @@
             echo "<script>alert('No file uploaded or an error occurred.');</script>";
         }
     }
+
+    // --- Create Admin Logic ---
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['create_admin'])) {
+        $email = trim($_POST['admin_email']);
+        $password = $_POST['admin_password'];
+        $confirm = $_POST['admin_confirm_password'];
+
+        // Basic validation
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "<script>alert('❌ Please enter a valid email address.'); window.location.href = 'admin.php#create-admin';</script>";
+            exit();
+        }
+        if ($password !== $confirm) {
+            echo "<script>alert('❌ Passwords do not match.'); window.location.href = 'admin.php#create-admin';</script>";
+            exit();
+        }
+
+        // Check if email already exists
+        $check_sql = "SELECT user_id FROM users WHERE email = ?";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->bind_param("s", $email);
+        $check_stmt->execute();
+        $check_stmt->store_result();
+
+        if ($check_stmt->num_rows > 0) {
+            echo "<script>alert('❌ Email already exists.'); window.location.href = 'admin.php#create-admin';</script>";
+            $check_stmt->close();
+            exit();
+        }
+        $check_stmt->close();
+
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $role = 'admin';
+        $first_name = 'Admin';
+        $middle_name = '';
+        $last_name = '';
+        $address = '';
+        $contact_number = '';
+
+        $sql = "INSERT INTO users (first_name, middle_name, last_name, email, password, address, role, contact_number) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssssssss", $first_name, $middle_name, $last_name, $email, $hashed_password, $address, $role, $contact_number);
+
+        if ($stmt->execute()) {
+            echo "<script>alert('✅ Admin account created successfully!'); window.location.href = 'admin.php#accounts';</script>";
+        } else {
+            error_log('SQL Error: ' . $stmt->error);
+             echo "<script>
+                alert('✅ Admin account created successfully!\\nUsername: " . addslashes($email) . "\\nPassword: " . addslashes($password) . "');
+                window.location.href = 'admin.php#accounts';
+            </script>";
+        }
+        $stmt->close();
+    }
 ?>
 
 
@@ -198,7 +253,18 @@
                         <?php endif ?>
                         <span>Edit Profile</span>
                     </a>
-                </div>                
+                </div>           
+                
+                <div class="animate-fadein-left">
+                    <a class="link-navs" href="#create-admin">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/add.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/add-dark.svg">
+                        <?php endif ?>
+                        <span>Create Admin</span>
+                    </a>
+                </div>          
             </div>
 
             <div class="right">
@@ -414,6 +480,29 @@
                         <h2>Change Profile Photo</h2>
                         <input type="file" name="profile_photo" required>
                         <button type="submit" name="update_photo" class="save-btn cool-btn">Update Photo</button>
+                    </form>
+                </div>
+
+                <div id="create-admin" style="margin-top: 40px">
+                    <div class="heading mb-20">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/edit-profile.svg">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/edit-profile-dark.svg">
+                        <?php endif ?>
+                        <h2>Create New Admin</h2>
+                    </div>
+                    <form action="" method="POST" style="width: 100%;">
+                        <label for="admin_email">Email:</label>
+                        <input type="email" id="admin_email" name="admin_email" placeholder="Enter admin email" required />
+
+                        <label for="admin_password">Password:</label>
+                        <input type="password" id="admin_password" name="admin_password" placeholder="Enter password" required />
+
+                        <label for="admin_confirm_password">Confirm Password:</label>
+                        <input type="password" id="admin_confirm_password" name="admin_confirm_password" placeholder="Confirm password" required />
+
+                        <button type="submit" name="create_admin" class="save-btn cool-btn" style="margin-top: 10px;">Create Admin</button>
                     </form>
                 </div>
             </div>
