@@ -332,7 +332,23 @@
                                     <?php while ($product = $all_products_result->fetch_assoc()): ?>
                                         <tr>
                                             <!-- <td><?php echo $product['product_id']; ?></td> -->
-                                            <td><?php echo htmlspecialchars($product['name']); ?></td>
+                                            <td class="name-photo">
+                                                <?php
+                                                    $product_image_query = "SELECT image FROM products WHERE product_id = ?";
+                                                    $stmt_img = $conn->prepare($product_image_query);
+                                                    $stmt_img->bind_param("i", $product['product_id']);
+                                                    $stmt_img->execute();
+                                                    $img_result = $stmt_img->get_result();
+                                                    $img_row = $img_result->fetch_assoc();
+                                                    $image_file = $img_row && $img_row['image'] ? $img_row['image'] : 'default-product.png';
+                                                ?>
+                                                <img 
+                                                    src="../uploads/<?php echo htmlspecialchars($image_file); ?>" 
+                                                    alt="Product Image" 
+                                                    style="width:100px; height:100px; border-radius:6px; object-fit:cover; vertical-align:middle; margin-right:8px;"
+                                                >
+                                                <?php echo htmlspecialchars($product['name']); ?>
+                                            </td>
                                             <td><?php echo htmlspecialchars($product['description']); ?></td>
                                             <td>₱<?php echo number_format($product['price'], 2); ?></td>
                                             <td><?php echo $product['stock']; ?> pcs</td>

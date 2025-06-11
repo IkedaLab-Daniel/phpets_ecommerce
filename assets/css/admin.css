@@ -334,6 +334,14 @@ form input:focus{
     padding: 10px 20px;
 }
 
+.name-photo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
 @keyframes fadein-left {
     0%{
         opacity: 0;
