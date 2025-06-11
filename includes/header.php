@@ -33,11 +33,18 @@
             </div>
             <div class="login-signup-btns">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <!-- If user is logged in, show Logout button -->
-                     <?php echo "Welcome back, " . $_SESSION['first_name'] . "" ?>
+                    <span 
+                        onclick="window.location.href='/phpets/<?php 
+                            echo ($_SESSION['role'] === 'buyer') ? 'buyer/buyer.php' : 
+                                (($_SESSION['role'] === 'seller') ? 'seller/seller.php' : 'admin/admin.php'); 
+                        ?>';"
+                        title="Go to your dashboard"
+                        class="name"
+                    >
+                        <?php echo htmlspecialchars($_SESSION['first_name'] . ' ' . $_SESSION['last_name']); ?>
+                    </span>
                     <a href="/phpets/logout.php" class="logout-btn">Log Out</a>
                 <?php else: ?>
-                    <!-- If user is not logged in, show Login and Sign Up buttons -->
                     <a href="/phpets/login.php" class="login-btn">Log In</a>
                     <a href="/phpets/register.php" class="signup-btn">Sign Up</a>
                 <?php endif; ?>

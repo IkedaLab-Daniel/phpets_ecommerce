@@ -126,6 +126,16 @@ nav span{
     width: 100%;
 }
 
+.name{
+    font-size: 1.2rem;
+    transition: 4s;
+}
+
+.name:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 
 @media (max-width: 768px) {
 
