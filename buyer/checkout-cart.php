@@ -56,14 +56,12 @@
                             Seller: 
                             <?php
                                 // Fetch seller name
-                                $seller_query = "SELECT first_name FROM users WHERE user_id = ?";
-                                $stmt = $conn->prepare($seller_query);
+                                $seller_query = "SELECT first_name, middle_name, last_name FROM users WHERE user_id = ?";                                           $stmt = $conn->prepare($seller_query);
                                 $stmt->bind_param("i", $seller_id);
                                 $stmt->execute();
                                 $seller_result = $stmt->get_result();
                                 $seller = $seller_result->fetch_assoc();
-                                echo htmlspecialchars($seller['first_name']);
-                            ?>
+                                echo htmlspecialchars(trim($seller['first_name'] . ' ' . ($seller['middle_name'] ?? '') . ' ' . $seller['last_name']));                            ?>
                         </h3>
                         <div class="product-table-head">
                             <span>Item</span>
@@ -74,9 +72,12 @@
                         <div class="product-list">
                             <?php $total_price = 0; ?>
                             <?php foreach ($items as $item): ?>
-                                <?php $total_price += $item['price'] * $item['quantity']; ?>
+                            <?php $total_price += $item['price'] * $item['quantity']; ?>
                                 <div class="product-item">
-                                    <span><?php echo htmlspecialchars($item['name']); ?></span>
+                                    <div class="img-name" style="display: flex; align-items: center; gap: 10px;">
+                                        <img src="/phpets/uploads/<?php echo htmlspecialchars($item['image']); ?>" alt="Product Image">
+                                        <span><?php echo htmlspecialchars($item['name']); ?></span>
+                                    </div>
                                     <span><?php echo $item['quantity']; ?></span>
                                     <span>₱<?php echo number_format($item['price'], 2); ?></span>
                                     <span>₱<?php echo number_format($item['price'] * $item['quantity'], 2); ?></span>
@@ -97,6 +98,24 @@
                     <form method="POST" style="display:inline;">
                         <button type="submit" name="clear_checkout" class="edit-btn cool-btn">Back</button>
                     </form>
+                </div>
+
+                <!-- User info section -->
+                <div class="user-info">
+                    <div class="user-wrapper">
+                        <?php if ($view_mode == 'dark'): ?>
+                            <img src="/phpets/assets/images/user.svg" alt="">
+                        <?php else: ?>
+                            <img src="/phpets/assets/images/user-dark.svg" alt="">
+                        <?php endif ?>
+                        <h3>Shipping Information</h3>
+                    </div>
+                    <p><strong>Buyer:</strong> <?php echo htmlspecialchars($user_info['first_name'] . ' ' . $user_info['middle_name'] . ' ' . $user_info['last_name']); ?></p>
+                    <p><strong>Email:</strong> <?php echo htmlspecialchars($user_info['email']); ?></p>
+                    <p><strong>Address:</strong> <?php echo htmlspecialchars($user_info['address']); ?></p>
+                    <p><strong>Contact Number:</strong> <?php echo htmlspecialchars($user_info['contact_number']); ?></p>
+                    <p class="cod">Cash on Delivery</p>
+                    <a href="/phpets/buyer/buyer.php#edit-profile" class="edit-info">Edit Info</a>
                 </div>
             </div>
         </div>
