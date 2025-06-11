@@ -37,7 +37,7 @@
     $total_sellers = $total_sellers_row['total_sellers'] ?? 0; // Default to 0 if no sellers
 
     // * Fetch all users
-    $all_users_query = "SELECT user_id, first_name, last_name, email, role, created_at, status, contact_number FROM users ORDER BY created_at DESC";
+    $all_users_query = "SELECT user_id, first_name, last_name, email, role, created_at, status, contact_number, profile_photo FROM users ORDER BY created_at DESC";
     $all_users_result = $conn->query($all_users_query);
 
     // * Fetch total products
@@ -269,7 +269,14 @@
                                     <?php while ($user = $all_users_result->fetch_assoc()): ?>
                                         <tr>
                                             <td><?php echo $user['user_id']; ?></td>
-                                            <td><?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?></td>
+                                            <td>
+                                                <img 
+                                                    src="../uploads/<?php echo htmlspecialchars($user['profile_photo'] ?? 'default.jpg'); ?>" 
+                                                    alt="Profile" 
+                                                    style="width:32px; height:32px; border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:8px;"
+                                                >
+                                                <?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?>
+                                            </td>
                                             <td><?php echo htmlspecialchars($user['email']); ?></td>
                                             <td><?php echo htmlspecialchars($user['contact_number'] ?? 'No Data'); ?></td>
                                             <td class="<?php echo ($user['role']); ?>"><?php echo ucfirst($user['role']); ?></td>
