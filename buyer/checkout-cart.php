@@ -94,12 +94,6 @@
                         </form>
                     </div>
                 <?php endforeach; ?>
-                <div class="btn-container">
-                    <form method="POST" style="display:inline;">
-                        <button type="submit" name="clear_checkout" class="edit-btn cool-btn">Back</button>
-                    </form>
-                </div>
-
                 <!-- User info section -->
                 <div class="user-info">
                     <div class="user-wrapper">
@@ -116,6 +110,12 @@
                     <p><strong>Contact Number:</strong> <?php echo htmlspecialchars($user_info['contact_number']); ?></p>
                     <p class="cod">Cash on Delivery</p>
                     <a href="/phpets/buyer/buyer.php#edit-profile" class="edit-info">Edit Info</a>
+                </div>
+
+                <div class="btn-container">
+                    <form method="POST" style="display:inline;">
+                        <button type="submit" name="clear_checkout" class="edit-btn cool-btn">Back</button>
+                    </form>
                 </div>
             </div>
         </div>
