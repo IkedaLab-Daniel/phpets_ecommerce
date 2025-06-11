@@ -18,7 +18,6 @@ function updatePage() {
         signup.classList.add('hidden');
         checkmark.classList.add('hidden');
         one.classList.remove('hidden');
-        // Show the white-btn on page 1
         const whiteBtn = document.querySelector('.white-btn');
         if (whiteBtn) whiteBtn.style.display = 'block';
         validatePart1(); // Ensure button state is updated
@@ -30,7 +29,6 @@ function updatePage() {
         signup.classList.remove('hidden');
         checkmark.classList.remove('hidden');
         one.classList.add('hidden');
-        // Hide the white-btn on page 2
         const whiteBtn = document.querySelector('.white-btn');
         if (whiteBtn) whiteBtn.style.display = 'none';
     }

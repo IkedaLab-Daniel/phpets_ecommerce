@@ -552,6 +552,17 @@ form input:focus{
     display: inline-block;
 }
 
+.name-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.name-image img{
+    width: 80px;
+}
+
 @keyframes fadein-left {
     0%{
         opacity: 0;

@@ -351,8 +351,11 @@
                     <div class="cart-table-row">
                         <?php if (mysqli_num_rows($cart_result) > 0): ?>
                             <?php while ($item = mysqli_fetch_assoc($cart_result)): ?>
-                                <li>
-                                    <span style="justify-content: left; margin-left: 20px;"><?php echo $item['name']; ?></span>
+                                <li>                                                                  
+                                    <span class="name-image" style="justify-content: left; margin-left: 20px;">
+                                        <img src="../uploads/<?php echo htmlspecialchars($item['image']); ?>" alt="Product Image" width="40" style="vertical-align: middle; border-radius: 5px;">
+                                        <?php echo $item['name']; ?>
+                                    </span>
                                     <span><?php echo $item['quantity']; ?></span>
                                     <span>₱<?php echo number_format($item['price'], 2); ?></span>
                                     <form action="" method="POST">
