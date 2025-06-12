@@ -163,17 +163,32 @@
                         </div>
                         <div class="signin-part-2 hidden">
                             <label for="password">Password:</label>
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                placeholder="Enter your password" 
-                                required 
-                            />
+                            <div class="password-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    placeholder="Enter your password" 
+                                    required 
+                                />
+                                <?php if ($view_mode == 'dark'): ?>
+                                    <img class="show-password" src="./assets/images/eye-close-white.svg" alt="eye">
+                                <?php else: ?>
+                                    <img class="show-password" src="./assets/images/eye-close-black.svg" alt="eye">
+                                <?php endif ?>
+                            </div>
                             <span class="password-error" style="color: red; font-size: 0.9rem;"></span>
-
+                            
                             <label for="confirm_password">Confirm Password:</label>
-                            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required />
+                            <div class="password-wrapper">
+                                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required />
+                                <?php if ($view_mode == 'dark'): ?>
+                                    <img class="show-password" src="./assets/images/eye-close-white.svg" alt="eye">
+                                <?php else: ?>
+                                    <img class="show-password" src="./assets/images/eye-close-black.svg" alt="eye">
+                                <?php endif ?>
+                            </div>
+                            
 
                             <label for="address">Address:</label>
                             <input 

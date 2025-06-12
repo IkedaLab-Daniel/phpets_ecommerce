@@ -73,20 +73,20 @@
         $updated_email = htmlspecialchars(trim($_POST['email']));
         $updated_address = htmlspecialchars(trim($_POST['address']));
 
-        // Update the user's information in the database
+        // ? Update the user's information in the database
         $update_user_query = "UPDATE users SET first_name = ?, middle_name = ?, last_name = ?, email = ?, address = ? WHERE user_id = ?";
         $stmt = $conn->prepare($update_user_query);
         $stmt->bind_param("sssssi", $updated_first_name, $updated_middle_name, $updated_last_name, $updated_email, $updated_address, $buyer_id);
 
         if ($stmt->execute()) {
-            // Update session variables
+            // ? Update session variables
             $_SESSION['first_name'] = $updated_first_name;
             $_SESSION['middle_name'] = $updated_middle_name;
             $_SESSION['last_name'] = $updated_last_name;
             $_SESSION['email'] = $updated_email;
             $_SESSION['address'] = $updated_address;
 
-            // Redirect to refresh the page
+            // >> Redirect to refresh the page
             header("Location: admin.php#edit-profile");
             echo "<script> User updated success</script>";
             exit();

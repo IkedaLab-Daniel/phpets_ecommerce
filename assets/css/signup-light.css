@@ -277,3 +277,20 @@ form .signup-btn:active{
     color: white;
     text-shadow: 2px 2px 5px rgba(26, 26, 26, 0.8); 
 }
+
+.password-wrapper{
+    position: relative;
+}
+
+.show-password{
+    width: 1.5rem;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    transition: .4s;
+}
+
+.show-password:hover{
+    cursor: pointer;
+    transform: translateY(-4px);
+}
