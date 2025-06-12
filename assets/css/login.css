@@ -182,6 +182,23 @@ form .white-btn:active{
     transform: scale(98%) translateY(0px);
 }
 
+.password-wrapper{
+    position: relative;
+}
+
+.show-password{
+    width: 1.5rem;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    transition: .4s;
+}
+
+.show-password:hover{
+    cursor: pointer;
+    transform: translateY(-4px);
+}
+
 
 @media (max-width: 768px) {
     .login-page{

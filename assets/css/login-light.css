@@ -97,6 +97,23 @@
 
 }
 
+.password-wrapper{
+    position: relative;
+}
+
+.show-password{
+    width: 1.5rem;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    transition: .4s;
+}
+
+.show-password:hover{
+    cursor: pointer;
+    transform: translateY(-4px);
+}
+
 form{
     padding: 40px 20px;
     position: relative;

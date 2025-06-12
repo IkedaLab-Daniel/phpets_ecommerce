@@ -108,13 +108,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         />
 
                         <label for="password">Password:</label>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            placeholder="Enter your password" 
-                            required 
-                        />
+
+                        <div class="password-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Enter your password" 
+                                required 
+                            />
+                            <?php if ($view_mode == 'dark'): ?>
+                                <img class="show-password" src="./assets/images/eye-close-white.svg" alt="eye">
+                            <?php else: ?>
+                                <img class="show-password" src="./assets/images/eye-close-black.svg" alt="eye">
+                            <?php endif ?>
+                        </div>
+                        
 
                         <button type="submit" class="black-btn">Log In</button>
                         <a class="white-btn" href="register.php" style="width: 100%;">
@@ -126,6 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
         <div id="toast-container"></div>
         <script src="./assets/js/toast.js"></script>
+        <script src="./assets/js/login.js"></script>
     </body>
 </html>
 
