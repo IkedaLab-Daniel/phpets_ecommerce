@@ -58,6 +58,7 @@
     display: flex;
     gap: 20px;
     position: relative;
+    margin-bottom: 10px;
 }
 
 .single-item-view .product-details .left img{
@@ -437,8 +438,6 @@
     border-radius: 5px;
     cursor: pointer;
 }
-
-
 
 @keyframes disappear {
     0%{

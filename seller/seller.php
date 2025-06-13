@@ -213,7 +213,7 @@
         <div id="seller">
             <div class="left">
                 <div class="user-details">
-                    <img src="../uploads/<?php echo htmlspecialchars($profile_photo); ?>" alt="Profile Picture" width="100">
+                    <img src="../uploads/<?php echo htmlspecialchars($profile_photo); ?>" alt="Profile Picture" >
                     <span class="fullname"> <?php echo $first_name . ' ' . $middle_name . ' ' . $last_name; ?></span>
                     <span class="role"><?php echo ucfirst($_SESSION['role']); ?></span>
                     <span class="address"><?php echo $address; ?></span>
@@ -392,6 +392,20 @@
                                         </div>
                                     <?php endwhile; ?>
                                     <div class="action-container">
+                                        <?php
+                                            // Fetch buyer's address for this order
+                                            $buyer_address = '';
+                                            $buyer_id = $order['buyer_id'];
+                                            $address_query = "SELECT address FROM users WHERE user_id = ?";
+                                            $address_stmt = $conn->prepare($address_query);
+                                            $address_stmt->bind_param("i", $buyer_id);
+                                            $address_stmt->execute();
+                                            $address_result = $address_stmt->get_result();
+                                            if ($address_row = $address_result->fetch_assoc()) {
+                                                $buyer_address = $address_row['address'];
+                                            }
+                                        ?>
+                                        <p style="margin-right: 10px; margin-top: 10px;"><strong>Address:</strong> <?php echo htmlspecialchars($buyer_address); ?></p>
                                         <?php if ($order['status'] === 'pending'): ?>
                                             <form method="POST" action="actions.php">
                                                 <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">

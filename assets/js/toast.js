@@ -1,6 +1,3 @@
-console.log('toast.js loaded');
-console.log(typeof showToast);
-
 function showToast(message, type = "", imgSrc = "") {
     console.log('TOAST TRIGGERED: ', message, type, imgSrc);
     const toastContainer = document.getElementById("toast-container");

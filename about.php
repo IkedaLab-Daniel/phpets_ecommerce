@@ -23,9 +23,7 @@
                     <h1>About <span class="violet">PHP</span>ets</h1>
 
                     <div class="middle">
-                        <p><b><span class="violet">PHP</span></b>ets is a web-based e-commerce platform developed as the final project for the college course “Web Development.”
-                        Built with PHP and MySQL, this project demonstrates the power of back-end technologies in creating dynamic and functional websites.
-                        Crafted with passion and precision by the <b>most driven and creative students (100% Confirmed) in the college</b>, PHPets is more than just a school requirement—it's a showcase of real-world development skills, user-centered design, and love for pets. </p>
+                        <p><b><span class="violet">PHP</span></b>ets is your one-stop online destination for everything cats, dogs, and other pets. Founded with a deep love for pets and a passion for enhancing their lives, PHPets was created to meet the growing need for a trusted, reliable, and customer-friendly platform dedicated exclusively to pet care essentials. From high-quality food and treats to grooming supplies, toys, accessories, and pet health products, we bring together a carefully curated selection of items designed to keep your furry companions happy, healthy, and pampered.</p>
                     </div>
                     
                     <div class="hero-btn-container">
@@ -47,12 +45,12 @@
                     <!-- Daniel -->
                     <div class="dev-card daniel">
                         <div class="dev-img-container">
-                            <img src="./assets/images/ice.jpeg" alt="">
+                            <img src="./assets/images/daniel2.jpeg" alt="">
                         </div>
                         <div class="dev-details-container">
-                            <p class="quote">"Wala na bang mas mahirap pa dito?"</p>
-                            <p class="name">@dev.IceIce</p>
-                            <p class="role">Software Engineer</p>
+                            <p class="quote">"Spend nights improving"</p>
+                            <p class="name">Callejas</p>
+                            <p class="role">Beginner Dev</p>
                             <div class="socials-container">
                                 <a href="https://github.com/IkedaLab-Daniel" target="_blank" class="social github">
                                     <img src="./assets/images/github.svg" >
@@ -69,18 +67,21 @@
                     <!-- Brix -->
                     <div class="dev-card brix">
                         <div class="dev-img-container">
-                            <img src="./assets/images/brix.jpeg" alt="">
+                            <img src="./assets/images/brix2.jpeg" alt="">
                         </div>
                         <div class="dev-details-container">
-                            <p class="quote">"Time is gold"</p>
-                            <p class="name">@brixxxxxxx</p>
-                            <p class="role">Role Model</p>
+                            <p class="quote">"Write clean code, live a clean life"</p>
+                            <p class="name">Ibuna</p>
+                            <p class="role">UI / UX Designer</p>
                             <div class="socials-container">
                                 <a href="https://www.facebook.com/brixandrew.ibuna" target="_blank" class="social facebook">
                                     <img src="./assets/images/facebook.svg" >
                                     <span>Facebook</span>
                                 </a>
-
+                                <a href="https://www.credly.com/users/brix-andrew-ibuna" target="_blank" class="social credly">
+                                    <img src="./assets/images/credly-2.png" >
+                                    <span>Credly</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -90,13 +91,17 @@
                             <img src="./assets/images/alvin.jpg" alt="">
                         </div>
                         <div class="dev-details-container">
-                            <p class="quote">"di man ako nag review (46/50 mamaya)"</p>
-                            <p class="name">@yumi</p>
-                            <p class="role">Pa-humble</p>
+                            <p class="quote">"Refactor your thoughts, not just your code."</p>
+                            <p class="name">Castro</p>
+                            <p class="role">Late-Night Coder</p>
                             <div class="socials-container">
                                 <a href="https://www.facebook.com/tewss15" target="_blank" class="social facebook">
                                     <img src="./assets/images/facebook.svg" >
                                     <span>Facebook</span>
+                                </a>
+                                <a href="https://github.com/devtews" target="_blank" class="social github">
+                                    <img src="./assets/images/github.svg" >
+                                    <span>GitHub</span>
                                 </a>
                             </div>
                         </div>

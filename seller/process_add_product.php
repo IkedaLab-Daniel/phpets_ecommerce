@@ -21,7 +21,7 @@
             $image_error = $_FILES['image']['error'];
 
             // Validate image type and size
-            $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+            $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
             $image_extension = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
 
             if (!in_array($image_extension, $allowed_extensions)) {

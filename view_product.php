@@ -238,7 +238,11 @@
                         <p><?php echo htmlspecialchars($product['first_name'] . ' ' . $product['last_name']); ?></p>
                     </div>
                     <div class="stock">
-                        <img src="/phpets/assets/images/box.svg" alt="">
+                        <?php if ($view_mode == "dark") : ?>
+                            <img src="/phpets/assets/images/box.svg" alt="">
+                        <?php else: ?>    
+                            <img src="/phpets/assets/images/box-dark.svg" alt="">
+                        <?php endif ?>
                         <p><strong> <?php echo $product['stock']; ?></strong> remaining</p> 
                     </div>
                     <p class="category"><?php echo htmlspecialchars($product['category_name']); ?></p>
